@@ -1,0 +1,28 @@
+---
+description: 能用预制体就拼预制体，运行时不要现场创建 UI
+alwaysApply: true
+---
+
+# 预制体优先
+
+界面、棋子、弹窗、HUD 能做成预制体的，都做成预制体，放进 `Assets/Content/`。运行时只 `Instantiate` 和绑事件，不要 `new GameObject` / `AddComponent` 拼一整棵 UI。资源由 Addressables 加载，不要再放进 `Assets/Resources/`。
+
+## 怎么做
+
+- 布局、颜色、文案、锚点：写在预制体里，脚本用公开字段引用。
+- 文本框高度用 `UIStyle.TextBoxHeight(字号)`，大字号要留余量，不要按字号等高校框。
+- 运行时脚本只做 `BindListeners`、改文本/显隐、播动画。
+- 已有界面直接改 `Assets/Content/` 下的预制体，不要用代码重新生成整棵 UI。
+- 棋盘格子可以按关卡动态数量生成，但单格必须实例化已有棋子预制体，不要临时代码拼 Image/Button。
+
+```csharp
+// 错误：运行时拼按钮
+var btn = UIViewFactory.CreateButton("Pause", parent, "暂停", color, onClick, size);
+
+// 正确：加载预制体
+var view = UiPrefabs.Instantiate<LianliankanGameView>(UiPrefabs.LianliankanView, Root);
+```
+
+路径约定：`Content/UI/` 通用界面，`Content/Lianliankan|Sheep|Match3|Card378Q/` 各玩法界面和棋子。Address 仍用 `UI/MainMenu` 这种短路径。
+
+选哪张图、复制哪个控件：见 `ui-kit.mdc`。

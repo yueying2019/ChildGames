@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2d31cf6141fd24d9bfa95a57f05ad5, type: 3}
+  m_Name: GameBalance
+  m_EditorClassIdentifier: 
+  Match3BaseMatchScore: 30
+  Match3ExtraMovesChance: 3
+  Match3GoldBeanChance: 6
+  Match3ExtraMovesGain: 5
+  Match3GoldBeanCoins: 100
+  Match3ShopExtraMoves: 5
+  Match3ContinueMoves: 5
+  Match3EndlessBonusMoves: 5
+  Match3EndlessMoves: 25
+  Match3EndlessScoreBase: 1600
+  Match3EndlessScorePerWave: 400
+  LianStartSeconds: 180
+  LianBonusSeconds: 18
+  LianMaxSeconds: 180
+  LianContinueSeconds: 30

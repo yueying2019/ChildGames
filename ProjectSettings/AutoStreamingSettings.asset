@@ -1,0 +1,2749 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!1200 &1
+AutoStreamingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  mSearchMode: 15
+  mCustomSearchFile: 
+  mTextureSearchString: 
+  mMeshSearchString: 
+  mTextures:
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Grey/Double/Double.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 131359
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/ICO.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 153621
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Sheep/Sheep.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 7867
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Blue/Default/Default.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 57901
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Match3/Match3.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 14791
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Blue/Double/Double.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 136947
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Red/Double/Double.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 136461
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Extra/Default/Default.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 13621
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Red/Default/Default.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 61701
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Yellow/Default/Default.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 59719
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Yellow/Double/Double.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 131939
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Lianliankan/Lianliankan.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 8991
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Green/Double/Double.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 132654
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Green/Default/Default.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 60191
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/Grey/Default/Default.spriteatlasv2
+    assetName: 
+    localFileId: 100100200
+    rtMem: 0
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 1114112
+    width: 0
+    height: 0
+    abSize: 57562
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/PNG/bg.png
+    assetName: bg
+    localFileId: 2800000
+    rtMem: 1400832
+    warningFlag: 0
+    refs:
+    - 0
+    - aa
+    maxPlaceholderSize: 196640
+    width: 1536
+    height: 2048
+    abSize: 44089
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/8+.png
+    assetName: 8+
+    localFileId: 2800000
+    rtMem: 25200
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 208
+    height: 268
+    abSize: 17906
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28755
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28961
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28939
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28753
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28636
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28621
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28748
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28859
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28564
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28724
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28750
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28585
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28675
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28805
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28672
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28913
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28624
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Eat/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28823
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/Font/NotoSansSC-UI.otf
+    assetName: Font Texture
+    localFileId: 2800000
+    rtMem: 524288
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 589856
+    width: 512
+    height: 1024
+    abSize: 55
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28330
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29065
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28320
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28591
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28794
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28712
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28816
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27749
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27950
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27466
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29118
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27276
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28051
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28147
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28577
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27972
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28782
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28870
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27767
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28363
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28058
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28275
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28107
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27298
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28398
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27289
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28117
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28055
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29009
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29065
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28710
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28482
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28242
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28321
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27956
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28203
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28265
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28614
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28646
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28322
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27917
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29989
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28279
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28674
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28364
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 30383
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28525
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28909
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28562
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27540
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28643
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28884
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28781
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28084
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28559
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28667
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29351
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29242
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27868
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27700
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28702
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29277
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28790
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28839
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28936
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28961
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28641
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28058
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28489
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28626
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_08.png
+    assetName: frame_08
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28498
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28243
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28409
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28027
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27466
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27523
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28428
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28402
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29175
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28360
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29021
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28464
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29040
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28776
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28094
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_06.png
+    assetName: frame_06
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28991
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28285
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27587
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28229
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28561
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27565
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27950
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28176
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28469
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28304
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28854
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27816
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28622
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27624
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28136
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_07.png
+    assetName: frame_07
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28181
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28419
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28466
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28587
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28113
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28440
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_13.png
+    assetName: frame_13
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28737
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_02.png
+    assetName: frame_02
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27876
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28184
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28556
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27998
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28245
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29217
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28528
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28338
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28066
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28496
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27980
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28637
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27620
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28614
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28363
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_09.png
+    assetName: frame_09
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27451
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28413
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28334
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28759
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27543
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29441
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28791
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Excited/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29021
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_01.png
+    assetName: frame_01
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28134
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_05.png
+    assetName: frame_05
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28978
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_11.png
+    assetName: frame_11
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28277
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Scratch/frame_15.png
+    assetName: frame_15
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28121
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_04.png
+    assetName: frame_04
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28619
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27957
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Scratch/frame_14.png
+    assetName: frame_14
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28834
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Eat/frame_16.png
+    assetName: frame_16
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28557
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27776
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Match3/Scratch/frame_17.png
+    assetName: frame_17
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 29700
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_12.png
+    assetName: frame_12
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28128
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Eat/frame_03.png
+    assetName: frame_03
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27513
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Sheep/Excited/frame_00.png
+    assetName: frame_00
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 27642
+  - serializedVersion: 2
+    onDemandDownload: 1
+    assetPath: Assets/UI/Cats/Lianliankan/Excited/frame_10.png
+    assetName: frame_10
+    localFileId: 2800000
+    rtMem: 52000
+    warningFlag: 0
+    refs:
+    - aa
+    maxPlaceholderSize: 196640
+    width: 300
+    height: 388
+    abSize: 28414
+  mAudios:
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/tap-a.ogg
+    assetName: tap-a
+    localFileId: 8300000
+    rtMem: 10805
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Pickup_Retro_16.wav
+    assetName: Interactions_Pickup_Retro_16
+    localFileId: 8300000
+    rtMem: 20621
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/level_win.wav
+    assetName: level_win
+    localFileId: 8300000
+    rtMem: 65390
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/level_lost.wav
+    assetName: level_lost
+    localFileId: 8300000
+    rtMem: 90291
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Bgm/bgm_lianliankan.ogg
+    assetName: bgm_lianliankan
+    localFileId: 8300000
+    rtMem: 593036
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/switch-a.ogg
+    assetName: switch-a
+    localFileId: 8300000
+    rtMem: 11290
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Suction_01.wav
+    assetName: Interactions_Suction_01
+    localFileId: 8300000
+    rtMem: 17522
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Steam_Spit_05.wav
+    assetName: Interactions_Steam_Spit_05
+    localFileId: 8300000
+    rtMem: 10280
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Steam_Spit_02.wav
+    assetName: Interactions_Steam_Spit_02
+    localFileId: 8300000
+    rtMem: 47507
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/HUD_Notification_Misc_01.wav
+    assetName: HUD_Notification_Misc_01
+    localFileId: 8300000
+    rtMem: 6443
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Pickup_Key_02.wav
+    assetName: Interactions_Pickup_Key_02
+    localFileId: 8300000
+    rtMem: 9854
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Error_Generic_Thud_01.wav
+    assetName: Error_Generic_Thud_01
+    localFileId: 8300000
+    rtMem: 17254
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Pickup_Paper_01.wav
+    assetName: Interactions_Pickup_Paper_01
+    localFileId: 8300000
+    rtMem: 7851
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Wooden_Switch_02.wav
+    assetName: Interactions_Wooden_Switch_02
+    localFileId: 8300000
+    rtMem: 6126
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Bgm/bgm_match3.mp3
+    assetName: bgm_match3
+    localFileId: 8300000
+    rtMem: 1008358
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Bgm/bgm_sheep.ogg
+    assetName: bgm_sheep
+    localFileId: 8300000
+    rtMem: 802521
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/chipsCollide3.ogg
+    assetName: chipsCollide3
+    localFileId: 8300000
+    rtMem: 13644
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/dieShuffle1.ogg
+    assetName: dieShuffle1
+    localFileId: 8300000
+    rtMem: 53036
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/chipsCollide1.ogg
+    assetName: chipsCollide1
+    localFileId: 8300000
+    rtMem: 13717
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/cardPlace3.ogg
+    assetName: cardPlace3
+    localFileId: 8300000
+    rtMem: 24074
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/HoverOver_Generic_Clicks_01.wav
+    assetName: HoverOver_Generic_Clicks_01
+    localFileId: 8300000
+    rtMem: 7690
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Repair_Weapon_01.wav
+    assetName: Interactions_Repair_Weapon_01
+    localFileId: 8300000
+    rtMem: 7846
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/UI_Toggle_Voice_Tripe_Note_Enable_stereo.wav
+    assetName: UI_Toggle_Voice_Tripe_Note_Enable_stereo
+    localFileId: 8300000
+    rtMem: 23536
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/click-a.ogg
+    assetName: click-a
+    localFileId: 8300000
+    rtMem: 13171
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/switch-b.ogg
+    assetName: switch-b
+    localFileId: 8300000
+    rtMem: 11961
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/HoverOver_Generic_Clicks_12.wav
+    assetName: HoverOver_Generic_Clicks_12
+    localFileId: 8300000
+    rtMem: 6534
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/UI_Toggle_Voice_Triple_Note_Disable_stereo.wav
+    assetName: UI_Toggle_Voice_Triple_Note_Disable_stereo
+    localFileId: 8300000
+    rtMem: 25381
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Bgm/bgm_lobby.ogg
+    assetName: bgm_lobby
+    localFileId: 8300000
+    rtMem: 1143212
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/cardPlace1.ogg
+    assetName: cardPlace1
+    localFileId: 8300000
+    rtMem: 21154
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/HUD_Map_Appear_02.wav
+    assetName: HUD_Map_Appear_02
+    localFileId: 8300000
+    rtMem: 6901
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Crank_Turn_02.wav
+    assetName: Interactions_Crank_Turn_02
+    localFileId: 8300000
+    rtMem: 10419
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/cardSlide3.ogg
+    assetName: cardSlide3
+    localFileId: 8300000
+    rtMem: 19097
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/tap-b.ogg
+    assetName: tap-b
+    localFileId: 8300000
+    rtMem: 8464
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/dieThrow1.ogg
+    assetName: dieThrow1
+    localFileId: 8300000
+    rtMem: 18981
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/cardSlide1.ogg
+    assetName: cardSlide1
+    localFileId: 8300000
+    rtMem: 17040
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/cardPlace2.ogg
+    assetName: cardPlace2
+    localFileId: 8300000
+    rtMem: 16519
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/click-a.ogg
+    assetName: click-a
+    localFileId: 8300000
+    rtMem: 13171
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/cardSlide2.ogg
+    assetName: cardSlide2
+    localFileId: 8300000
+    rtMem: 19461
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/chipsCollide2.ogg
+    assetName: chipsCollide2
+    localFileId: 8300000
+    rtMem: 12545
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Error_Generic_Misc_03.wav
+    assetName: Error_Generic_Misc_03
+    localFileId: 8300000
+    rtMem: 13404
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/Bonus/dieThrow2.ogg
+    assetName: dieThrow2
+    localFileId: 8300000
+    rtMem: 16920
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Tool_Select_01.wav
+    assetName: Interactions_Tool_Select_01
+    localFileId: 8300000
+    rtMem: 7019
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Pickup_Key_01.wav
+    assetName: Interactions_Pickup_Key_01
+    localFileId: 8300000
+    rtMem: 10478
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_Crank_Turn_01.wav
+    assetName: Interactions_Crank_Turn_01
+    localFileId: 8300000
+    rtMem: 8725
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Sounds/click-b.ogg
+    assetName: click-b
+    localFileId: 8300000
+    rtMem: 7943
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Interactions_TinyDoor_Open_09.wav
+    assetName: Interactions_TinyDoor_Open_09
+    localFileId: 8300000
+    rtMem: 6241
+    warningFlag: 0
+    refs:
+    - aa
+  - onDemandDownload: 0
+    assetPath: Assets/Content/Sounds/Selection_Misc_06.wav
+    assetName: Selection_Misc_06
+    localFileId: 8300000
+    rtMem: 6258
+    warningFlag: 0
+    refs:
+    - aa
+  mMeshes: []
+  mAnimations: []
+  mSharedSceneAssets: []
+  mScenes:
+  - onDemandDownload: 1
+    assetPath: Assets/Scenes/GameScene.scene
+    assetName: 
+    localFileId: -1
+    rtMem: 12838
+    warningFlag: 0
+    refs: []
+  mConfigCCD:
+    useCCD: 0
+    uosSecret: 087dbe7796c643e2a23d8f47531196e5
+    uosAppid: 6647e7e9-19e8-4372-87a5-1ff9e4c51270
+    bucketUuid: 0150ca16-7a9e-45f3-bd04-6c64e8c5c8e1
+    bucketName: kazihe
+    badgeName: kaziheV1
+    ttAppid: 
+    targetPlatfrom: 

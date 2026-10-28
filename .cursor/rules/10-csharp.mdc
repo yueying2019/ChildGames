@@ -1,0 +1,26 @@
+---
+description: C# 命名、字段与帧循环约束
+alwaysApply: true
+---
+
+# C# 编码
+
+类、方法、属性、常量用 PascalCase（`MaxShuffleTries`）。私有字段 `_camelCase`，局部变量 camelCase。一个公开类型一个文件，文件名与类型名一致。
+
+## 字段
+
+- 面板、棋子上给预制体拖引用的字段保持 `public`，与 `MainMenuPanel`、关卡 `ScriptableObject` 一致。
+- 运行时状态用属性或 `private` 字段。不要把已有的 public 预制体引用改成 `[SerializeField] private`。
+- 新组件若必须声明依赖，用 `[RequireComponent]`；不该叠多个的用 `[DisallowMultipleComponent]`。
+
+## 生命周期
+
+- `MonoBehaviour` 只放运行时目录，不放 `Assets/Scripts/Editor`。
+- `GetComponent` / `TryGetComponent` 在 `Awake`、`Start` 或 `BindListeners` 里做一次并缓存。不要在 `Update` 里反复取组件。
+- 有物理时逻辑放 `FixedUpdate`，表现放 `Update`。
+- 运行时不要 `GameObject.Find`、`FindObjectOfType`、`Transform.Find`。引用来自预制体字段或已有单例。
+
+## 热路径
+
+- `Update` 和消除循环里不要 `new`、字符串拼接、LINQ、装箱。用已分配的数组或 `List`。
+- 规则放不依赖 `UnityEngine` 的纯 C# 类。`MonoBehaviour` 只做编排、回调和引用桥接。细则见 `gameplay-code`。

@@ -1,0 +1,23 @@
+---
+description: 项目版本、技术栈与协作硬约束
+alwaysApply: true
+---
+
+# 项目上下文
+
+- 引擎：团结引擎 1.9（Unity `2022.3.62t8`）。不要使用 Unity 6 或更高团结版本才有的 API。
+- 语言：C# 9 / .NET Standard 2.1。不要用 C# 10 及以后的语法（文件范围命名空间、`global using`、`required`）。
+- 渲染：内置管线。不要引入 URP / HDRP。
+- UI：UGUI + `UnityEngine.UI.Text`。字体、按钮和弹窗结构见 `ui-kit`、`prefab-first-ui`。不要引入 TextMeshPro。
+- 热更：Addressables 远程资源与关卡数据。没有 Lua / XLua，业务逻辑写 C#。
+- 平台：微信小游戏（WebGL）。输入用旧 Input Manager。
+- 玩法分层、加载释放见 `gameplay-code`、`runtime-code`。
+
+# 协作
+
+1. 回复和代码注释使用简体中文。
+2. 不要主动新建 `.md` / `.markdown`，除非明确要求。
+3. 一次只做提出的问题，不扩大改动范围。
+4. 改多个文件时，先列出要改的文件和改动点，改完给简短汇总。
+5. 拿不准的 API 写成 `// 待确认：...`，不要凭记忆硬写。
+6. 需求与仓库规范冲突时，先说明冲突，再按最终决定执行。

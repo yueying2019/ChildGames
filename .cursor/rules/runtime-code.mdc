@@ -1,0 +1,41 @@
+---
+description: 运行时代码面向微信小游戏：异步加载、句柄成对释放、不引入新依赖
+alwaysApply: true
+---
+
+# 运行时代码
+
+运行时程序集 `SmallGames.Runtime`，命名空间 `SmallGames`。编辑器脚本放 `Assets/Scripts/Editor`，命名空间 `SmallGames.Editor`，程序集 `SmallGames.Editor`。Runtime 里不要引用 `UnityEditor`。
+
+## 资源
+
+- 运行时加载只走 `AssetHub`。不要 `Resources.Load`，不要把新资源放进 `Assets/Resources/`。
+- 微信小游戏 / WebGL 玩家包禁止 `Addressables` 的 `WaitForCompletion`，也禁止同步 `AssetHub.Initialize` / `Load`。用 `InitializeRoutine`、`PreloadModeRoutine` 和协程。`UITween.WaitForCompletion` 可以 `yield return`。
+- 进玩法用 `AssetHub.PreloadModeRoutine`，退出用 `AssetHub.UnloadMode`。标签用 `AssetLabels`，Address 用短路径（`UI/MainMenu`、`Lianliankan/...`）。
+- 大厅资源进 `ui.core`，玩法进 `mode.*`，关卡进 `levels.*`。
+
+## 表现与对象
+
+- 补间用 `UITween`，同一对象重播前 `KillTarget`。不要加 DOTween 或其他补间包。
+- 棋子、飘字、短时特效用 `ObjectPool<T>` / `ComponentPool`。不要在消除循环里 `Instantiate` 再 `Destroy`。
+- 按钮点击音走 `UiClickRelay`。不要每帧 `RaycastAll` 判点击。
+- 单例只继承已有 `SingletonBehaviour<T>`，由 `GameBootstrap` 创建。不要用 `FindObjectOfType` 当流程入口。
+
+## 热更
+
+- 热更的是远程资源和关卡数据，不是代码。玩法包、关卡走 Addressables Remote；`ui.core` 留在本地主包。
+- 不要引入 XLua，也不要再写一套 AssetBundle 加载器。
+- 数值、关卡、商店、任务优先改 Catalog / `.asset`，让远程组能单独更新。
+
+## 平台与数据
+
+- 微信非广告接口走 `WeChatMiniGameBridge`（反射，SDK 缺失要静默降级）。
+- 广告只经 `AdDirector`，底层用 `WeChatAdBridge`。初始化必须在隐私同意之后。
+- 存档走现有 Repository + `SecurePrefs`。不要另写一套明文 `PlayerPrefs`。
+- 不要新增第三方运行时包。缺能力时先复用 `AssetHub`、`UITween`、`ObjectPool`、`SecurePrefs`。
+
+## 写法
+
+- 一个公开类型一个文件，文件名与类型名一致。
+- 不用 `System.Linq`。热路径用 `for` 和已分配的 `List` / 数组，不在 `Update` 或消除循环里分配。
+- 公开方法用中文 `///` 说明不显而易见的时序（例如必须在 `RecordStars` 之前取旧纪录）。

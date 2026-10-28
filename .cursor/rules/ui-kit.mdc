@@ -1,0 +1,58 @@
+---
+description: 按现有界面套件选图和控件结构，新 UI 复制已有预制体，不要另起一套
+alwaysApply: true
+---
+
+# UI 套件
+
+新界面、新按钮、新弹窗：**复制已有预制体上的同类控件（含 Image.sprite）**，只改文案、尺寸、锚点、事件。不要 `UIViewFactory` 拼整棵 UI，不要从 Kenney 包里另挑一套没在用的变体。
+
+资源根：`Assets/UI/PNG/`（Kenney UI Pack + ico + Cards）。预制体：`Assets/Content/UI/` 与 `Assets/Content/{玩法}/`。字体：`Assets/Font/Kenney Future.ttf` Bold。颜色：`UIStyle`。
+
+## 先复制谁
+
+| 要做的东西 | 复制源 |
+|---|---|
+| 全屏层 / Toast | `Content/UI/UIRoot.prefab` |
+| 弹窗（遮罩+窗+标题+底栏） | `Settings` / `Pause` / `Result` |
+| 合规页 | `Splash` / `Privacy` / `Legal` / `Loading` |
+| 主界面入口卡 | `MainMenu` 四张玩法卡 |
+| 局内 HUD | 对应 `*GameView` 的 TopBar、Footer、PauseButton |
+| 棋子 | `LianliankanTile` / `Match3Tile` / `SheepTile` / `Card378QCard` |
+
+弹窗固定结构：`Dim`（全屏、`UIStyle.Overlay`、接收点击）+ `Window`（居中九宫）+ `Title` + 内容 + 底栏按钮。
+
+## 控件 → 已用图（按语义，不要混用）
+
+图本身带颜色，Image.color 保持白。矩形按钮 `Image.Type = Sliced`。优先 `Default/`，不要用 `Double/`。
+
+| 语义 | 现有控件（复制 sprite） | 对应 Kenney 路径 |
+|---|---|---|
+| 全屏背景 / Scrim | MainMenu/Splash `Background` | `Assets/UI/PNG/bg.png` |
+| 弹窗窗体 | Settings `Window` | `Grey/Default/button_rectangle_border.png` |
+| 主操作：继续、确认、出牌、领取 | Result `Retry`、378Q `PlayButton` | `Green/Default/button_rectangle_border.png` |
+| 次操作：设置、重置、道具、商店、签到格 | Settings `Reset`、MainMenu `ShopButton` | `Yellow/Default/button_rectangle_border.png` |
+| 危险：关闭、取消、要不起、退出 | Settings `Close`、378Q `PassButton` | `Red/Default/button_rectangle_border.png` |
+| 局内暂停小方钮 | `*GameView` `PauseButton` | `Grey`/`Extra` 的 `button_square_*` |
+| 开关方块 | Settings `Box` | `check_square_color` / `check_square_grey` |
+| 滑条底/填/柄 | Settings 音量 Row 的 Background/Fill/Handle | `slide_horizontal_grey` / `slide_horizontal_color` |
+| 分段选中 | Settings `Male`/`Female` | 选中 `AccentGreen`，未选 `SlotEmpty` |
+| 星星 | Result `Star1` | `Yellow/Default/star.png`、`star_outline.png` |
+| 对对消/三消/羊 图标 | Tile 上的 `Icon` | `Assets/UI/PNG/ico/1.png`–`21.png` |
+| 对对消格底/选中 | Tile `Background`/`SelectFrame` | `UI/bg3.png`、`UI/bg4.png`、`UI/bg1.png` |
+| 扑克牌 | `Card378QCard` | `Cards/card{Suit}{Rank}.png`，背 `cardBack_blue1.png` |
+
+底图装饰卡（主界面玩法入口）用 `UI/bg1.png`–`bg7.png`，不要当按钮九宫。
+
+## 字号与框高
+
+- 标题 44、按钮 36、正文 26、说明 22；框高 `UIStyle.TextBoxHeight(字号)`。
+- 主按钮约 `240x74`，局内操作钮约 `240x62`，设置行 `620x59`。
+- 文案色：`TextMain` / `TextMuted` / `Accent` / `AccentGreen`。
+
+## 禁止
+
+- 运行时 `new GameObject` + `AddComponent<Image/Button>` 拼界面。
+- 同一行按钮混用不同 Kenney 形状（圆钮+方钮+扁平）。
+- 给九宫按钮改 Image.color 来“换色”；换色请换对应颜色目录的同一文件名。
+- 棋盘格临时代码拼 Image；只 `Instantiate` 已有棋子预制体。

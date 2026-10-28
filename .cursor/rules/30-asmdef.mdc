@@ -1,0 +1,19 @@
+---
+description: 程序集只有 Runtime、Editor、EditMode 三份，依赖单向
+alwaysApply: true
+---
+
+# 程序集
+
+只使用现有三份程序集，不要再拆「接口程序集」或把脚本丢到 `Assets` 根目录。
+
+| 程序集 | 目录 | 命名空间 |
+|---|---|---|
+| `SmallGames.Runtime` | `Assets/Scripts`（不含 Editor） | `SmallGames` |
+| `SmallGames.Editor` | `Assets/Scripts/Editor` | `SmallGames.Editor` |
+| `SmallGames.EditMode.Tests` | `Assets/Tests/EditMode` | `SmallGames.Tests` |
+
+- Editor、Tests 引用 Runtime。Runtime 不引用 Editor，运行时代码里不要出现 `UnityEditor`。
+- Runtime 现有引用保持为 Addressables、ResourceManager、`Wx`。不要为了少写反射再加程序集。
+- 微信广告走已有 `Wx` 引用；其余微信接口继续用 `WeChatMiniGameBridge` 反射，SDK 缺失时静默降级。
+- 新脚本先归进上表对应目录，再写代码。

@@ -1,0 +1,7 @@
+﻿=== 鎷彿閰嶅钩 ===
+  OK   12 涓敼鍔ㄦ枃浠跺叏閮ㄩ厤骞?
+=== 鎴愬憳瀛樺湪鎬?===
+  OK   8 涓绾︽垚鍛樺叏閮ㄦ湁瀹氫箟
+=== 瀹為檯璋冪敤鍒扮殑鎴愬憳 ===
+  StarCatalog: FromCombo, FromRemaining, Label, MaxStars, Remaining
+  ProgressRepository: RecordStars, Stars, TotalStars

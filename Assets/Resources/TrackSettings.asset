@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4b6d6dd7474232bba9405281ee7b0e, type: 3}
+  m_Name: TrackSettings
+  m_EditorClassIdentifier: 
+  sync:
+    room:
+      viewRooms: 0
+  push:
+    message:
+      viewSubscribed: 0
+      viewPublic: 0
+    team:
+      viewCurrent: 0
+      viewTeams: 0
+      viewTeammates: 0
+  passport:
+    achievement:
+      viewAchievements: 0
+      viewCompleted: 0
+    battlepass:
+      viewBattlepass: 0
+    economy:
+      viewProducts: 0
+      viewProductDetail: 0
+      viewInventories: 0
+    guild:
+      viewCurrent: 0
+      viewGuilds: 0
+    leaderboard:
+      viewLeaderboards: 0
+      viewScore: 0
+      viewFriend: 0
+      viewHistory: 0
+    quest:
+      viewQuests: 0

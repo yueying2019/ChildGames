@@ -1,0 +1,2 @@
+This font is a subset of Noto Sans SC (SIL Open Font License 1.1).
+https://scripts.sil.org/OFL

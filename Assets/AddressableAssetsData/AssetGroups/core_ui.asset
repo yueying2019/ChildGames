@@ -1,0 +1,613 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: core_ui
+  m_EditorClassIdentifier: 
+  m_GroupName: core_ui
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f721f47154192da4d8371da19e0301f3
+  m_SerializeEntries:
+  - m_GUID: 02fd02caa723a15409d1af09cdca8495
+    m_Address: UI/Splash
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 036ea33087ee80443b38c475cf865b9d
+    m_Address: Sounds/Bonus/chipsCollide3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04c6d1990f1e2a14991e87db5a35c54b
+    m_Address: Sounds/Bonus/dieShuffle1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07793b49fe3ea5c4093028a876f01f07
+    m_Address: Sounds/Bonus/chipsCollide1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 173684551e2689647a1b5287d6cf668e
+    m_Address: Sounds/Bonus/cardPlace3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1833a84321d1c9e42be2530ca8bfe92e
+    m_Address: Sounds/HoverOver_Generic_Clicks_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d79e7e9d12060b49a2c0f0cbf4a6370
+    m_Address: UI/PNG/ico/4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f575510f9462ae409b020246a463c74
+    m_Address: Sounds/Interactions_Repair_Weapon_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22bac2a44357cdc4ba3c7c20bb2404ee
+    m_Address: UI/Privacy
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 294441b16b820fb45b4499c57f1841e8
+    m_Address: Sounds/UI_Toggle_Voice_Tripe_Note_Enable_stereo
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a3a361d967aac6fa60a84bfefd8b6fe
+    m_Address: UI/CatMascot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32c9f142ec9c8f743bc9286012706689
+    m_Address: UI/Sheep/SheepShuffle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 360acfc0d99330240a053ea57920272c
+    m_Address: Sounds/Interactions_Pickup_Paper_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37096180e3a1c8741b78707795c95287
+    m_Address: UI/Match3/Match3LineH
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c2d27036f8d48b42b0d9b800b32ba42
+    m_Address: UI/PNG/ico/6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3cd28e3d2b162ef429abfe93dd0d7445
+    m_Address: UI/Codex
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d1bec7088d0ce04a858419a84c3c98a
+    m_Address: Sounds/click-a
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41e4a6d16cb60804c8b308a475b392a1
+    m_Address: Sounds/switch-b
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 430de58edecd9eb499a01475df63d2e4
+    m_Address: Sounds/switch-a
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47a63ddd3cb702f47b099ec2e757cbb7
+    m_Address: UI/ComboPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a4a5f8e925d1f74aacf995e4ce9a617
+    m_Address: Sounds/HoverOver_Generic_Clicks_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a9dca4317643434782fbbae3d6c8ac2
+    m_Address: Sounds/Interactions_Steam_Spit_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ca9b0cb96070ce429c25c21a4788735
+    m_Address: Sounds/level_lost
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51a18ad5ea2ee68469e1062d17db46a5
+    m_Address: UI/PNG/ico/14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56fdc039d77dbf1448f6007bcb3be92d
+    m_Address: UI/Match3/Match3Hint
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57269e4f2f8259e43827817ebac805c0
+    m_Address: UI/Match3/Match3ColorBomb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58ba6bd8fd8998740bb4826d436faecc
+    m_Address: Sounds/Error_Generic_Thud_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ab81568b7756ad4ca7e048471f22b52
+    m_Address: UI/Match3/Match3LineV
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f6c02cf62f152c48a67e5a253af51d1
+    m_Address: UI/PNG/ico/12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 619ed5675db319b45ae8170ae0ec627f
+    m_Address: UI/Pause
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6586b4c095396b04bacf827618d63564
+    m_Address: UI/Match3/Match3Shuffle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69b7675cae3413042a74bbdd662982a6
+    m_Address: Sounds/UI_Toggle_Voice_Triple_Note_Disable_stereo
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ac3af1a21f118f4d99a91f88e3f5e0b
+    m_Address: UI/LevelSelect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6acb12411599dfb46b23f405e9c68603
+    m_Address: UI/Legal
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b3a8d1c07c53e09b20d4f7a8e1c9360
+    m_Address: Sounds/Bgm/bgm_lobby
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b95326bb8c3439409414c1b317c446c
+    m_Address: Sounds/Bonus/cardPlace1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bb119e5bf6b2d54abd3142a90ae6834
+    m_Address: Sounds/level_win
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70e63c03fc53a194fbcc3508bb0fa3b9
+    m_Address: Sounds/Interactions_Steam_Spit_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72227fd7afead7a4396a6b0f9c93d8ba
+    m_Address: Sounds/HUD_Map_Appear_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73b50a7b01ee2b740841e7f4a304c005
+    m_Address: UI/PNG/ico/16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7491b16ea16d4c54db6e60b0a6e6f1b6
+    m_Address: UI/Lianliankan/LianHint
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 767c0ced4de490a4ab80c366c7e32cbd
+    m_Address: Sounds/HUD_Notification_Misc_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 795ef604e3f453649bc77b0b5b777be9
+    m_Address: UI/PNG/ico/9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79a5a01ccd523c843953b236e53fd2c5
+    m_Address: UI/Lianliankan/LianTime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80b7f976db74a664da05b26dcb7882c3
+    m_Address: Sounds/tap-a
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80cfd30686bd18145aefb45dd48e17a2
+    m_Address: UI/Guide
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cf86cf15ca8fe44195abfd58f9f5ba7
+    m_Address: UI/Sheep/SheepUndo
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95b718aaf146d234e977b2266de84dbc
+    m_Address: UI/Sheep/SheepSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98550bfa3d376064799f7f7ba0e4849b
+    m_Address: UI/DailyLogin
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bf7bc7709261fa4c8b2153d3b494d90
+    m_Address: Sounds/Interactions_Pickup_Retro_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f4232928b614534ca62d4ba81bdf990
+    m_Address: Sounds/Interactions_Crank_Turn_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5fe6407de99fcc4bad31d138d7f5dab
+    m_Address: UI/Match3/Match3Bomb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aaddd8883fc795f4c831597f04613eea
+    m_Address: Sounds/Interactions_Pickup_Key_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab7bf42f0a4d28d498a78d7b70fffbd5
+    m_Address: Sounds/Bonus/cardSlide3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aca179341ec4ccd408e09ea3f421f79b
+    m_Address: UI/PNG/ico/2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b05adfe164530084d92ebe99d14e52fd
+    m_Address: UI/Lianliankan/LianFreeze
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0768a7d519143b499ef7fb7eed0f911
+    m_Address: UI/GameHud
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b49c351b8bd65bc47af1ba38683304d1
+    m_Address: Sounds/tap-b
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5509aa19b5ec984e87c3921001ac535
+    m_Address: Sounds/Bonus/dieThrow1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5a99db6c5c80764d8d31ce8758939b1
+    m_Address: UI/Item
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b650b3ea1626ce447b6bfbd8c001c528
+    m_Address: UI/Shop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7d2f0a14e8c4b6d9f1a3c5e7b9d1e20
+    m_Address: UI/TestWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7d2f0a14e8c4b6d9f1a3c5e7b9d1e21
+    m_Address: UI/DevWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc286d1328b83f245963da317e08586a
+    m_Address: UI/Loading
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd32de2ef5328af4da7d3b64835b2c67
+    m_Address: UI/Match3/Match3ColorClear
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be538b2d959b20e47925ac64733a4f39
+    m_Address: Sounds/Bonus/cardSlide1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1a7a8a55f0c5b4429c0983344ea4d8c
+    m_Address: UI/MainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c395c87dabd61314f81f86d0e2f213cb
+    m_Address: Sounds/Bonus/cardPlace2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5577bba908b4d0448568766f5fac49a
+    m_Address: Sounds/click-a
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6e50cca02448484eaa9584c44db9d15
+    m_Address: UI/Match3/Match3Hammer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8f3a91e4b2d47a6b5c10e8f2d6a4b71
+    m_Address: Font/NotoSansSC-UI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cade4f9aaf9dadf47a3565fce5c7b3f7
+    m_Address: Sounds/Interactions_Wooden_Switch_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbfe8d2df036e844f91c63d85e2c0477
+    m_Address: Sounds/Bonus/cardSlide2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd3a1b61de9531449af756fbf6869398
+    m_Address: UI/Settings
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd631ecf92d48124ca6658f24c32ccca
+    m_Address: Sounds/Bonus/chipsCollide2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d087b53d96e21b640a1af2a14626e02f
+    m_Address: Sounds/Bgm/LICENSE
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0bb09b151341f34ea0f91719f752a80
+    m_Address: Sounds/Error_Generic_Misc_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d66c96dbb7201344fb7e5223aacc8425
+    m_Address: UI/UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d901f2c42f2b494409b8d879a6c5b89d
+    m_Address: UI/Match3/Match3Moves
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db172d458709b7b448a8b45277977dd3
+    m_Address: Sounds/Bonus/dieThrow2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db325659db288e54890d9427f20e34b0
+    m_Address: UI/DailyTask
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd2553e3378ca8f41ae04f42d787e929
+    m_Address: Sounds/Interactions_Suction_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de171b0969748ed4cbf1737fefdbe68e
+    m_Address: UI/Energy
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ded6bd22ff9c02147a3ac791a9f516a9
+    m_Address: UI/Lianliankan/LianAuto
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3265ab4bf004d28a9537516768c1c75
+    m_Address: Font/LiberationSans
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4a19fcb4c67c1c4a8d8b4e8c4a4f8de
+    m_Address: UI/Continue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e529619391aff2c46a99ef5f2bea967b
+    m_Address: UI/Result
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e832e61e22cb48048b8b694bef9c2134
+    m_Address: UI/Sheep/SheepRemove
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e871acae3f948d04c8a2e7c206211708
+    m_Address: Sounds/Interactions_Tool_Select_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e88ecd99321374d43a993078cad7d997
+    m_Address: UI/handbook
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec130e652842acf42812ab1be9dbe761
+    m_Address: GameBalance
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef454dc5a9e60034981d820be1970dd7
+    m_Address: Sounds/Interactions_Pickup_Key_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f46ed9321b8bf7343bd8aa86807b56ee
+    m_Address: Sounds/Interactions_Crank_Turn_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f61f69d094aecf643a21e42d10fe0a6b
+    m_Address: Sounds/click-b
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9af1bfc2c2c0b54caa168860b656111
+    m_Address: UI/ModeRules
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: facb1be9aa13784448edf2fd70569ba4
+    m_Address: Sounds/Interactions_TinyDoor_Open_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb3c7a1fa7b71a54d81ca136f56edccf
+    m_Address: UI/Lianliankan/LianShuffle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ffba99dea60fb094b9e7d7764d55eb77
+    m_Address: Sounds/Selection_Misc_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5bad5acfb96e6344eb22a5a22d3a110c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d478a329420879845a0b7d4e85c3e443, type: 2}
+    - {fileID: 11400000, guid: 963751e2ac091c8418be05082ae22bed, type: 2}

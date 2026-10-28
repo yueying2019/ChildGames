@@ -1,0 +1,27 @@
+---
+description: UGUI 分层、合批、射线与列表复用
+alwaysApply: true
+---
+
+# UGUI
+
+控件选型、九宫和字体以 `ui-kit` 为准。界面结构以预制体为准，见 `prefab-first-ui`。本文件只约束 Canvas 和运行时 UI 行为。
+
+## 层级
+
+- 新面板挂到 `UIRoot` 已有层：`Background` / `Gameplay` / `Normal` / `Hud` / `Popup` / `Toast`。注册走 `UIManager`，不要再造一套根 Canvas。
+- 整页开关沿用 `UIPanel.OnOpen` / `OnClose`（`SetActive`）。`CanvasGroup` 用于淡入淡出（如 Toast），不要拿它替换面板开关。
+- 频繁改的数字、倒计时放在对应层的文本上，不要每帧触发布局重建。
+
+## 合批与射线
+
+- 图集按模块拆，用菜单 `SmallGames/图集打包工具`。同一界面能进同一图集的元素放在一起。
+- `Mask`、额外嵌套 Canvas、中途换材质会打断合批。装饰图不要单独换材质。
+- 只有可点的 `Image` / `Text` 勾选 Raycast Target。纯装饰在代码或预制体里 `raycastTarget = false`。
+
+## 文本、动画、列表
+
+- 文本用 `UnityEngine.UI.Text`，样式走 `UIStyle`。倒计时和分数用缓存字符串或直接改已有文本，不要在刷新里反复 `+` 拼新字符串。
+- 动画用 `UITween`。同一对象重播前 `KillTarget`。
+- 按钮在 `BindListeners` 里用 `Wire` 绑定（内部会先清掉旧监听）。不要在 `OnEnable` 再订一套点击。
+- 关卡格、商品、任务格复用现有 Cell 预制体。棋子和短时特效用对象池，不要一次 `Instantiate` 出整表不可回收的项。

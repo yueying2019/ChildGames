@@ -1,0 +1,37 @@
+---
+description: 玩法按引擎、会话、表现拆开写，规则不进 View，结算不另开通道
+alwaysApply: true
+---
+
+# 玩法代码
+
+新玩法放在 `Assets/Scripts/Gameplay/{Mode}/`，沿用现有八件套。不要把规则、表现、结算写进同一个 `MonoBehaviour`。
+
+| 文件 | 职责 |
+|---|---|
+| `{Mode}Engine` | 纯 C#，`sealed`，不继承 `MonoBehaviour`，不写协程，不碰 `GameObject` |
+| `{Mode}Types` / `{Mode}LevelData` | 棋盘状态、关卡 `ScriptableObject` |
+| `{Mode}LevelCatalog` | 取关：Addressables → 内置 Spec → Editor 兜底 |
+| `{Mode}Session` | 继承 `GameSessionBase`，只编排流程 |
+| `{Mode}GameView` | 按引擎结果播放 |
+| `{Mode}TileView` | 单格表现，实例化已有棋子预制体 |
+| `{Mode}AudioProfile` | 本玩法音效 |
+
+## 硬约束
+
+- 引擎入口是 `Load(关卡数据)`。一步操作返回结果（含事件列表）。View 只按事件播放，不在点击回调里重算规则。
+- 胜负、星级、金币、续关只走 `GameSessionBase.ReportResult` / `OfferContinue`。玩法侧不要自己打开结算面板，也不要直接改通关记录。
+- 每日任务只在 `ReportDailyStats` 里上报，走 `DailyTaskDirector`。
+- `GameModeType` 只在末尾追加新值，不插入、不改已有数字。同步改 `GameModeCatalog` 和 `AssetLabels`。
+- 关卡数值放 `.asset` / Catalog。不要在引擎里写死某一关的布局。
+- 可解性在生成时保证（数量成组）。不要靠运行时反复洗牌碰运气。
+- 规则变更补 `Assets/Tests/EditMode`（`namespace SmallGames.Tests`）。测试适配公开 API，不要为测试把生产字段改成 `public`。
+
+```csharp
+// 错误：View 里判消除
+if (CountSame(x, y) >= 3) RemoveTiles();
+
+// 正确：引擎吐事件，View 只演
+var result = _engine.TrySwap(a, b);
+yield return PlayEvents(result.Events);
+```

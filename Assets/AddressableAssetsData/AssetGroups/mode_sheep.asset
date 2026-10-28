@@ -1,0 +1,514 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: mode_sheep
+  m_EditorClassIdentifier: 
+  m_GroupName: mode_sheep
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fd0bfa01e94c4634d8a9830bfa90d3c5
+  m_SerializeEntries:
+  - m_GUID: 03478cdf20a8925082c83b1bffa347df
+    m_Address: UI/Cats/Sheep/Eat/frame_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ea847f6eea557699fb3c05cf395a00f
+    m_Address: UI/Cats/Sheep/Eat/frame_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15779bd5a2cc9762fa7c818a3af435ae
+    m_Address: UI/Cats/Sheep/Scratch/frame_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19cc1181a493ad25e5994b814d8b29d9
+    m_Address: UI/Cats/Sheep/Scratch/frame_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1be8ea2e592efc2710423589a43baea0
+    m_Address: UI/Cats/Sheep/Eat/frame_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1eb508add7bf77043942e4f1e390f935
+    m_Address: Sheep/Levels/Level_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22c8a14ac379bcb9a23da3eb4e0646bf
+    m_Address: UI/Cats/Sheep/Eat/frame_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 250e22e3540848eee859542dd2bb729b
+    m_Address: UI/Cats/Sheep/Scratch/frame_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25fee24218a6e3ba598a0c1d5610fa7e
+    m_Address: UI/Cats/Sheep/Excited/frame_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26ced4184966dc2fe672001f4f3a3427
+    m_Address: UI/Cats/Sheep/Eat/frame_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38fb968f27ff34449b5ea6c4e6545056
+    m_Address: Sheep/SheepAudio
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3952ad0de58029acdb6b80dce7def8ba
+    m_Address: UI/Cats/Sheep/Eat/frame_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 396d6e7d13538f8c6c9321ef437e8941
+    m_Address: UI/Cats/Sheep/Excited/frame_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3994e84193556e278513e1d4e0fcdc17
+    m_Address: UI/Cats/Sheep/Eat/frame_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a7c3e22ff6674245b84d48fa1745c47
+    m_Address: Sheep/SheepGameView
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bed8effa9749ebfd33b90dd3f425b77
+    m_Address: UI/Cats/Sheep/Scratch/frame_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 427246e84e79d034a8353f8cccf094c5
+    m_Address: Sheep/Levels/Level_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43b2dfe57f6853dd19c11e3d637962bd
+    m_Address: UI/Cats/Sheep/Scratch/frame_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 455d252f462ca414aa3ce5b05714e83d
+    m_Address: Sheep/Levels/Level_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bf0963b4c17554f523d151ecf4eebf9
+    m_Address: UI/Cats/Sheep/Scratch/frame_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ffa450d2fe8694b7f1c0bc56196d803
+    m_Address: UI/Cats/Sheep/Scratch/frame_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5254f1b87e7731438853fc8c2fdadef9
+    m_Address: UI/Cats/Sheep/Eat/frame_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5712a4289f9e15694a59193f8d653cb6
+    m_Address: UI/Cats/Sheep/Eat/frame_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c831920b2d09071fc237d7f207dd160
+    m_Address: UI/Cats/Sheep/Scratch/frame_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ed910f026f70ecad6a862b560e2533a
+    m_Address: UI/Cats/Sheep/Eat/frame_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fc775e5f3b8d7015f47a0f55079970e
+    m_Address: UI/Cats/Sheep/Scratch/frame_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 629d408cb3b6cfd43bd9c17aa4f52d58
+    m_Address: Sheep/Levels/Level_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6427eb91aef63074aa450432a5c3ed54
+    m_Address: Sheep/Levels/Level_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65b5dff23475b8647982834f95a48326
+    m_Address: Sheep/Levels/Level_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67ea6fd47f56703ed24ffffd44221f83
+    m_Address: UI/Cats/Sheep/Eat/frame_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bd26fffb24811247a811ab632335d80
+    m_Address: Sheep/Levels/Level_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72a902b7de162c5a5d2b6b8500527708
+    m_Address: UI/Cats/Sheep/Scratch/frame_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73d9c6e6f2ebaa342ad65c9f713174f6
+    m_Address: UI/Cats/Sheep/Scratch/frame_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 790b1d332b4c23f4383a4a37f2cba120
+    m_Address: Sheep/Levels/Level_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8199a8a4d694b79448a2e83aa8ac222d
+    m_Address: Sheep/Levels/Level_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8291e4eacb5dd5a00bf4301b4b6d456b
+    m_Address: UI/Cats/Sheep/Scratch/frame_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8341c7ef086c00f281b95e49bde860b8
+    m_Address: UI/Cats/Sheep/Eat/frame_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 874edddd7715c9a408d6355437dd3b29
+    m_Address: Sheep/Levels/Level_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 882a7a55e4588d5cef2095f7aee3c828
+    m_Address: UI/Cats/Sheep/Excited/frame_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ad40e31cfe2fbd4d909a3149541096f
+    m_Address: Sheep/Levels/Level_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d5b0f3c29e7501bb42f6d9c0e3a1582
+    m_Address: Sounds/Bgm/bgm_sheep
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e3f43c951b833f95ca47437074c5711
+    m_Address: UI/Cats/Sheep/Excited/frame_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f0c00323ae081799852cc4d70e1c551
+    m_Address: UI/Cats/Sheep/Excited/frame_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90266c265cbb0c3459a4ec55fdb2459d
+    m_Address: Sheep/Levels/Level_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92d69309c6f0634075edd7b7ae196697
+    m_Address: UI/Cats/Sheep/Scratch/frame_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 960c14467c06affd82a6cf2b9ae958cf
+    m_Address: UI/Cats/Sheep/Excited/frame_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 974fb5bbd5180f34695efe771b84979d
+    m_Address: Sheep/Levels/Level_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c5fb00e6f6f09fe9e83b7e87c7b82ad
+    m_Address: UI/Cats/Sheep/Scratch/frame_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c667dddca257b72f61e744082335f10
+    m_Address: UI/Cats/Sheep/Excited/frame_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a31f63cf75f63955b654b6236ad3cb0b
+    m_Address: UI/Cats/Sheep/Eat/frame_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4a72a63ca446b67879eebafbc51a70a
+    m_Address: UI/Cats/Sheep/Excited/frame_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a73c0b83aa0c6be4c8470f1747b03415
+    m_Address: Sheep/Levels/Level_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a948a1996cf85f94b86c6c60456e96a0
+    m_Address: Sheep/Levels/Level_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa010a2fa0e3448dcae6dec8ab588428
+    m_Address: UI/Cats/Sheep/Scratch/frame_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab34b910ee51d11791fe51730d8afd9f
+    m_Address: UI/Cats/Sheep/Excited/frame_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af6bb42281ca60d1710dca30572e3282
+    m_Address: UI/Cats/Sheep/Excited/frame_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1616577cecc6da4d9a56064eab8e70f
+    m_Address: Sheep/SheepTile
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bdcd48a052c013b4f9f1d841384bd90e
+    m_Address: Sheep/Levels/Level_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1236bbb02283c350b50ec2525a3f3f7
+    m_Address: UI/Cats/Sheep/Eat/frame_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c32c347023219be649a73c4dceb08796
+    m_Address: UI/Cats/Sheep/Scratch/frame_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb7ea32d01bde6678a5088b1e23e662e
+    m_Address: UI/Cats/Sheep/Eat/frame_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf703fb172d4c969835eae3e965009fc
+    m_Address: UI/Cats/Sheep/Excited/frame_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d182d1d188f89981c4ce2db1bb23b1f1
+    m_Address: UI/Cats/Sheep/Scratch/frame_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d46b5c6096be555e846adfec80922eab
+    m_Address: UI/Cats/Sheep/Excited/frame_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc4e44bde3170844295e0479dc638d85
+    m_Address: UI/Cats/Sheep/Excited/frame_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dcd90ac2c68ad8249971c6c69808142a
+    m_Address: Sheep/Levels/Level_18
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de056e57b65c1ab500d5914ef67db76c
+    m_Address: UI/Cats/Sheep/Eat/frame_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2270c17a96b8914fbdf5c792f2deaec
+    m_Address: Sheep/Levels/Level_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb5dd560cc83ab4ace6191b884b524f1
+    m_Address: UI/Cats/Sheep/Excited/frame_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: edfeccaae5c374293f880f8c94c3b7e8
+    m_Address: UI/Cats/Sheep/Excited/frame_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f05f516212e877a4081d313139b9f936
+    m_Address: Sheep/Levels/Level_20
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f174bc8d4b3dd9542b7efcc68451d707
+    m_Address: Sheep/Levels/Level_19
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.sheep
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f374f0f56c44a3dac1cc5c5efcff904f
+    m_Address: UI/Cats/Sheep/Scratch/frame_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f67530803f486dee04f2066bac178401
+    m_Address: UI/Cats/Sheep/Excited/frame_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: faa5b0a932d9a233160c7af4e37c0a9e
+    m_Address: UI/Cats/Sheep/Excited/frame_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fab2fe86d18fa82293f9ee4e0332b7aa
+    m_Address: UI/Cats/Sheep/Eat/frame_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff19773ef1e209a8279c3835d32aaf43
+    m_Address: UI/Cats/Sheep/Eat/frame_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff3df2e40cf7c3ffdcb142480ee5c51f
+    m_Address: UI/Cats/Sheep/Excited/frame_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.sheep
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5bad5acfb96e6344eb22a5a22d3a110c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b945bce3a3189fa4a821eeddae379d98, type: 2}
+    - {fileID: 11400000, guid: bf05866cee1c697488deb420d83af1ab, type: 2}

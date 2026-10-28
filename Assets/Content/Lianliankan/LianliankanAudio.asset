@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8202b35fbb261844b5b5343ae8f6e24, type: 3}
+  m_Name: LianliankanAudio
+  m_EditorClassIdentifier: 
+  Click:
+    Clip: {fileID: 8300000, guid: 80b7f976db74a664da05b26dcb7882c3, type: 3}
+    Volume: 1
+    Pitch: 1
+  Mismatch:
+    Clip: {fileID: 8300000, guid: 80b7f976db74a664da05b26dcb7882c3, type: 3}
+    Volume: 0.9
+    Pitch: 1.45
+  Connect:
+    Clip: {fileID: 8300000, guid: 9bf7bc7709261fa4c8b2153d3b494d90, type: 3}
+    Volume: 0.95
+    Pitch: 1
+  Win:
+    Clip: {fileID: 8300000, guid: 6bb119e5bf6b2d54abd3142a90ae6834, type: 3}
+    Volume: 1
+    Pitch: 1
+  Lose:
+    Clip: {fileID: 8300000, guid: 4ca9b0cb96070ce429c25c21a4788735, type: 3}
+    Volume: 1
+    Pitch: 1
+  Bgm:
+    Clip: {fileID: 8300000, guid: 7c4a9e2b18d64f0aa31e5c8b9d2f0471, type: 3}
+    Volume: 0.65
+    Pitch: 1

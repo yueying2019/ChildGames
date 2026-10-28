@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af7c4b0b3537144cb811804eb62466d, type: 3}
+  m_Name: Level_01
+  m_EditorClassIdentifier: 
+  LevelId: 1
+  Title: "\u9752\u8349\u5730"
+  TypeNum: 3
+  LevelNum: 3
+  LevelBlockNum: 8
+  BorderStep: 1
+  LeftStack: 0
+  RightStack: 0
+  ComposeNum: 3
+  Motif: 1

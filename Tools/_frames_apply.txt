@@ -1,0 +1,5 @@
+﻿  Slot_7 rect=6817641122648674563
+  Slot_8 rect=6401355380668694202
+澶嶅埗 4 鍧?x 2 涓Ы = 8 鍧?
+宸插啓鍏?E:\UnityGame\SmallGames\Assets\Content\Sheep\SheepGameView.prefab
+  Slots 瀛愯妭鐐规暟: 9

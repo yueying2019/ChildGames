@@ -1,0 +1,13 @@
+---
+description: 编辑器工具放 Editor 程序集，菜单走 SmallGames，改资源可撤销
+alwaysApply: true
+---
+
+# 编辑器工具
+
+脚本放 `Assets/Scripts/Editor`，命名空间 `SmallGames.Editor`。菜单用 `SmallGames/功能名`，与现有「刷新 Addressable 分组」「三消关卡编辑器」一致。资源右键入口才用 `Assets/...`。
+
+- 改场景对象或资源前 `Undo.RecordObject` / `Undo.RegisterCreatedObjectUndo`，保证能撤销。
+- 批量处理用 `EditorUtility.DisplayProgressBar`，结束或中断时 `ClearProgressBar`。会改很多资源的操作先弹确认框。
+- 工具不要依赖只在 Play 模式才存在的运行时单例。能离线处理预制体、`.asset` 和 Addressables 设置就不要进 Play。
+- 生成器只批量产出已有类型的关卡、音效配置、图集和 Addressables 分组。界面结构改 `Assets/Content/` 里的预制体，不要在编辑器里另拼一套运行时 UI。

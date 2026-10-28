@@ -1,0 +1,541 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: mode_lianliankan
+  m_EditorClassIdentifier: 
+  m_GroupName: mode_lianliankan
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3af3f3d727276b748a8ecd2eec58840a
+  m_SerializeEntries:
+  - m_GUID: 03dfebd763965f3bf27607b06c6f65a9
+    m_Address: UI/Cats/Lianliankan/Excited/frame_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04ad39f57196d4ae787c2b238a3a4692
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0604f327a8d85b8b941fa648bd2188f9
+    m_Address: UI/Cats/Lianliankan/Excited/frame_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f644ce8838010e7cf890fe7283dbdd3
+    m_Address: UI/Cats/Lianliankan/Excited/frame_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12577b6f0957a2d4c8179f1708faf6f3
+    m_Address: Lianliankan/Levels/Level_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14c5e694f34402149d583d874e46a706
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 152883af0f6d6155ef6885ac5daf8040
+    m_Address: UI/Cats/Lianliankan/Excited/frame_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 155f46ea1df5de42efbe1223e3653912
+    m_Address: UI/Cats/Lianliankan/Eat/frame_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16cbb51dbc0349240a3af9cc9d3ba30f
+    m_Address: Lianliankan/Levels/Level_21
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25b36637608b7548429180dff25214a0
+    m_Address: UI/Cats/Lianliankan/Eat/frame_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2810ae04770f7e048aad4ba5ee37ed56
+    m_Address: Lianliankan/Levels/Level_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2843a5d7bf72e8bbea4db4aa4a9167d0
+    m_Address: UI/Cats/Lianliankan/Eat/frame_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2851cc3695720f45e1e7ec9cd6a812c7
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 286ff7cf0703f19d453f789134dcc36f
+    m_Address: UI/Cats/Lianliankan/Eat/frame_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29ee99b011460f44db6c07fdb96767d0
+    m_Address: Lianliankan/Levels/Level_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a69f96bff3dfe44a8d1a0187afcce6a
+    m_Address: Lianliankan/Levels/Level_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2dcfc76792576504da5a30a0255e2879
+    m_Address: Lianliankan/Levels/Level_23
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 33184ef67fb1667e753355a9352a8f96
+    m_Address: UI/Cats/Lianliankan/Eat/frame_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35e09207392865c489950fdf9dc43377
+    m_Address: Lianliankan/LianliankanGameView
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 388bae7d71f8cee8e9039d2dee6e74b1
+    m_Address: UI/Cats/Lianliankan/Eat/frame_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e39343e05db8743fe041b0c8139f9fd
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40e65354c47170d69361159d95b8dbe1
+    m_Address: UI/Cats/Lianliankan/Excited/frame_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49dc8996180364b49b2337f6e23c8242
+    m_Address: Lianliankan/Levels/Level_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c4753f1837bbdf4997762724d96f57c
+    m_Address: Lianliankan/Levels/Level_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4eeb9db3d556f58dd7033b85afe6f362
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f4068e7e834be0f175bed528b31067d
+    m_Address: UI/Cats/Lianliankan/Excited/frame_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56dd265d1b90b8d341e91ce2c236a8cd
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f293dbd7a085f64aba70c7cf80c21fa
+    m_Address: Lianliankan/Levels/Level_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 641a8c450f95705f696d2935b7975000
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69ae71e42a459544095d4f18396c46de
+    m_Address: Lianliankan/Levels/Level_22
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bb892e5df362974dd602f27d0603b7c
+    m_Address: UI/Cats/Lianliankan/Eat/frame_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d9c5cc7c5ca4214189bfbd205c24171
+    m_Address: Lianliankan/Levels/Level_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f060a14c2d9646fe1459ff40dfe27b9
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 715dd85108d9f9f941676a6f06591dec
+    m_Address: UI/Cats/Lianliankan/Excited/frame_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7344a80131f8c174cb82eb88c8497a3f
+    m_Address: Lianliankan/LianliankanAudio
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 761056f2820418b5bddbb45ca2c6f40b
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79c2245df236dda44aad0ed82b84e06d
+    m_Address: Lianliankan/Levels/Level_18
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7acbffce46f371641adec1ca84f8e71a
+    m_Address: Lianliankan/Levels/Level_09
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b6e901b1f81aced51b99abd3a2abe3d
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bcb7e5b859d489c0ff62ea216839dd4
+    m_Address: UI/Cats/Lianliankan/Eat/frame_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c4a9e2b18d64f0aa31e5c8b9d2f0471
+    m_Address: Sounds/Bgm/bgm_lianliankan
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    - ui.core
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80d693569ad1083e65141e4cb47cd818
+    m_Address: UI/Cats/Lianliankan/Eat/frame_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 850631ae18e01487b6313fde09f6528d
+    m_Address: UI/Cats/Lianliankan/Eat/frame_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 892e49bc85300044cb4ff5c9f2a026df
+    m_Address: Lianliankan/Levels/Level_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bd1d6ae61ea7854c88aaa46b2aaa3c1
+    m_Address: Lianliankan/Levels/Level_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c25e318f0d02048c41203371a577a98
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cf2919ece3d621ea4044f759b420c42
+    m_Address: UI/Cats/Lianliankan/Eat/frame_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9338b963c600fb4158c5309937082643
+    m_Address: UI/Cats/Lianliankan/Eat/frame_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95166febb8ae4874b4d90862def3f9a4
+    m_Address: UI/Cats/Lianliankan/Excited/frame_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95642ac94029700145f060ef1adfb471
+    m_Address: UI/Cats/Lianliankan/Eat/frame_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 997b5145517fa8b7483ab88ff8884480
+    m_Address: UI/Cats/Lianliankan/Eat/frame_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ad5ded25bebcdb9b6cf8d58378c4606
+    m_Address: UI/Cats/Lianliankan/Excited/frame_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d200d033f5f2e94dbdd43ed93c41f79
+    m_Address: Lianliankan/Levels/Level_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f124d9896a9dfc8a02a823a0926f2f4
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f16f7cea16f05329bb44ec6fdd16319
+    m_Address: UI/Cats/Lianliankan/Eat/frame_16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7406c02404f0a546a62ed0050bccd64
+    m_Address: Lianliankan/Levels/Level_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad32a31ec65c97427e2fe69c301b21b8
+    m_Address: UI/Cats/Lianliankan/Eat/frame_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aeac1f104bde403fdc5c264d4b81bdc1
+    m_Address: UI/Cats/Lianliankan/Eat/frame_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b29b7829cba3a717f17d9facb951e051
+    m_Address: UI/Cats/Lianliankan/Excited/frame_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b71a6a3175a86de4887e8108a8fa96ce
+    m_Address: Lianliankan/LianliankanLine
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b951bc15676294bb957593f24cf72cc1
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbf93008828612147b1185f6a09d3267
+    m_Address: Lianliankan/LianliankanTile
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcfd15020f00af0c1dea10f2d49fbcec
+    m_Address: UI/Cats/Lianliankan/Excited/frame_17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bed370fa5ff531dfdd2d8199f3e3ee2a
+    m_Address: UI/Cats/Lianliankan/Excited/frame_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bef8559e6109e6a41b556c7a586d47fd
+    m_Address: Lianliankan/Levels/Level_11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c31694624f63b0940a96df73f857fd98
+    m_Address: Lianliankan/Levels/Level_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c983bf2ae5bc2b73e6e541074d2ee695
+    m_Address: UI/Cats/Lianliankan/Excited/frame_13
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d21d42b532edd679bf94571c74c952d5
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4ea7371c01dc5851dbf902b41e89ec0
+    m_Address: UI/Cats/Lianliankan/Excited/frame_08
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d54dc6aa518d36d9967ff29aabe32832
+    m_Address: UI/Cats/Lianliankan/Excited/frame_15
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7cf84b52e0297b42d116cca1440dd59
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dabcfc2b8dabee445a667b8e05991c8b
+    m_Address: Lianliankan/Levels/Level_20
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db275d240f213954784a5c1a49e28310
+    m_Address: Lianliankan/Levels/Level_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd0ef2eccd7f8d4d30510e388c748b49
+    m_Address: UI/Cats/Lianliankan/Excited/frame_14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5d3db0755b47e03411c3f007f04fa28
+    m_Address: UI/Cats/Lianliankan/Excited/frame_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebbf283fa8c77e2e3f99b4a35743618a
+    m_Address: UI/Cats/Lianliankan/Eat/frame_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f399fd537c781224bb8cbfc31067a8ed
+    m_Address: Lianliankan/Levels/Level_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6f7b07802f769e54f86a97913593081
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7053549e9b2e0543b34fc11b934f3ce
+    m_Address: Lianliankan/Levels/Level_19
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - levels.lianliankan
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcbbac4264fdd7ec2c94cffe840fd335
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd765cccf9ae3ae0e5304dcc5ca4acd3
+    m_Address: UI/Cats/Lianliankan/Scratch/frame_12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff4fee1612b66f132dccd6ebeb98db33
+    m_Address: UI/Cats/Lianliankan/Excited/frame_10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - mode.lianliankan
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5bad5acfb96e6344eb22a5a22d3a110c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 31359ec1bad17594a9843073ca64bb64, type: 2}
+    - {fileID: 11400000, guid: 99c9dcae7d4e07442b196266b38f2666, type: 2}

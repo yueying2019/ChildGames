@@ -1,0 +1,16 @@
+﻿=== 鍧楁€绘暟 ===
+  212 鍧?
+=== 鎮┖寮曠敤 ===
+  OK   娌℃湁鎮┖ fileID
+=== 鍏抽敭鑺傜偣 ===
+  OK   SlotButton x1
+  OK   RemoveButton x1
+  OK   UndoButton x1
+  OK   ShuffleButton x1
+=== 鎸夐挳鏂囨 ===
+  "\u79FB\u51FA" | "\u6362" | "\u6D17\u724C" | "\u64A4\u56DE" | "- 9\u670813\u65E5 -" | "\u6682\u5B58"
+=== 鎵€鏈?Spacing ===
+  7688502924492052770 -> 20
+  199080764580472005 -> 8
+=== 鑴氭湰瀛楁鍥炲～ ===
+  SlotButton: {fileID: 7909458047616795607}

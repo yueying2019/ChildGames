@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f1c0254cc6f415396fab55e2b1a880, type: 3}
+  m_Name: UOSEnvironments
+  m_EditorClassIdentifier: 
+  environments:
+  - environmentName: kazihe
+    appID: 6647e7e9-19e8-4372-87a5-1ff9e4c51270
+    appSecret: 7c45b28ce06949e784a0e9322923dc5e
+    appServiceSecret: 087dbe7796c643e2a23d8f47531196e5
+    roomProfileUUID: 
+    matchmakingConfigID: 
+    configPairs: []
+  selectedAppID: 6647e7e9-19e8-4372-87a5-1ff9e4c51270

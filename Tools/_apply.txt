@@ -1,0 +1,8 @@
+﻿妯℃澘琛屾暟: 76
+鏂板鏄熸爣 RectTransform:
+  Star1 -> 2756550287447359635
+  Star2 -> 4217580296229401064
+  Star3 -> 3645251175872564630
+鎸傝浇鐖惰妭鐐?Cell RectTransform: 2984404852848354897
+鍐欏叆鏂瑰紡: 瑕嗙洊鏂囦欢
+宸插啓鍏?E:\UnityGame\SmallGames\Assets\Content\UI\LevelSelect.prefab锛堝叡 1426 琛岋級

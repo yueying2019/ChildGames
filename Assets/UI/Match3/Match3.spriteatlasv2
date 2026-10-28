@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!612988286 &1
+SpriteAtlasAsset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 3
+  m_MasterAtlas: {fileID: 0}
+  m_ImporterData:
+    packables:
+    - {fileID: 2800000, guid: a5fe6407de99fcc4bad31d138d7f5dab, type: 3}
+    - {fileID: 2800000, guid: 57269e4f2f8259e43827817ebac805c0, type: 3}
+    - {fileID: 2800000, guid: bd32de2ef5328af4da7d3b64835b2c67, type: 3}
+    - {fileID: 2800000, guid: c6e50cca02448484eaa9584c44db9d15, type: 3}
+    - {fileID: 2800000, guid: 56fdc039d77dbf1448f6007bcb3be92d, type: 3}
+    - {fileID: 2800000, guid: 37096180e3a1c8741b78707795c95287, type: 3}
+    - {fileID: 2800000, guid: 5ab81568b7756ad4ca7e048471f22b52, type: 3}
+    - {fileID: 2800000, guid: d901f2c42f2b494409b8d879a6c5b89d, type: 3}
+    - {fileID: 2800000, guid: 6586b4c095396b04bacf827618d63564, type: 3}
+  m_IsVariant: 0
+  m_IsPlaceholder: 0

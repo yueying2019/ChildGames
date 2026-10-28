@@ -1,0 +1,19 @@
+大厅 bgm_lobby.ogg
+  Cozy Puzzle Title by MintoDog
+  https://opengameart.org/content/cozy-puzzle-title
+  CC0
+
+对对消 bgm_lianliankan.ogg
+  Peaceful Ville (2023) by bobjt
+  https://opengameart.org/content/peacefull-ville
+  CC0
+
+叠叠消 bgm_sheep.ogg
+  Flowerbed Fields [Loop] by Zane Little Music
+  https://opengameart.org/content/flowerbed-fields-loop
+  CC0
+
+三消 bgm_match3.mp3
+  candy day by haruta
+  https://opengameart.org/content/candy-day
+  CC0
