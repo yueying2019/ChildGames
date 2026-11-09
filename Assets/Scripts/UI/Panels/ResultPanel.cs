@@ -52,9 +52,14 @@ namespace SmallGames
             if (MessageText != null)
             {
                 // 过关不写「已连通 / 已清空 / 得分」和「评级」，星星已经表达评级。
-                var body = win
-                    ? string.Empty
-                    : (data != null && !string.IsNullOrEmpty(data.Message) ? data.Message : "再试一次吧");
+                var jieqiNote = win && data != null &&
+                    (data.Mode == GameModeType.Jieqi || data.Mode == GameModeType.SkillXiangqi)
+                    && !string.IsNullOrEmpty(data.Message);
+                var body = jieqiNote
+                    ? data.Message
+                    : (win
+                        ? string.Empty
+                        : (data != null && !string.IsNullOrEmpty(data.Message) ? data.Message : "再试一次吧"));
                 if (data != null && data.CoinsGained > 0)
                 {
                     body = AppendLine(body, win && data.FirstClear
@@ -112,6 +117,18 @@ namespace SmallGames
 
             var bonus = AdDirector.DoubleRewardBonus(data != null ? data.CoinsGained : 0);
             var usable = bonus > 0 && AdDirector.RewardedReady;
+            var chess = data != null &&
+                (data.Mode == GameModeType.Jieqi || data.Mode == GameModeType.SkillXiangqi);
+            if (!usable && chess)
+            {
+                DoubleButton.gameObject.SetActive(true);
+                var undoLabel = DoubleButton.GetComponentInChildren<Text>();
+                if (undoLabel != null)
+                    undoLabel.text = "悔棋";
+                Wire(DoubleButton, UndoChess);
+                return;
+            }
+
             DoubleButton.gameObject.SetActive(usable);
             if (!usable)
                 return;
@@ -121,6 +138,15 @@ namespace SmallGames
             if (label != null)
                 label.text = $"看广告\n双倍 +{bonus}";
             Wire(DoubleButton, OnDoubleClicked);
+        }
+
+        private static void UndoChess()
+        {
+            var session = GameManager.Instance != null
+                ? GameManager.Instance.CurrentSession as JieqiSession
+                : null;
+            if (session != null)
+                session.UndoMove();
         }
 
         private void OnDoubleClicked()

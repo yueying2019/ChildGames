@@ -109,23 +109,23 @@ namespace SmallGames
             switch (id)
             {
                 case Match3GuideId.Line:
-                    return "连成 4 个会生成直线。与旁边任意棋子交换，就能打掉一整行或一整列。";
+                    return UIStyle.Key("4 连") + "生成直线。与任意棋子交换后，消除" + UIStyle.Key("整行或整列") + "。";
                 case Match3GuideId.Bomb:
-                    return "连成 L 形会生成炸弹。与旁边任意棋子交换，就能炸掉周围 3×3。";
+                    return UIStyle.Key("L 或 T") + "形生成" + UIStyle.Key("炸弹") + "。与任意棋子交换后，消除周围 " + UIStyle.Key("3×3") + "。";
                 case Match3GuideId.ColorBomb:
-                    return "连成 5 个会生成彩虹球。与一种颜色交换，即可消除全场该颜色。";
+                    return UIStyle.Key("5 连") + "生成" + UIStyle.Key("彩虹球") + "。与一种颜色交换后，消除" + UIStyle.Key("全场") + "该颜色。";
                 case Match3GuideId.ExtraMoves:
-                    return "被直线、炸弹或彩虹球打到时，增加 5 步。";
+                    return "被特效击中时，增加 " + UIStyle.Key("5 步") + "。";
                 case Match3GuideId.GoldBean:
-                    return "被特效打到时，获得 100 金币。";
+                    return "被特效击中时，获得 " + UIStyle.Key("100 金币") + "。";
                 case Match3GuideId.Ice:
-                    return "冰块盖住的棋子不能交换。用三消或特效敲碎冰块后才能移动。";
+                    return "覆盖的棋子" + UIStyle.Ban("不能交换") + "。消除或特效可击碎。";
                 case Match3GuideId.Stone:
-                    return "石头占格，不能放棋子。相邻消除或特效可以砸碎。";
+                    return "占据格子。相邻消除或特效可" + UIStyle.Key("击碎") + "。";
                 case Match3GuideId.Jelly:
-                    return "在这一格消除棋子会撕掉一层果冻，清完才算完成目标。";
+                    return "在该格消除可清除" + UIStyle.Key("一层") + "。全部清除后完成目标。";
                 case Match3GuideId.Cage:
-                    return "被锁住的棋子不能交换。先打破牢笼，才能把它换走。";
+                    return "锁住的棋子" + UIStyle.Ban("不能交换") + "。打破后才能移动。";
                 default:
                     return string.Empty;
             }

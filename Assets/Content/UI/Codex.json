@@ -11,32 +11,32 @@
             {
               "name": "重排",
               "icon": "UI/Lianliankan/LianShuffle",
-              "desc": "打乱剩余棋子的位置，通路卡住时用。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "<color=#FF4D00>打乱</color>剩余棋子。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "提示",
               "icon": "UI/Lianliankan/LianHint",
-              "desc": "标出当前可以连通的一对棋子。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "标出一对<color=#FF4D00>可连</color>棋子。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "加时",
               "icon": "UI/Lianliankan/LianTime",
-              "desc": "立刻补 30 秒。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "增加 <color=#FF4D00>30 秒</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "冻结",
               "icon": "UI/Lianliankan/LianFreeze",
-              "desc": "倒计时停 5 秒。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "倒计时<color=#FF4D00>暂停</color> <color=#FF4D00>5 秒</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "自动连",
               "icon": "UI/Lianliankan/LianAuto",
-              "desc": "自动消掉一对当前可连的棋子。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "<color=#FF4D00>自动消除</color>一对可连棋子。",
+              "obtain": "商店购买，过关获得。"
             }
           ]
         }
@@ -53,26 +53,26 @@
             {
               "name": "移出",
               "icon": "UI/Sheep/SheepRemove",
-              "desc": "把槽里最多 3 张牌移回场地。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "将槽内最多 <color=#FF4D00>3 张</color>牌移回场上。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "撤回",
               "icon": "UI/Sheep/SheepUndo",
-              "desc": "撤销上一步收牌。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "<color=#FF4D00>撤销</color>上一次收牌。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "洗牌",
               "icon": "UI/Sheep/SheepShuffle",
-              "desc": "打乱场上剩余牌的图案。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "<color=#FF4D00>打乱</color>场上剩余牌的图案。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "暂存位",
               "icon": "UI/Sheep/SheepSlot",
-              "desc": "本局收纳槽上限 +1。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "本局槽位上限 <color=#FF4D00>+1</color>。",
+              "obtain": "商店购买，过关获得。"
             }
           ]
         }
@@ -89,56 +89,56 @@
             {
               "name": "提示",
               "icon": "UI/Match3/Match3Hint",
-              "desc": "标出一步可以消除的交换。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "标出一步<color=#FF4D00>可消除</color>的交换。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "重排",
               "icon": "UI/Match3/Match3Shuffle",
-              "desc": "重排棋盘，并保证还有可消的一步。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "重排棋盘，并保留<color=#FF4D00>可消除</color>的步。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "消除",
               "icon": "UI/Match3/Match3Hammer",
-              "desc": "点掉一颗棋子。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "消除<color=#FF4D00>指定棋子</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "横消",
               "icon": "UI/Match3/Match3LineH",
-              "desc": "把一颗棋子变成横向特效。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "将指定棋子变为<color=#FF4D00>横向特效</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "竖消",
               "icon": "UI/Match3/Match3LineV",
-              "desc": "把一颗棋子变成纵向特效。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "将指定棋子变为<color=#FF4D00>纵向特效</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "炸弹",
               "icon": "UI/Match3/Match3Bomb",
-              "desc": "把一颗棋子变成炸弹特效。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "将指定棋子变为<color=#FF4D00>炸弹</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "加步",
               "icon": "UI/Match3/Match3Moves",
-              "desc": "立刻增加步数。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "增加<color=#FF4D00>步数</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "彩球笔",
               "icon": "UI/Match3/Match3ColorBomb",
-              "desc": "把一颗棋子变成彩虹球。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "将指定棋子变为<color=#FF4D00>彩虹球</color>。",
+              "obtain": "商店购买，过关获得。"
             },
             {
               "name": "同色消",
               "icon": "UI/Match3/Match3ColorClear",
-              "desc": "点一颗棋子，消掉全场同色。",
-              "obtain": "商店用金币购买，过关也会获得。"
+              "desc": "消除<color=#FF4D00>全场</color>与指定棋子相同的图案。",
+              "obtain": "商店购买，过关获得。"
             }
           ]
         },
@@ -149,62 +149,62 @@
             {
               "name": "冰块",
               "icon": "UI/PNG/ico/2",
-              "desc": "盖住棋子，被盖住的棋子不能交换。相邻消除或特效能敲碎冰层。",
-              "obtain": "第 10 关开始出现。"
+              "desc": "覆盖的棋子<color=#FF4D4D>不能交换</color>。消除或特效可击碎。",
+              "obtain": "第 10 关起出现。"
             },
             {
               "name": "石头",
               "icon": "UI/PNG/ico/4",
-              "desc": "占住一格，本身不能交换。相邻消除或特效能把它砸碎。",
-              "obtain": "第 11 关开始出现。"
+              "desc": "占据格子。相邻消除或特效可<color=#FF4D00>击碎</color>。",
+              "obtain": "第 11 关起出现。"
             },
             {
               "name": "果冻",
               "icon": "UI/PNG/ico/14",
-              "desc": "铺在格子上。要在这一格发生消除，果冻才会被撕掉。",
-              "obtain": "第 15 关开始出现。"
+              "desc": "在该格消除可清除<color=#FF4D00>一层</color>。",
+              "obtain": "第 15 关起出现。"
             },
             {
               "name": "牢笼",
               "icon": "UI/PNG/ico/9",
-              "desc": "锁住棋子，被锁的棋子不能交换。先打破牢笼才能移动。",
-              "obtain": "第 16 关开始出现。"
+              "desc": "锁住的棋子<color=#FF4D4D>不能交换</color>。打破后才能移动。",
+              "obtain": "第 16 关起出现。"
             },
             {
               "name": "横向特效",
               "icon": "UI/Match3/Match3LineH",
-              "desc": "再交换一次会打掉整行。",
-              "obtain": "同一行连成 4 个时生成，不按关卡摆放。"
+              "desc": "交换后消除<color=#FF4D00>整行</color>。",
+              "obtain": "同一行 4 连时生成。"
             },
             {
               "name": "纵向特效",
               "icon": "UI/Match3/Match3LineV",
-              "desc": "再交换一次会打掉整列。",
-              "obtain": "同一列连成 4 个时生成，不按关卡摆放。"
+              "desc": "交换后消除<color=#FF4D00>整列</color>。",
+              "obtain": "同一列 4 连时生成。"
             },
             {
               "name": "炸弹",
               "icon": "UI/PNG/ico/12",
-              "desc": "炸掉周围 3×3。",
-              "obtain": "连成 L 或 T 形时生成，不按关卡摆放。"
+              "desc": "消除周围 <color=#FF4D00>3×3</color>。",
+              "obtain": "L 或 T 形时生成。"
             },
             {
               "name": "彩虹球",
               "icon": "UI/Match3/Match3ColorBomb",
-              "desc": "与一种颜色交换，消掉全场该颜色。",
-              "obtain": "连成 5 个时生成，不按关卡摆放。"
+              "desc": "与一种颜色交换后，消除<color=#FF4D00>全场</color>该颜色。",
+              "obtain": "5 连时生成。"
             },
             {
               "name": "加步",
               "icon": "UI/PNG/ico/16",
-              "desc": "被特效打中时增加步数。",
-              "obtain": "作为掉落物出现在棋盘上。"
+              "desc": "被特效击中时增加<color=#FF4D00>步数</color>。",
+              "obtain": "作为掉落物出现。"
             },
             {
               "name": "金豆荚",
               "icon": "UI/PNG/ico/6",
-              "desc": "被特效打中时获得金币。",
-              "obtain": "作为掉落物出现在棋盘上。"
+              "desc": "被特效击中时获得<color=#FF4D00>金币</color>。",
+              "obtain": "作为掉落物出现。"
             }
           ]
         }

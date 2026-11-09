@@ -8,7 +8,9 @@ namespace SmallGames
         None = 0,
         Lianliankan = 1,
         Sheep = 2,
-        Match3 = 3
+        Match3 = 3,
+        Jieqi = 4,
+        SkillXiangqi = 5
     }
 
     public readonly struct GameModeInfo
@@ -47,6 +49,18 @@ namespace SmallGames
             "滑动交换相邻两格，三个相同即可消除",
             "#5BA3E8");
 
+        public static readonly GameModeInfo Jieqi = new(
+            GameModeType.Jieqi,
+            "新规揭棋",
+            "除将帅外全部打乱",
+            "#C45C26");
+
+        public static readonly GameModeInfo SkillXiangqi = new(
+            GameModeType.SkillXiangqi,
+            "技能象棋",
+            "吃子学会对方走法",
+            "#8B3A2F");
+
         public static GameModeInfo Get(GameModeType type)
         {
             switch (type)
@@ -54,6 +68,8 @@ namespace SmallGames
                 case GameModeType.Lianliankan: return Lianliankan;
                 case GameModeType.Sheep: return Sheep;
                 case GameModeType.Match3: return Match3;
+                case GameModeType.Jieqi: return Jieqi;
+                case GameModeType.SkillXiangqi: return SkillXiangqi;
                 default: return new GameModeInfo(GameModeType.None, "未知", string.Empty, "#FFFFFF");
             }
         }

@@ -123,6 +123,7 @@ namespace SmallGames
             Stretch(textRect, 140f, 24f, 24f, 24f);
             var text = textRect.gameObject.AddComponent<Text>();
             UIStyle.ApplyTextStyle(text);
+            text.supportRichText = true;
             text.fontSize = UIStyle.BodySize + 2;
             text.alignment = TextAnchor.MiddleLeft;
             text.color = UIStyle.TextMain;

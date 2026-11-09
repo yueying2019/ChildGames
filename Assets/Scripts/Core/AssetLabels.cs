@@ -9,6 +9,7 @@ namespace SmallGames
         public const string Lianliankan = "mode.lianliankan";
         public const string Sheep = "mode.sheep";
         public const string Match3 = "mode.match3";
+        public const string Jieqi = "mode.jieqi";
         public const string LianliankanLevels = "levels.lianliankan";
         public const string SheepLevels = "levels.sheep";
         public const string Match3Levels = "levels.match3";
@@ -20,6 +21,8 @@ namespace SmallGames
                 case GameModeType.Lianliankan: return Lianliankan;
                 case GameModeType.Sheep: return Sheep;
                 case GameModeType.Match3: return Match3;
+                case GameModeType.Jieqi: return Jieqi;
+                case GameModeType.SkillXiangqi: return Jieqi;
                 default: return null;
             }
         }
@@ -42,6 +45,8 @@ namespace SmallGames
                 case GameModeType.Lianliankan: return "Lianliankan/";
                 case GameModeType.Sheep: return "Sheep/";
                 case GameModeType.Match3: return "Match3/";
+                case GameModeType.Jieqi: return "Jieqi/";
+                case GameModeType.SkillXiangqi: return "Jieqi/";
                 default: return null;
             }
         }

@@ -64,6 +64,7 @@ namespace SmallGames.Editor
             MarkFolder(addresses, labels, extras, assets, ContentRoot + "/Lianliankan", AssetLabels.Lianliankan, AssetLabels.LianliankanLevels);
             MarkFolder(addresses, labels, extras, assets, ContentRoot + "/Sheep", AssetLabels.Sheep, AssetLabels.SheepLevels);
             MarkFolder(addresses, labels, extras, assets, ContentRoot + "/Match3", AssetLabels.Match3, AssetLabels.Match3Levels);
+            MarkFolder(addresses, labels, extras, assets, ContentRoot + "/Jieqi", AssetLabels.Jieqi, null);
             MarkFolder(addresses, labels, extras, assets, "Assets/UI/Cats/Lianliankan", AssetLabels.Lianliankan, null, IsCatFrame);
             MarkFolder(addresses, labels, extras, assets, "Assets/UI/Cats/Sheep", AssetLabels.Sheep, null, IsCatFrame);
             MarkFolder(addresses, labels, extras, assets, "Assets/UI/Cats/Match3", AssetLabels.Match3, null, IsCatFrame);

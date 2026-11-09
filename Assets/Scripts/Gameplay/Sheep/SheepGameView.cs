@@ -898,7 +898,7 @@ namespace SmallGames
                 RefreshProgress();
                 if (_mascot != null)
                     _mascot.PlaySkill(0);
-                UIManager.Instance?.ShowToast("吐出来：槽里最早的一张回到牌面");
+                UIManager.Instance?.ShowToast("移出：" + UIStyle.Key("最早的一张") + "回到场上");
                 return true;
             }
 

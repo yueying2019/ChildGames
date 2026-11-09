@@ -33,9 +33,9 @@ namespace SmallGames
         {
             switch (mode)
             {
-                case GameModeType.Sheep: return $"移出槽里最多 {SheepClearSlots} 张牌，补 {SheepBonusSeconds} 秒";
-                case GameModeType.Match3: return $"增加 {ExtraMoves} 步";
-                default: return $"增加 {ExtraSeconds} 秒";
+                case GameModeType.Sheep: return "移出槽内最多 " + UIStyle.Key(SheepClearSlots + " 张") + "牌，并增加 " + UIStyle.Key(SheepBonusSeconds + " 秒");
+                case GameModeType.Match3: return "增加 " + UIStyle.Key(ExtraMoves + " 步");
+                default: return "增加 " + UIStyle.Key(ExtraSeconds + " 秒");
             }
         }
     }

@@ -1,0 +1,13 @@
+木纹象棋棋子与棋盘。
+
+作者：Kadagaden
+仓库：https://github.com/Kadagaden/chess-pieces
+许可：Creative Commons Attribution 4.0（CC BY 4.0）
+https://creativecommons.org/licenses/by/4.0/
+原文件：pieces/xiangqi_gmchess_style_wood 、boards/xiangqi_gmchess_wood.svg
+完整许可证：src/LICENSE.txt
+
+改动：矢量图已栅格成 256×256 棋子 PNG 和 1080×1200 棋盘 PNG。
+table.png、move_glow.png 为本项目绘制：深色木案底图，以及上一步落子的白光圈。
+back.png 由红帅去掉字面得到，给暗子共用背面。
+棋盘原图没有「楚河」「汉界」。

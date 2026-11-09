@@ -72,6 +72,8 @@ namespace SmallGames
                 case GameModeType.Lianliankan: return 1 << 0;
                 case GameModeType.Sheep: return 1 << 1;
                 case GameModeType.Match3: return 1 << 2;
+                case GameModeType.Jieqi: return 1 << 3;
+                case GameModeType.SkillXiangqi: return 1 << 4;
                 default: return 0;
             }
         }

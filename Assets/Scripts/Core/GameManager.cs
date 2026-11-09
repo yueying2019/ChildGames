@@ -105,6 +105,12 @@ namespace SmallGames
                 case GameModeType.Match3:
                     session = sessionGo.AddComponent<Match3Session>();
                     break;
+                case GameModeType.Jieqi:
+                    session = sessionGo.AddComponent<JieqiSession>();
+                    break;
+                case GameModeType.SkillXiangqi:
+                    session = sessionGo.AddComponent<SkillXiangqiSession>();
+                    break;
                 default:
                     Destroy(sessionGo);
                     return;

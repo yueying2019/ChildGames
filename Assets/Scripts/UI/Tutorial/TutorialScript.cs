@@ -43,7 +43,7 @@ namespace SmallGames
                 new TutorialStep
                 {
                     Key = "m3.step1",
-                    Desc = "按住这一颗，和它下面的交换，让三颗一样的连成一条线",
+                    Desc = "交换这两格，使" + UIStyle.Key("三个相同图案") + "连成" + UIStyle.Key("一线"),
                     Highlight = new[] { x0, y0, x1, y1 },
                     Allowed = new[] { x0, y0, x1, y1 },
                     Complete = Match3SwapDone
@@ -51,7 +51,7 @@ namespace SmallGames
                 new TutorialStep
                 {
                     Key = "m3.step2",
-                    Desc = "很好！再接着消除，攒够分数就过关",
+                    Desc = "继续消除，达到" + UIStyle.Key("分数") + "即" + UIStyle.Key("过关"),
                     Complete = Match3AnyMatch
                 }
             };
@@ -65,7 +65,7 @@ namespace SmallGames
                 new TutorialStep
                 {
                     Key = "lian.step1",
-                    Desc = "点这两张一样的牌，把它们连起来消掉",
+                    Desc = "点选这两张" + UIStyle.Key("相同") + "的牌并" + UIStyle.Key("消除"),
                     Highlight = new[] { r0, c0, r1, c1 },
                     Allowed = new[] { r0, c0, r1, c1 },
                     Complete = LianFirstPair
@@ -73,7 +73,7 @@ namespace SmallGames
                 new TutorialStep
                 {
                     Key = "lian.step2",
-                    Desc = "继续找出一样的牌，全部消完就过关",
+                    Desc = "继续消除相同图案，全部消除即" + UIStyle.Key("过关"),
                     Complete = LianAnyPair
                 }
             };
@@ -88,7 +88,7 @@ namespace SmallGames
                 new TutorialStep
                 {
                     Key = "sheep.step1",
-                    Desc = "点三张一样的牌，它们会掉进下面的槽里消掉",
+                    Desc = "点选" + UIStyle.Key("三张相同") + "的牌，进入" + UIStyle.Key("槽位") + "后消除",
                     Highlight = new[] { 1 },
                     Allowed = new[] { 1 },
                     Complete = SheepFirstGroup
@@ -96,7 +96,7 @@ namespace SmallGames
                 new TutorialStep
                 {
                     Key = "sheep.step2",
-                    Desc = "槽位只有几个，别乱点。继续凑齐三张，清空棋盘就过关",
+                    Desc = UIStyle.Key("槽位有限") + "。继续凑齐三张，清空棋盘即" + UIStyle.Key("过关"),
                     Complete = SheepAnyGroup
                 }
             };

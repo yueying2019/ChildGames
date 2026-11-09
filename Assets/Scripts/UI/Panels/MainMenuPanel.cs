@@ -10,6 +10,8 @@ namespace SmallGames
         public Button LianliankanButton;
         public Button SheepButton;
         public Button Match3Button;
+        public Button JieqiButton;
+        public Button SkillButton;
         public Button ShopButton;
         public Button DailyButton;
         public Button TaskButton;
@@ -35,6 +37,8 @@ namespace SmallGames
             Wire(LianliankanButton, () => ClickMode(GameModeType.Lianliankan));
             Wire(SheepButton, () => ClickMode(GameModeType.Sheep));
             Wire(Match3Button, () => ClickMode(GameModeType.Match3));
+            Wire(JieqiButton, () => ClickMode(GameModeType.Jieqi));
+            Wire(SkillButton, () => ClickMode(GameModeType.SkillXiangqi));
             BindVersionButton();
         }
 

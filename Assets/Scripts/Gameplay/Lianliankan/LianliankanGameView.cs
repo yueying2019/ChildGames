@@ -913,7 +913,7 @@ namespace SmallGames
                 HintFlash.Play(graphics);
                 if (_mascot != null)
                     _mascot.PlaySkill(0);
-                UIManager.Instance?.ShowToast("瞄一眼：闪出一对能连的牌");
+                UIManager.Instance?.ShowToast("提示：标出一对" + UIStyle.Key("可连") + "的牌");
                 return true;
             }
 

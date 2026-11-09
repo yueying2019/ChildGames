@@ -208,3 +208,7 @@ x86/
 
 # 补字工具下载的完整 Noto Sans SC，不进仓库
 Tools/FontCache/
+
+# 仓库里只保留这一份发布包，其余 apk 仍忽略
+!/Apk/
+!/Apk/*.apk

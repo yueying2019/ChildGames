@@ -97,6 +97,29 @@ namespace SmallGames
                 Button.onClick.AddListener(onClick);
         }
 
+        /// <summary>揭棋入口：没有关卡和星级，只选双人或对电脑。</summary>
+        public void BindPlain(string number, string title, string state, UnityAction onClick)
+        {
+            SetStars(0);
+            if (NumberText != null)
+                NumberText.text = number;
+            if (TitleText != null)
+                TitleText.text = title;
+            if (StateText != null)
+            {
+                StateText.text = state;
+                StateText.horizontalOverflow = HorizontalWrapMode.Overflow;
+                StateText.verticalOverflow = VerticalWrapMode.Overflow;
+            }
+
+            if (Button == null)
+                return;
+            Button.interactable = true;
+            Button.onClick.RemoveAllListeners();
+            if (onClick != null)
+                Button.onClick.AddListener(onClick);
+        }
+
         /// <summary>教学关（第 0 关）格子：不算星级，只显示「学会 / 未学」。</summary>
         public void BindTutorial(bool cleared, UnityAction onClick)
         {

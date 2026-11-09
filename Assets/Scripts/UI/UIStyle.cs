@@ -44,6 +44,22 @@ namespace SmallGames
         public const FontStyle TextFontStyle = FontStyle.Bold;
         public const float TextLineSpacing = 1f;
 
+        /// <summary>说明里的关键词。规则、商店、图鉴正文已开启富文本。</summary>
+        public const string RichKey = "#FF4D00";
+
+        /// <summary>限制、失败。深色底和浅色底都能辨认。</summary>
+        public const string RichBan = "#FF4D4D";
+
+        public static string Key(string text)
+        {
+            return "<color=" + RichKey + ">" + text + "</color>";
+        }
+
+        public static string Ban(string text)
+        {
+            return "<color=" + RichBan + ">" + text + "</color>";
+        }
+
         private static Font _prefabFont;
         private static Sprite _whiteSprite;
 

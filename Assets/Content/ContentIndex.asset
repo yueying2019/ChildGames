@@ -536,6 +536,7 @@ MonoBehaviour:
   - Match3/Levels/Level_34
   - Match3/Levels/Level_35
   - Match3/Levels/Level_36
+  - Jieqi/JieqiGameView
   Labels:
   - ui.core
   - ui.core
@@ -1060,6 +1061,7 @@ MonoBehaviour:
   - mode.match3
   - mode.match3
   - mode.match3
+  - mode.jieqi
   ExtraLabels:
   - 
   - 
@@ -1584,6 +1586,7 @@ MonoBehaviour:
   - levels.match3
   - levels.match3
   - levels.match3
+  - 
   Assets:
   - {fileID: 810001, guid: 2a3a361d967aac6fa60a84bfefd8b6fe, type: 3}
   - {fileID: 4900000, guid: 3cd28e3d2b162ef429abfe93dd0d7445, type: 3}
@@ -2108,3 +2111,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3a30034000040008000000000000034, type: 2}
   - {fileID: 11400000, guid: c3a30035000040008000000000000035, type: 2}
   - {fileID: 11400000, guid: c3a30036000040008000000000000036, type: 2}
+  - {fileID: 2100000000000000001, guid: b2a7e3d95c8f4b10d4e6f9028c3b7d51, type: 3}

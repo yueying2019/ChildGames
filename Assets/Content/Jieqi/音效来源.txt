@@ -1,0 +1,4 @@
+jieqi_capture.ogg、jieqi_check.wav
+来源：https://github.com/audreyt/gcin-voice-data
+录音人：Edward Der-Hua Liu。吃子是阴平「吃」。将军是同一人的阴平「将」接阴平「军」。
+许可：LGPL-3.0 或 GPL-3.0，由原作者双许可。

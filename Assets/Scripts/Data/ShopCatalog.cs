@@ -65,24 +65,24 @@ namespace SmallGames
 
         public static readonly ShopItemInfo[] All =
         {
-            new ShopItemInfo(ShopItemId.LianShuffle, GameModeType.Lianliankan, "重排", "打乱剩余棋子位置", 80),
-            new ShopItemInfo(ShopItemId.LianHint, GameModeType.Lianliankan, "提示", "标出一对可连的棋子", 50),
-            new ShopItemInfo(ShopItemId.LianTime, GameModeType.Lianliankan, "加时", $"立刻补 {LianBonusSeconds} 秒", 60),
-            new ShopItemInfo(ShopItemId.LianFreeze, GameModeType.Lianliankan, "冻结", $"倒计时停 {LianFreezeSeconds} 秒", 40),
-            new ShopItemInfo(ShopItemId.LianAuto, GameModeType.Lianliankan, "自动连", "自动消掉一对可连的棋子", 50),
-            new ShopItemInfo(ShopItemId.SheepRemove, GameModeType.Sheep, "移出", "把槽里最多 3 张牌移回场地", 80),
-            new ShopItemInfo(ShopItemId.SheepUndo, GameModeType.Sheep, "撤回", "撤销上一步操作", 40),
-            new ShopItemInfo(ShopItemId.SheepShuffle, GameModeType.Sheep, "洗牌", "打乱场上剩余牌的图案", 60),
-            new ShopItemInfo(ShopItemId.SheepSlot, GameModeType.Sheep, "暂存位", "本局槽位上限 +1，差一张也不必认输", 70),
-            new ShopItemInfo(ShopItemId.Match3Hint, GameModeType.Match3, "提示", "标出一步可消的交换", 50),
-            new ShopItemInfo(ShopItemId.Match3Shuffle, GameModeType.Match3, "重排", "重排棋盘并保证有可消步", 80),
-            new ShopItemInfo(ShopItemId.Match3Hammer, GameModeType.Match3, "消除", "点掉一颗棋子", 80),
-            new ShopItemInfo(ShopItemId.Match3LineH, GameModeType.Match3, "横消", "把一颗棋子变成横向特效", 60),
-            new ShopItemInfo(ShopItemId.Match3LineV, GameModeType.Match3, "竖消", "把一颗棋子变成纵向特效", 60),
-            new ShopItemInfo(ShopItemId.Match3Bomb, GameModeType.Match3, "炸弹", "把一颗棋子变成炸弹特效", 80),
-            new ShopItemInfo(ShopItemId.Match3Moves, GameModeType.Match3, "加步", $"立即增加 {Match3ExtraMoves} 步", 50),
-            new ShopItemInfo(ShopItemId.Match3ColorBomb, GameModeType.Match3, "彩球笔", "把一颗棋子变成彩虹球", 120),
-            new ShopItemInfo(ShopItemId.Match3ColorClear, GameModeType.Match3, "同色消", "点一颗棋子，消掉全场同色", 100)
+            new ShopItemInfo(ShopItemId.LianShuffle, GameModeType.Lianliankan, "重排", UIStyle.Key("打乱") + "剩余棋子", 80),
+            new ShopItemInfo(ShopItemId.LianHint, GameModeType.Lianliankan, "提示", "标出一对" + UIStyle.Key("可连") + "棋子", 50),
+            new ShopItemInfo(ShopItemId.LianTime, GameModeType.Lianliankan, "加时", "增加 " + UIStyle.Key(LianBonusSeconds + " 秒"), 60),
+            new ShopItemInfo(ShopItemId.LianFreeze, GameModeType.Lianliankan, "冻结", "倒计时" + UIStyle.Key("暂停") + " " + UIStyle.Key(LianFreezeSeconds + " 秒"), 40),
+            new ShopItemInfo(ShopItemId.LianAuto, GameModeType.Lianliankan, "自动连", UIStyle.Key("自动消除") + "一对可连棋子", 50),
+            new ShopItemInfo(ShopItemId.SheepRemove, GameModeType.Sheep, "移出", "将槽内最多 " + UIStyle.Key("3 张") + "牌移回场上", 80),
+            new ShopItemInfo(ShopItemId.SheepUndo, GameModeType.Sheep, "撤回", UIStyle.Key("撤销") + "上一次收牌", 40),
+            new ShopItemInfo(ShopItemId.SheepShuffle, GameModeType.Sheep, "洗牌", UIStyle.Key("打乱") + "场上剩余牌的图案", 60),
+            new ShopItemInfo(ShopItemId.SheepSlot, GameModeType.Sheep, "暂存位", "本局槽位上限 " + UIStyle.Key("+1"), 70),
+            new ShopItemInfo(ShopItemId.Match3Hint, GameModeType.Match3, "提示", "标出一步" + UIStyle.Key("可消除") + "的交换", 50),
+            new ShopItemInfo(ShopItemId.Match3Shuffle, GameModeType.Match3, "重排", "重排棋盘，并保留" + UIStyle.Key("可消除") + "的步", 80),
+            new ShopItemInfo(ShopItemId.Match3Hammer, GameModeType.Match3, "消除", "消除" + UIStyle.Key("指定棋子"), 80),
+            new ShopItemInfo(ShopItemId.Match3LineH, GameModeType.Match3, "横消", "将指定棋子变为" + UIStyle.Key("横向特效"), 60),
+            new ShopItemInfo(ShopItemId.Match3LineV, GameModeType.Match3, "竖消", "将指定棋子变为" + UIStyle.Key("纵向特效"), 60),
+            new ShopItemInfo(ShopItemId.Match3Bomb, GameModeType.Match3, "炸弹", "将指定棋子变为" + UIStyle.Key("炸弹"), 80),
+            new ShopItemInfo(ShopItemId.Match3Moves, GameModeType.Match3, "加步", "增加 " + UIStyle.Key(Match3ExtraMoves + " 步"), 50),
+            new ShopItemInfo(ShopItemId.Match3ColorBomb, GameModeType.Match3, "彩球笔", "将指定棋子变为" + UIStyle.Key("彩虹球"), 120),
+            new ShopItemInfo(ShopItemId.Match3ColorClear, GameModeType.Match3, "同色消", "消除" + UIStyle.Key("全场") + "与指定棋子相同的图案", 100)
         };
 
         public static GameModeType ModeOfPage(int page)

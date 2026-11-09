@@ -17,6 +17,7 @@ namespace SmallGames
         private AudioClip _clickA;
         private AudioClip _defaultBgm;
         private float _bgmVolumeScale = 1f;
+        private bool _bgmHeld;
 
         private GameSettingsData Settings => SettingsRepository.Current ?? new GameSettingsData();
 
@@ -67,7 +68,7 @@ namespace SmallGames
 
             _bgm.mute = !data.MusicEnabled;
             _bgm.volume = data.MusicEnabled ? data.MusicVolume * Mathf.Clamp01(_bgmVolumeScale) : 0f;
-            if (data.MusicEnabled)
+            if (data.MusicEnabled && !_bgmHeld)
             {
                 if (_bgm.clip != null && !_bgm.isPlaying)
                     _bgm.Play();
@@ -88,6 +89,7 @@ namespace SmallGames
             if (clip == null || _bgm == null)
                 return;
 
+            _bgmHeld = false;
             _bgmVolumeScale = volumeScale > 0.001f ? Mathf.Clamp01(volumeScale) : 1f;
             _bgm.loop = loop;
             if (_bgm.clip != clip)
@@ -113,6 +115,14 @@ namespace SmallGames
 
         public void StopBgm()
         {
+            if (_bgm != null)
+                _bgm.Stop();
+        }
+
+        /// <summary>这一局里不播背景音乐。离开时再 PlayBgm / PlayDefaultBgm 会恢复。</summary>
+        public void HoldBgm()
+        {
+            _bgmHeld = true;
             if (_bgm != null)
                 _bgm.Stop();
         }

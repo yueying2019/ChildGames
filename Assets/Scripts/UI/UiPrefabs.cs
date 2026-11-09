@@ -33,6 +33,7 @@ namespace SmallGames
         public const string LianliankanView = "Lianliankan/LianliankanGameView";
         public const string SheepView = "Sheep/SheepGameView";
         public const string Match3View = "Match3/Match3GameView";
+        public const string JieqiView = "Jieqi/JieqiGameView";
 
         public static T Instantiate<T>(string path, Transform parent, bool stretch = true) where T : Component
         {

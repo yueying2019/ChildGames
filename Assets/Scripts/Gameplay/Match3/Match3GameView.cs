@@ -719,7 +719,7 @@ namespace SmallGames
                 StartPlay(result);
                 if (_mascot != null)
                     _mascot.PlaySkill(0);
-                UIManager.Instance?.ShowToast("踩一脚：随机消掉一颗棋子");
+                UIManager.Instance?.ShowToast("消除：" + UIStyle.Key("随机消除") + "一颗棋子");
                 return true;
             }
 

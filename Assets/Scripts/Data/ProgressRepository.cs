@@ -44,6 +44,9 @@ namespace SmallGames
         public List<int> LianClearPaid = new List<int>();
         public List<int> SheepClearPaid = new List<int>();
         public List<int> Match3ClearPaid = new List<int>();
+
+        /// <summary>揭棋残局已过关的位。第 n 位为 1 表示第 n 关已是三星。</summary>
+        public int JieqiEndgameStars;
     }
 
     /// <summary>
@@ -189,6 +192,29 @@ namespace SmallGames
 
             Save();
             return true;
+        }
+
+        /// <summary>揭棋残局过关记为三星。人机和双人不记在这里。</summary>
+        public static void RecordJieqiEndgame(int index)
+        {
+            if (index < 0 || index >= JieqiEndgameCatalog.Count)
+                return;
+            Ensure();
+            var bit = 1 << index;
+            if ((Current.JieqiEndgameStars & bit) != 0)
+                return;
+            Current.JieqiEndgameStars |= bit;
+            Save();
+        }
+
+        /// <summary>残局选关上的星数。过关是 3，没过是 0。</summary>
+        public static int JieqiEndgameStars(int index)
+        {
+            if (index < 0 || index >= JieqiEndgameCatalog.Count)
+                return 0;
+            Ensure();
+            var bit = 1 << index;
+            return (Current.JieqiEndgameStars & bit) != 0 ? StarCatalog.MaxStars : 0;
         }
 
         /// <summary>某关历史最好星级，未通关卡为 0。</summary>
