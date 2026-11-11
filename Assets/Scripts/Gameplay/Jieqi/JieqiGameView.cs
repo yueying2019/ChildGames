@@ -42,6 +42,9 @@ namespace SmallGames
         public Sprite MoveGlow;
         public AudioClip CaptureClip;
         public AudioClip CheckClip;
+        public JieqiRookCaptureFx CaptureFx;
+        public JieqiHorseCaptureFx HorseCaptureFx;
+        public JieqiRoleCaptureFx RoleCaptureFx;
 
         readonly List<JieqiPieceView> _pool = new List<JieqiPieceView>(48);
         readonly List<JieqiPieceView> _heldPool = new List<JieqiPieceView>(16);
@@ -60,7 +63,11 @@ namespace SmallGames
         bool _popGlow;
         bool _locked;
         bool _thinking;
+        const float CaptureGap = 3f;
+
         Coroutine _ai;
+        Coroutine _hold;
+        bool _holding;
 
         public event Action Changed;
 
@@ -75,6 +82,8 @@ namespace SmallGames
             _lastToY = -1;
             _popGlow = false;
             _thinking = false;
+            CancelHold();
+            StopCaptureFx();
             Refresh();
         }
 
@@ -97,8 +106,11 @@ namespace SmallGames
             }
 
             _thinking = false;
+            StopCaptureFx();
             if (!_match.TryUndo())
                 return false;
+
+            CancelHold();
 
             _locked = false;
             _fromX = -1;
@@ -188,7 +200,7 @@ namespace SmallGames
 
         void OnSquare(int x, int y)
         {
-            if (_locked || _thinking || _match == null || !_match.HumanToMove)
+            if (_locked || _thinking || _holding || _match == null || !_match.HumanToMove)
                 return;
 
             if (_fromX >= 0 && IsLegal(_fromX, _fromY, x, y))
@@ -202,11 +214,7 @@ namespace SmallGames
 
                 _fromX = -1;
                 _fromY = -1;
-                RememberMove(step);
-                PlayMoveSounds(step);
-                Refresh();
-                Changed?.Invoke();
-                ScheduleAi();
+                FinishMove(step, false);
                 return;
             }
 
@@ -266,7 +274,7 @@ namespace SmallGames
 
         void ScheduleAi()
         {
-            if (_ai != null || _locked || _match == null || !_match.AiToMove)
+            if (_ai != null || _locked || _holding || _match == null || !_match.AiToMove)
                 return;
             _ai = StartCoroutine(PlayAi());
         }
@@ -284,11 +292,70 @@ namespace SmallGames
             _ai = null;
             if (_match != null && _match.AiToMove && _match.PlayAi(out var step))
             {
-                RememberMove(step);
-                PlayMoveSounds(step);
+                FinishMove(step, true);
+                yield break;
             }
+
             Refresh();
             Changed?.Invoke();
+        }
+
+        /// <summary>吃子且动效开着时，先锁 3 秒。对局分出胜负就等这 3 秒后再打开结算。</summary>
+        void FinishMove(JieqiStep step, bool fromAi)
+        {
+            RememberMove(step);
+            PlayMoveSounds(step);
+            var held = step.Captured && PlayCaptureFx(step);
+            Refresh();
+            var over = _match != null && _match.Engine.Outcome != JieqiOutcome.Playing;
+            if (held)
+            {
+                BeginHold(over);
+                if (!over)
+                    Changed?.Invoke();
+                return;
+            }
+
+            Changed?.Invoke();
+            if (!fromAi)
+                ScheduleAi();
+        }
+
+        void BeginHold(bool openResult)
+        {
+            if (_hold != null)
+                StopCoroutine(_hold);
+            _hold = StartCoroutine(HoldCapture(openResult));
+        }
+
+        IEnumerator HoldCapture(bool openResult)
+        {
+            _holding = true;
+            yield return new WaitForSeconds(CaptureGap);
+            _holding = false;
+            _hold = null;
+            HideSand();
+            if (openResult)
+                Changed?.Invoke();
+            else
+                ScheduleAi();
+        }
+
+        void CancelHold()
+        {
+            if (_hold != null)
+            {
+                StopCoroutine(_hold);
+                _hold = null;
+            }
+
+            _holding = false;
+        }
+
+        void HideSand()
+        {
+            if (CaptureFx != null && CaptureFx.Backdrop != null)
+                CaptureFx.Backdrop.Hide();
         }
 
         void MarkLastMove()
@@ -327,6 +394,157 @@ namespace SmallGames
                 AudioManager.Instance?.PlaySfx(CaptureClip);
             if (_match.Engine.DefenderInCheck())
                 AudioManager.Instance?.PlaySfx(CheckClip);
+        }
+
+        /// <summary>吃子已经写入棋盘。按走出这一步的走法播对应动画；吃掉将或帅只播城旗。返回是否真的播了。</summary>
+        bool PlayCaptureFx(JieqiStep step)
+        {
+            if (SettingsRepository.Current != null && SettingsRepository.Current.RemoveXiangqiFx)
+                return false;
+
+            if (step.CapturedRole == JieqiRole.King)
+            {
+                StopPieceFx();
+                if (RoleCaptureFx == null)
+                    return false;
+                RoleCaptureFx.PlayFlag();
+                return true;
+            }
+
+            var horse = step.MoverRole == JieqiRole.Horse || step.MoverHorseSkill;
+            var rook = step.MoverRole == JieqiRole.Rook || step.MoverRookSkill;
+            var cannon = step.MoverRole == JieqiRole.Cannon || step.MoverCannonSkill;
+            var elephant = step.MoverRole == JieqiRole.Elephant || step.MoverElephantSkill;
+            var advisor = step.MoverRole == JieqiRole.Advisor || step.MoverAdvisorSkill;
+            var pawn = step.MoverRole == JieqiRole.Pawn || step.MoverPawnSkill;
+            var dx = step.Move.ToX - step.Move.FromX;
+            var dy = step.Move.ToY - step.Move.FromY;
+            if (dx < 0)
+                dx = -dx;
+            if (dy < 0)
+                dy = -dy;
+
+            if (horse && ((dx == 1 && dy == 2) || (dx == 2 && dy == 1)))
+                return PlayHorse();
+
+            if (dx == 2 && dy == 2 && elephant)
+                return PlayRole(2);
+
+            if ((dx == 2 && dy == 2 && advisor) || (dx == 1 && dy == 1 && advisor))
+                return PlayRole(3);
+
+            var orthogonal = (dx == 0) != (dy == 0);
+            if (!orthogonal)
+                return false;
+
+            var screens = CountScreens(step.Move);
+            var dist = dx + dy;
+            if (cannon && screens >= 1)
+                return PlayRole(1);
+
+            if (rook && screens >= 1)
+                return PlayRook();
+
+            if (rook && screens == 0 && step.MoverRole == JieqiRole.Rook)
+                return PlayRook();
+
+            if (step.MoverRole == JieqiRole.King && dist == 1)
+                return PlayRole(5);
+
+            if (pawn && dist == 1)
+                return PlayRole(4);
+
+            if (rook && screens == 0)
+                return PlayRook();
+            return false;
+        }
+
+        bool PlayHorse()
+        {
+            if (HorseCaptureFx == null)
+                return false;
+            if (CaptureFx != null)
+                CaptureFx.Stop();
+            if (RoleCaptureFx != null)
+                RoleCaptureFx.Stop();
+            HorseCaptureFx.Play();
+            return true;
+        }
+
+        bool PlayRook()
+        {
+            if (CaptureFx == null)
+                return false;
+            if (HorseCaptureFx != null)
+                HorseCaptureFx.Stop();
+            if (RoleCaptureFx != null)
+                RoleCaptureFx.Stop();
+            CaptureFx.Play();
+            return true;
+        }
+
+        bool PlayRole(int kind)
+        {
+            if (RoleCaptureFx == null)
+                return false;
+            if (CaptureFx != null)
+                CaptureFx.Stop();
+            if (HorseCaptureFx != null)
+                HorseCaptureFx.Stop();
+            if (kind == 1)
+                RoleCaptureFx.PlayCannon();
+            else if (kind == 2)
+                RoleCaptureFx.PlayElephant();
+            else if (kind == 3)
+                RoleCaptureFx.PlayAdvisor();
+            else if (kind == 4)
+                RoleCaptureFx.PlayPawn();
+            else if (kind == 5)
+                RoleCaptureFx.PlaySeal();
+            else
+                return false;
+            return true;
+        }
+
+        void StopPieceFx()
+        {
+            if (CaptureFx != null)
+                CaptureFx.Stop();
+            if (HorseCaptureFx != null)
+                HorseCaptureFx.Stop();
+        }
+
+        void StopCaptureFx()
+        {
+            StopPieceFx();
+            if (RoleCaptureFx != null)
+                RoleCaptureFx.Stop();
+        }
+
+        int CountScreens(JieqiMove move)
+        {
+            if (_match == null)
+                return 0;
+            if (move.FromX != move.ToX && move.FromY != move.ToY)
+                return -1;
+            var sx = move.ToX == move.FromX ? 0 : (move.ToX > move.FromX ? 1 : -1);
+            var sy = move.ToY == move.FromY ? 0 : (move.ToY > move.FromY ? 1 : -1);
+            if (sx == 0 && sy == 0)
+                return -1;
+            var count = 0;
+            var x = move.FromX + sx;
+            var y = move.FromY + sy;
+            var guard = 0;
+            while ((x != move.ToX || y != move.ToY) && guard < 16)
+            {
+                if (_match.Engine.TryView(x, y, out var view) && view.Occupied)
+                    count++;
+                x += sx;
+                y += sy;
+                guard++;
+            }
+
+            return count;
         }
 
         void RememberMove(JieqiStep step)

@@ -21,4 +21,8 @@ MonoBehaviour:
   LeftStack: 0
   RightStack: 0
   ComposeNum: 3
-  Motif: 1
+  Motif: 3
+  SlotBonus: 0
+  TimeLimit: 0
+  GoalCount: 0
+  FixedCells: []

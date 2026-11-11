@@ -225,6 +225,13 @@ namespace SmallGames
             step.Flipped = before.FaceDown;
             step.RevealedCamp = before.Printed;
             step.RevealedRole = before.Role;
+            step.MoverRole = before.FaceDown ? before.SlotRole : before.Role;
+            step.MoverRookSkill = !before.FaceDown && before.HasSkill && before.SkillRole == JieqiRole.Rook;
+            step.MoverHorseSkill = !before.FaceDown && before.HasSkill && before.SkillRole == JieqiRole.Horse;
+            step.MoverCannonSkill = !before.FaceDown && before.HasSkill && before.SkillRole == JieqiRole.Cannon;
+            step.MoverElephantSkill = !before.FaceDown && before.HasSkill && before.SkillRole == JieqiRole.Elephant;
+            step.MoverAdvisorSkill = !before.FaceDown && before.HasSkill && before.SkillRole == JieqiRole.Advisor;
+            step.MoverPawnSkill = !before.FaceDown && before.HasSkill && before.SkillRole == JieqiRole.Pawn;
             step.Captured = hadCapture;
             if (hadCapture)
             {

@@ -56,6 +56,13 @@ namespace SmallGames
         public JieqiRole CapturedRole;
         public JieqiCamp CapturedController;
         public JieqiOutcome Outcome;
+        public JieqiRole MoverRole;
+        public bool MoverRookSkill;
+        public bool MoverHorseSkill;
+        public bool MoverCannonSkill;
+        public bool MoverElephantSkill;
+        public bool MoverAdvisorSkill;
+        public bool MoverPawnSkill;
     }
 
     /// <summary>界面可见的一格。暗子不带底牌。</summary>

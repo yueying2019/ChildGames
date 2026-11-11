@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!612988286 &1
+SpriteAtlasAsset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 3
+  m_MasterAtlas: {fileID: 0}
+  m_ImporterData:
+    packables:
+    - {fileID: 2800000, guid: c4e8a1b26d3f47a0b5c9d0e1f2a3b4c5, type: 3}
+    - {fileID: 2800000, guid: d5f9b2c37e4a48b1c6d0e1f2a3b4c5d6, type: 3}
+    - {fileID: 2800000, guid: 376b732714bb70646a463676de300dbe, type: 3}
+    - {fileID: 2800000, guid: b0d4fea3c7d28b44b9c8d0b273af4c00, type: 3}
+    - {fileID: 2800000, guid: 6aeb4954ecca9284b86ce0eac5e2115c, type: 3}
+    - {fileID: 2800000, guid: f7ed0dde349bfba4fb7b36d255d6ff71, type: 3}
+    - {fileID: 2800000, guid: aaccd4bdcc74d49409f73ee03c1cbf1d, type: 3}
+    - {fileID: 2800000, guid: 6786b3f41a216d84e98963a08bfc8ad9, type: 3}
+    - {fileID: 2800000, guid: e2e75349c6f66614c9185045d6664a24, type: 3}
+    - {fileID: 2800000, guid: b803719dc9d499543a3ebb5d50a2a425, type: 3}
+    - {fileID: 2800000, guid: d26e206115157a94488491cc47a88600, type: 3}
+    - {fileID: 2800000, guid: 7734c8149830e364991b2696164f04bf, type: 3}
+    - {fileID: 2800000, guid: 06ff1159eecefc640a3cb36d5eef97a7, type: 3}
+    - {fileID: 2800000, guid: 035592de39aec324b83b56f558ac0fa2, type: 3}
+    - {fileID: 2800000, guid: f74c0676fd7340441854193dbba2c259, type: 3}
+    - {fileID: 2800000, guid: d77157233923b7a4690cc27898259989, type: 3}
+    - {fileID: 2800000, guid: b0ab7379c9fe997499b0642ddac6f4e3, type: 3}
+  m_IsVariant: 0
+  m_IsPlaceholder: 0

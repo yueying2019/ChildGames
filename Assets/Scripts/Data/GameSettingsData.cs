@@ -10,6 +10,7 @@ namespace SmallGames
         [Range(0f, 1f)] public float SfxVolume = 1f;
         public bool MusicEnabled = true;
         public bool SfxEnabled = true;
+        public bool RemoveXiangqiFx;
 
         public void Sanitize()
         {
@@ -26,6 +27,7 @@ namespace SmallGames
             SfxVolume = other.SfxVolume;
             MusicEnabled = other.MusicEnabled;
             SfxEnabled = other.SfxEnabled;
+            RemoveXiangqiFx = other.RemoveXiangqiFx;
             Sanitize();
         }
     }

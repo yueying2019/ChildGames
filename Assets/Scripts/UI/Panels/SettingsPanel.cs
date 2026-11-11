@@ -19,8 +19,11 @@ namespace SmallGames
         public Slider SfxSlider;
         public Text MusicValue;
         public Text SfxValue;
+        public Toggle FxToggle;
+        public Image FxToggleBox;
+        public Text FxToggleState;
 
-    private float _sfxPreviewAt;
+        private float _sfxPreviewAt;
 
         public override void BindListeners()
         {
@@ -40,6 +43,11 @@ namespace SmallGames
                 SettingsRepository.Current.SfxEnabled = on;
                 ApplyAndSave();
             });
+            BindToggle(FxToggle, FxToggleBox, FxToggleState, on =>
+            {
+                SettingsRepository.Current.RemoveXiangqiFx = on;
+                SettingsRepository.Save();
+            }, "是", "否");
 
             BindSlider(MusicSlider, MusicValue, v =>
             {
@@ -68,6 +76,7 @@ namespace SmallGames
             var data = SettingsRepository.Current;
             SetToggle(MusicToggle, MusicToggleBox, MusicToggleState, data.MusicEnabled);
             SetToggle(SfxToggle, SfxToggleBox, SfxToggleState, data.SfxEnabled);
+            SetToggle(FxToggle, FxToggleBox, FxToggleState, data.RemoveXiangqiFx, "是", "否");
             if (MusicSlider != null)
                 MusicSlider.SetValueWithoutNotify(data.MusicVolume);
             if (SfxSlider != null)
@@ -92,14 +101,14 @@ namespace SmallGames
             AudioManager.Instance?.ApplySettings();
         }
 
-        private static void BindToggle(Toggle toggle, Image box, Text state, UnityEngine.Events.UnityAction<bool> onChanged)
+        private static void BindToggle(Toggle toggle, Image box, Text state, UnityEngine.Events.UnityAction<bool> onChanged, string onText = "开", string offText = "关")
         {
             if (toggle == null)
                 return;
             toggle.onValueChanged.RemoveAllListeners();
             toggle.onValueChanged.AddListener(on =>
             {
-                ApplyToggleVisual(box, state, on);
+                ApplyToggleVisual(box, state, on, onText, offText);
                 onChanged?.Invoke(on);
             });
         }
@@ -117,19 +126,19 @@ namespace SmallGames
             });
         }
 
-        private static void SetToggle(Toggle toggle, Image box, Text state, bool isOn)
+        private static void SetToggle(Toggle toggle, Image box, Text state, bool isOn, string onText = "开", string offText = "关")
         {
             if (toggle != null)
                 toggle.SetIsOnWithoutNotify(isOn);
-            ApplyToggleVisual(box, state, isOn);
+            ApplyToggleVisual(box, state, isOn, onText, offText);
         }
 
-        private static void ApplyToggleVisual(Image box, Text state, bool isOn)
+        private static void ApplyToggleVisual(Image box, Text state, bool isOn, string onText = "开", string offText = "关")
         {
             if (box != null)
                 box.color = isOn ? UIStyle.None : UIStyle.TabSelect;
             if (state != null)
-                state.text = isOn ? "开" : "关";
+                state.text = isOn ? onText : offText;
         }
 
         private static string Percent(float value)
