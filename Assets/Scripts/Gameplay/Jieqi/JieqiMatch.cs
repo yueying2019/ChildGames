@@ -82,7 +82,10 @@ namespace SmallGames
                 return false;
             }
 
-            if (!_ai.TryChoose(_engine, _aiRng, out var move))
+            var depth = JieqiAi.Depth;
+            if (SettingsRepository.Current != null)
+                depth = SettingsRepository.Current.XiangqiSearchDepth();
+            if (!_ai.TryChoose(_engine, _aiRng, depth, out var move))
             {
                 _engine.RefreshTerminal();
                 step = default;

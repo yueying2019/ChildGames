@@ -138,5 +138,25 @@ namespace SmallGames.Tests
             Assert.IsTrue(engine.TryHint(out var r0, out var c0, out var r1, out var c1));
             Assert.IsTrue(engine.TryFindPath(r0, c0, r1, c1, null), "提示必须是真实可连的一对");
         }
+
+        [Test]
+        public void Shuffle_LeavesAConnectablePair()
+        {
+            var ids = EmptyIds();
+            var n = 0;
+            for (var r = 0; r < Rows; r++)
+            {
+                for (var c = 0; c < Cols; c++)
+                {
+                    ids[r, c] = n / 2;
+                    n++;
+                }
+            }
+
+            var engine = new LianliankanEngine();
+            engine.Load(ids, null);
+            engine.Shuffle(null);
+            Assert.IsTrue(engine.HasMove());
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace SmallGames
         public Toggle FxToggle;
         public Image FxToggleBox;
         public Text FxToggleState;
+        public Toggle PaceToggle;
+        public Text PaceState;
 
         private float _sfxPreviewAt;
 
@@ -48,6 +50,7 @@ namespace SmallGames
                 SettingsRepository.Current.RemoveXiangqiFx = on;
                 SettingsRepository.Save();
             }, "是", "否");
+            BindPace();
 
             BindSlider(MusicSlider, MusicValue, v =>
             {
@@ -77,6 +80,7 @@ namespace SmallGames
             SetToggle(MusicToggle, MusicToggleBox, MusicToggleState, data.MusicEnabled);
             SetToggle(SfxToggle, SfxToggleBox, SfxToggleState, data.SfxEnabled);
             SetToggle(FxToggle, FxToggleBox, FxToggleState, data.RemoveXiangqiFx, "是", "否");
+            ShowPace(data.XiangqiAiPace);
             if (MusicSlider != null)
                 MusicSlider.SetValueWithoutNotify(data.MusicVolume);
             if (SfxSlider != null)
@@ -99,6 +103,37 @@ namespace SmallGames
         {
             SettingsRepository.Save();
             AudioManager.Instance?.ApplySettings();
+        }
+
+        private void BindPace()
+        {
+            if (PaceToggle == null)
+                return;
+            PaceToggle.onValueChanged.RemoveAllListeners();
+            PaceToggle.onValueChanged.AddListener(_ =>
+            {
+                var data = SettingsRepository.Current;
+                if (data.XiangqiAiPace == 0)
+                    data.XiangqiAiPace = 1;
+                else if (data.XiangqiAiPace == 1)
+                    data.XiangqiAiPace = 2;
+                else
+                    data.XiangqiAiPace = 0;
+                SettingsRepository.Save();
+                ShowPace(data.XiangqiAiPace);
+            });
+        }
+
+        private void ShowPace(int pace)
+        {
+            if (PaceState == null)
+                return;
+            if (pace == 1)
+                PaceState.text = "快";
+            else if (pace == 2)
+                PaceState.text = "慢";
+            else
+                PaceState.text = "普通";
         }
 
         private static void BindToggle(Toggle toggle, Image box, Text state, UnityEngine.Events.UnityAction<bool> onChanged, string onText = "开", string offText = "关")

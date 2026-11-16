@@ -4,13 +4,12 @@ using System.Collections.Generic;
 namespace SmallGames
 {
     /// <summary>
-    /// 电脑只看明子和格子兵种。暗子底牌按剩余棋子随机摊到各暗格上再搜索，不读取真实落点。
-    /// 每个样本走两层：自己一步、对方应一步。
+    /// 电脑只看明子和格子兵种。暗子底牌在根上摊一次，再按层数搜索，不读取真实落点。
     /// </summary>
     public sealed class JieqiAi
     {
         public const int Depth = 2;
-        public const int Samples = 4;
+        const int MaxDepth = 3;
         const int Mate = 30000;
 
         readonly List<JieqiMove>[] _levels;
@@ -19,18 +18,28 @@ namespace SmallGames
 
         public JieqiAi()
         {
-            _levels = new List<JieqiMove>[Depth + 1];
+            _levels = new List<JieqiMove>[MaxDepth + 1];
             for (var i = 0; i < _levels.Length; i++)
                 _levels[i] = new List<JieqiMove>(160);
         }
 
         public bool TryChoose(JieqiEngine source, Random rng, out JieqiMove move)
         {
+            return TryChoose(source, rng, Depth, out move);
+        }
+
+        /// <summary>depth 1 快、2 普通、3 慢。暗子只在根上摊一次底牌。</summary>
+        public bool TryChoose(JieqiEngine source, Random rng, int depth, out JieqiMove move)
+        {
             move = default;
             if (source == null || source.Outcome != JieqiOutcome.Playing)
                 return false;
             if (rng == null)
                 rng = new Random(1);
+            if (depth < 1)
+                depth = 1;
+            if (depth > MaxDepth)
+                depth = MaxDepth;
 
             _root.Clear();
             source.CollectMoves(_root);
@@ -39,20 +48,13 @@ namespace SmallGames
 
             if (_scores.Length < _root.Count)
                 _scores = new int[_root.Count];
-            for (var i = 0; i < _root.Count; i++)
-                _scores[i] = 0;
 
-            var samples = source.StandardDeal ? Samples : 1;
-            for (var sample = 0; sample < samples; sample++)
+            var blind = source.CloneBlind(rng);
+            for (var i = 0; i < _root.Count; i++)
             {
-                var blind = source.CloneBlind(rng);
-                for (var i = 0; i < _root.Count; i++)
-                {
-                    var undo = blind.Make(_root[i]);
-                    var score = -Negamax(blind, Depth - 1, -Mate - 1000, Mate + 1000);
-                    blind.Unmake(undo);
-                    _scores[i] += score;
-                }
+                var undo = blind.Make(_root[i]);
+                _scores[i] = -Negamax(blind, depth - 1, -Mate - 1000, Mate + 1000);
+                blind.Unmake(undo);
             }
 
             var best = 0;

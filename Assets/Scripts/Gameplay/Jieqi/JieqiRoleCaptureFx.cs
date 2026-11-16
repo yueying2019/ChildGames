@@ -27,6 +27,9 @@ namespace SmallGames
         public Sprite ElephantRunA;
         public Sprite ElephantRunB;
 
+        public const float Duration = 2f;
+        public const float PawnDuration = 1.6f;
+
         const int KindCannon = 1;
         const int KindElephant = 2;
         const int KindAdvisor = 3;
@@ -85,33 +88,33 @@ namespace SmallGames
 
         public void PlayCannon()
         {
-            Begin(KindCannon, 2f);
+            Begin(KindCannon, Duration);
         }
 
         public void PlayElephant()
         {
-            Begin(KindElephant, 2f);
+            Begin(KindElephant, Duration);
         }
 
         public void PlayAdvisor()
         {
-            Begin(KindAdvisor, 2f);
+            Begin(KindAdvisor, Duration);
         }
 
         /// <summary>兵卒持枪冲上来再突刺，大约 1.6 秒。</summary>
         public void PlayPawn()
         {
-            Begin(KindPawn, 1.6f);
+            Begin(KindPawn, PawnDuration);
         }
 
         public void PlaySeal()
         {
-            Begin(KindSeal, 2f);
+            Begin(KindSeal, Duration);
         }
 
         public void PlayFlag()
         {
-            Begin(KindFlag, 2f);
+            Begin(KindFlag, Duration);
         }
 
         public void Stop()

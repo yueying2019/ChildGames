@@ -63,7 +63,6 @@ namespace SmallGames
         bool _popGlow;
         bool _locked;
         bool _thinking;
-        const float CaptureGap = 3f;
 
         Coroutine _ai;
         Coroutine _hold;
@@ -300,17 +299,17 @@ namespace SmallGames
             Changed?.Invoke();
         }
 
-        /// <summary>吃子且动效开着时，先锁 3 秒。对局分出胜负就等这 3 秒后再打开结算。</summary>
+        /// <summary>吃子且动效开着时，锁到这段动画播完。对局分出胜负就等同一段时间后再打开结算。</summary>
         void FinishMove(JieqiStep step, bool fromAi)
         {
             RememberMove(step);
             PlayMoveSounds(step);
-            var held = step.Captured && PlayCaptureFx(step);
+            var seconds = step.Captured ? PlayCaptureFx(step) : 0f;
             Refresh();
             var over = _match != null && _match.Engine.Outcome != JieqiOutcome.Playing;
-            if (held)
+            if (seconds > 0f)
             {
-                BeginHold(over);
+                BeginHold(over, seconds);
                 if (!over)
                     Changed?.Invoke();
                 return;
@@ -321,17 +320,17 @@ namespace SmallGames
                 ScheduleAi();
         }
 
-        void BeginHold(bool openResult)
+        void BeginHold(bool openResult, float seconds)
         {
             if (_hold != null)
                 StopCoroutine(_hold);
-            _hold = StartCoroutine(HoldCapture(openResult));
+            _hold = StartCoroutine(HoldCapture(openResult, seconds));
         }
 
-        IEnumerator HoldCapture(bool openResult)
+        IEnumerator HoldCapture(bool openResult, float seconds)
         {
             _holding = true;
-            yield return new WaitForSeconds(CaptureGap);
+            yield return new WaitForSeconds(seconds);
             _holding = false;
             _hold = null;
             HideSand();
@@ -396,19 +395,19 @@ namespace SmallGames
                 AudioManager.Instance?.PlaySfx(CheckClip);
         }
 
-        /// <summary>吃子已经写入棋盘。按走出这一步的走法播对应动画；吃掉将或帅只播城旗。返回是否真的播了。</summary>
-        bool PlayCaptureFx(JieqiStep step)
+        /// <summary>吃子已经写入棋盘。按走出这一步的走法播对应动画；吃掉将或帅只播城旗。返回这段动画的秒数，0 表示没播。</summary>
+        float PlayCaptureFx(JieqiStep step)
         {
             if (SettingsRepository.Current != null && SettingsRepository.Current.RemoveXiangqiFx)
-                return false;
+                return 0f;
 
             if (step.CapturedRole == JieqiRole.King)
             {
                 StopPieceFx();
                 if (RoleCaptureFx == null)
-                    return false;
+                    return 0f;
                 RoleCaptureFx.PlayFlag();
-                return true;
+                return JieqiRoleCaptureFx.Duration;
             }
 
             var horse = step.MoverRole == JieqiRole.Horse || step.MoverHorseSkill;
@@ -435,7 +434,7 @@ namespace SmallGames
 
             var orthogonal = (dx == 0) != (dy == 0);
             if (!orthogonal)
-                return false;
+                return 0f;
 
             var screens = CountScreens(step.Move);
             var dist = dx + dy;
@@ -456,37 +455,37 @@ namespace SmallGames
 
             if (rook && screens == 0)
                 return PlayRook();
-            return false;
+            return 0f;
         }
 
-        bool PlayHorse()
+        float PlayHorse()
         {
             if (HorseCaptureFx == null)
-                return false;
+                return 0f;
             if (CaptureFx != null)
                 CaptureFx.Stop();
             if (RoleCaptureFx != null)
                 RoleCaptureFx.Stop();
             HorseCaptureFx.Play();
-            return true;
+            return JieqiHorseCaptureFx.Duration;
         }
 
-        bool PlayRook()
+        float PlayRook()
         {
             if (CaptureFx == null)
-                return false;
+                return 0f;
             if (HorseCaptureFx != null)
                 HorseCaptureFx.Stop();
             if (RoleCaptureFx != null)
                 RoleCaptureFx.Stop();
             CaptureFx.Play();
-            return true;
+            return JieqiRookCaptureFx.Duration;
         }
 
-        bool PlayRole(int kind)
+        float PlayRole(int kind)
         {
             if (RoleCaptureFx == null)
-                return false;
+                return 0f;
             if (CaptureFx != null)
                 CaptureFx.Stop();
             if (HorseCaptureFx != null)
@@ -498,12 +497,15 @@ namespace SmallGames
             else if (kind == 3)
                 RoleCaptureFx.PlayAdvisor();
             else if (kind == 4)
+            {
                 RoleCaptureFx.PlayPawn();
+                return JieqiRoleCaptureFx.PawnDuration;
+            }
             else if (kind == 5)
                 RoleCaptureFx.PlaySeal();
             else
-                return false;
-            return true;
+                return 0f;
+            return JieqiRoleCaptureFx.Duration;
         }
 
         void StopPieceFx()

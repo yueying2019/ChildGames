@@ -45,7 +45,7 @@ namespace SmallGames
             SlotLimit = slotLimit < 1 ? 1 : slotLimit;
         }
 
-        /// <summary>撤回前记下槽里的图案顺序。组数不回滚，与界面现有撤回一致。</summary>
+        /// <summary>撤回前记下槽里的图案顺序。组数和连击用 <see cref="CaptureProgress"/> 一起记。</summary>
         public int[] CaptureSlots()
         {
             return _slots.ToArray();
@@ -58,6 +58,25 @@ namespace SmallGames
                 return;
             for (var i = 0; i < slots.Length; i++)
                 _slots.Add(slots[i]);
+        }
+
+        /// <summary>撤回前记下已经消除的组数和连击。峰值只升不降，撤回后仍保留本局最高连击。</summary>
+        public void CaptureProgress(out int groups, out int combo, out int peak)
+        {
+            groups = GroupsCleared;
+            combo = Combo;
+            peak = ComboPeak;
+        }
+
+        public void RestoreProgress(int groups, int combo, int peak)
+        {
+            GroupsCleared = groups < 0 ? 0 : groups;
+            Combo = combo < 0 ? 0 : combo;
+            if (peak < ComboPeak)
+                peak = ComboPeak;
+            if (peak < Combo)
+                peak = Combo;
+            ComboPeak = peak;
         }
 
         /// <summary>插到同图案最后一张的后面。返回插入下标。</summary>

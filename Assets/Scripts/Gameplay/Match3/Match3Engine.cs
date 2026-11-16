@@ -24,6 +24,18 @@ namespace SmallGames
         private int[,] _horzLen;
         private int[,] _vertLen;
         private bool[,] _overlayHit;
+        private bool[,] _remove;
+        private bool[,] _matched;
+        private bool[,] _seen;
+        private readonly HashSet<int> _fired = new HashSet<int>();
+        private readonly HashSet<int> _skipFire = new HashSet<int>();
+        private readonly Queue<Match3Coord> _blast = new Queue<Match3Coord>();
+        private readonly List<MatchGroup> _groups = new List<MatchGroup>(8);
+        private readonly List<MatchGroup> _groupPool = new List<MatchGroup>(8);
+        private readonly Stack<Match3Coord> _flood = new Stack<Match3Coord>(16);
+        private readonly List<(Match3Tile tile, int fromY)> _falling = new List<(Match3Tile tile, int fromY)>(16);
+        private readonly List<Match3Coord> _candidates = new List<Match3Coord>(64);
+        private readonly List<Match3Tile> _shuffleTiles = new List<Match3Tile>(64);
         private int _bonusMoves;
         private int _bonusCoins;
         private readonly List<Match3Coord> _leftoverSpecials = new List<Match3Coord>();
@@ -130,13 +142,11 @@ namespace SmallGames
                 return result;
 
             var color = tile.Color;
-            var remove = new bool[Width, Height];
-            var fired = new HashSet<int>();
-            var queue = new Queue<Match3Coord>();
+            BeginBlast();
             ClearOverlayHits();
             result.Events.Add(Match3BoardEvent.Blast(Match3Special.ColorBomb, x, y, color));
-            ClearColor(color, remove, fired, queue, result.Events);
-            FlushDetonation(remove, fired, queue, result.Events, null);
+            ClearColor(color, _remove, _fired, _blast, result.Events);
+            FlushDetonation(_remove, _fired, _blast, result.Events, null);
             ApplyGravity(result.Events);
             Fill(result.Events);
             ResolveStable(result.Events, 1);
@@ -155,13 +165,13 @@ namespace SmallGames
             if (Endless || MovesLeft <= 0)
                 return result;
 
-            var candidates = new List<Match3Coord>(Width * Height);
-            CollectLeftoverCandidates(candidates);
-            ShuffleCoords(candidates);
-            var n = Math.Min(MovesLeft, candidates.Count);
+            _candidates.Clear();
+            CollectLeftoverCandidates(_candidates);
+            ShuffleCoords(_candidates);
+            var n = Math.Min(MovesLeft, _candidates.Count);
             for (var i = 0; i < n; i++)
             {
-                var pos = candidates[i];
+                var pos = _candidates[i];
                 var tile = GetTile(pos.X, pos.Y);
                 if (tile == null)
                     continue;
@@ -184,9 +194,7 @@ namespace SmallGames
             if (_leftoverSpecials.Count == 0)
                 return result;
 
-            var remove = new bool[Width, Height];
-            var fired = new HashSet<int>();
-            var queue = new Queue<Match3Coord>();
+            BeginBlast();
             ClearOverlayHits();
             for (var i = 0; i < _leftoverSpecials.Count; i++)
             {
@@ -194,10 +202,10 @@ namespace SmallGames
                 var tile = GetTile(pos.X, pos.Y);
                 if (tile == null || tile.Special == Match3Special.None)
                     continue;
-                MarkRemove(pos.X, pos.Y, remove, fired, queue, result.Events);
+                MarkRemove(pos.X, pos.Y, _remove, _fired, _blast, result.Events);
             }
 
-            FlushDetonation(remove, fired, queue, result.Events, null);
+            FlushDetonation(_remove, _fired, _blast, result.Events, null);
             ApplyGravity(result.Events);
             Fill(result.Events);
             ResolveStable(result.Events, 1, false);
@@ -275,6 +283,9 @@ namespace SmallGames
             _horzLen = new int[Width, Height];
             _vertLen = new int[Width, Height];
             _overlayHit = new bool[Width, Height];
+            _remove = new bool[Width, Height];
+            _matched = new bool[Width, Height];
+            _seen = new bool[Width, Height];
             _leftoverSpecials.Clear();
             _nextId = 1;
 
@@ -557,31 +568,29 @@ namespace SmallGames
 
         private void RemoveGroups(List<MatchGroup> groups, List<Match3BoardEvent> events, int cascade)
         {
-            var remove = new bool[Width, Height];
-            var fired = new HashSet<int>();
-            var queue = new Queue<Match3Coord>();
+            BeginBlast();
             ClearOverlayHits();
 
             for (var i = 0; i < groups.Count; i++)
             {
                 var group = groups[i];
                 for (var c = 0; c < group.Cells.Count; c++)
-                    MarkRemove(group.Cells[c].X, group.Cells[c].Y, remove, fired, queue, events);
+                    MarkRemove(group.Cells[c].X, group.Cells[c].Y, _remove, _fired, _blast, events);
             }
 
-            while (queue.Count > 0)
+            while (_blast.Count > 0)
             {
-                var pos = queue.Dequeue();
+                var pos = _blast.Dequeue();
                 var tile = GetTile(pos.X, pos.Y);
                 if (tile == null)
                     continue;
-                FireSpecial(tile, pos.X, pos.Y, remove, fired, queue, events);
+                FireSpecial(tile, pos.X, pos.Y, _remove, _fired, _blast, events);
             }
 
-            HitNeighborsOf(remove, events);
+            HitNeighborsOf(_remove, events);
 
             var multiplier = Math.Max(1, cascade);
-            ExtractRemoved(remove, GameBalance.Current.Match3BaseMatchScore * multiplier, events, true);
+            ExtractRemoved(_remove, GameBalance.Current.Match3BaseMatchScore * multiplier, events, true);
 
             if (cascade <= 0)
                 return;
@@ -696,40 +705,38 @@ namespace SmallGames
         {
             var a = GetTile(x0, y0);
             var b = GetTile(x1, y1);
-            var remove = new bool[Width, Height];
-            var fired = new HashSet<int>();
-            var queue = new Queue<Match3Coord>();
+            BeginBlast();
             ClearOverlayHits();
 
             var colorBomb = (a != null && a.Special == Match3Special.ColorBomb)
                 || (b != null && b.Special == Match3Special.ColorBomb);
             if (colorBomb || IsSpecialCombo(a, b))
             {
-                var skipFire = new HashSet<int>();
+                _skipFire.Clear();
                 if (a != null)
                 {
-                    skipFire.Add(a.Id);
-                    fired.Add(a.Id);
+                    _skipFire.Add(a.Id);
+                    _fired.Add(a.Id);
                 }
 
                 if (b != null)
                 {
-                    skipFire.Add(b.Id);
-                    fired.Add(b.Id);
+                    _skipFire.Add(b.Id);
+                    _fired.Add(b.Id);
                 }
 
-                MarkRemove(x0, y0, remove, fired, queue, events);
-                MarkRemove(x1, y1, remove, fired, queue, events);
-                ApplySpecialCombo(a, b, x0, y0, x1, y1, remove, fired, queue, events);
-                FlushDetonation(remove, fired, queue, events, skipFire);
+                MarkRemove(x0, y0, _remove, _fired, _blast, events);
+                MarkRemove(x1, y1, _remove, _fired, _blast, events);
+                ApplySpecialCombo(a, b, x0, y0, x1, y1, _remove, _fired, _blast, events);
+                FlushDetonation(_remove, _fired, _blast, events, _skipFire);
                 return;
             }
 
             if (a != null && IsSwapActivable(a.Special))
-                MarkRemove(x0, y0, remove, fired, queue, events);
+                MarkRemove(x0, y0, _remove, _fired, _blast, events);
             if (b != null && IsSwapActivable(b.Special))
-                MarkRemove(x1, y1, remove, fired, queue, events);
-            FlushDetonation(remove, fired, queue, events, null);
+                MarkRemove(x1, y1, _remove, _fired, _blast, events);
+            FlushDetonation(_remove, _fired, _blast, events, null);
         }
 
         private void ApplySpecialCombo(
@@ -933,7 +940,6 @@ namespace SmallGames
 
         private void ApplyGravity(List<Match3BoardEvent> events)
         {
-            var falling = new List<(Match3Tile tile, int fromY)>(Height);
             for (var x = 0; x < Width; x++)
             {
                 var y = Height - 1;
@@ -950,19 +956,19 @@ namespace SmallGames
                     while (top > 0 && CanReceiveFall(x, top - 1))
                         top--;
 
-                    falling.Clear();
+                    _falling.Clear();
                     for (var sy = bottom; sy >= top; sy--)
                     {
                         if (_tiles[x, sy] == null)
                             continue;
-                        falling.Add((_tiles[x, sy], sy));
+                        _falling.Add((_tiles[x, sy], sy));
                         _tiles[x, sy] = null;
                     }
 
                     var write = bottom;
-                    for (var i = 0; i < falling.Count; i++)
+                    for (var i = 0; i < _falling.Count; i++)
                     {
-                        var (tile, fromY) = falling[i];
+                        var (tile, fromY) = _falling[i];
                         _tiles[x, write] = tile;
                         if (fromY != write)
                             events.Add(Match3BoardEvent.Move(tile, x, fromY, x, write));
@@ -993,7 +999,7 @@ namespace SmallGames
 
         private List<MatchGroup> FindMatchGroups()
         {
-            var matched = new bool[Width, Height];
+            Array.Clear(_matched, 0, _matched.Length);
             Array.Clear(_horzLen, 0, _horzLen.Length);
             Array.Clear(_vertLen, 0, _vertLen.Length);
 
@@ -1017,7 +1023,7 @@ namespace SmallGames
                     {
                         for (var i = x; i < end; i++)
                         {
-                            matched[i, y] = true;
+                            _matched[i, y] = true;
                             _horzLen[i, y] = len;
                         }
                     }
@@ -1046,7 +1052,7 @@ namespace SmallGames
                     {
                         for (var i = y; i < end; i++)
                         {
-                            matched[x, i] = true;
+                            _matched[x, i] = true;
                             _vertLen[x, i] = len;
                         }
                     }
@@ -1055,28 +1061,29 @@ namespace SmallGames
                 }
             }
 
-            var groups = new List<MatchGroup>();
-            var seen = new bool[Width, Height];
+            _groups.Clear();
+            Array.Clear(_seen, 0, _seen.Length);
             for (var y = 0; y < Height; y++)
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    if (!matched[x, y] || seen[x, y])
+                    if (!_matched[x, y] || _seen[x, y])
                         continue;
-                    groups.Add(BuildGroup(x, y, matched, seen));
+                    _groups.Add(BuildGroup(x, y));
                 }
             }
 
-            return groups;
+            return _groups;
         }
 
-        private MatchGroup BuildGroup(int startX, int startY, bool[,] matched, bool[,] seen)
+        private MatchGroup BuildGroup(int startX, int startY)
         {
             var color = ColorAt(startX, startY);
-            var group = new MatchGroup { Color = color };
-            var stack = new Stack<Match3Coord>();
-            stack.Push(new Match3Coord(startX, startY));
-            seen[startX, startY] = true;
+            var group = RentGroup();
+            group.Color = color;
+            _flood.Clear();
+            _flood.Push(new Match3Coord(startX, startY));
+            _seen[startX, startY] = true;
 
             var maxLine = 0;
             var lineDir = 0;
@@ -1084,9 +1091,9 @@ namespace SmallGames
             var hasSwap = false;
             var swapAt = new Match3Coord(startX, startY);
 
-            while (stack.Count > 0)
+            while (_flood.Count > 0)
             {
-                var p = stack.Pop();
+                var p = _flood.Pop();
                 group.Cells.Add(p);
                 if (p.X == _lastSwapX && p.Y == _lastSwapY)
                 {
@@ -1108,10 +1115,10 @@ namespace SmallGames
                     lineDir = 2;
                 }
 
-                TryPush(p.X + 1, p.Y, color, matched, seen, stack);
-                TryPush(p.X - 1, p.Y, color, matched, seen, stack);
-                TryPush(p.X, p.Y + 1, color, matched, seen, stack);
-                TryPush(p.X, p.Y - 1, color, matched, seen, stack);
+                TryPush(p.X + 1, p.Y, color, _matched, _seen, _flood);
+                TryPush(p.X - 1, p.Y, color, _matched, _seen, _flood);
+                TryPush(p.X, p.Y + 1, color, _matched, _seen, _flood);
+                TryPush(p.X, p.Y - 1, color, _matched, _seen, _flood);
             }
 
             if (maxLine >= 5)
@@ -1135,6 +1142,32 @@ namespace SmallGames
                     ? Match3Special.LineH
                     : Match3Special.LineV;
             return lineDir == 2 ? Match3Special.LineV : Match3Special.LineH;
+        }
+
+        private void BeginBlast()
+        {
+            if (_remove != null)
+                Array.Clear(_remove, 0, _remove.Length);
+            _fired.Clear();
+            _blast.Clear();
+        }
+
+        private MatchGroup RentGroup()
+        {
+            MatchGroup group;
+            if (_groupPool.Count > _groups.Count)
+            {
+                group = _groupPool[_groups.Count];
+            }
+            else
+            {
+                group = new MatchGroup();
+                _groupPool.Add(group);
+            }
+
+            group.Reward = Match3Special.None;
+            group.Cells.Clear();
+            return group;
         }
 
         private void TryPush(int x, int y, int color, bool[,] matched, bool[,] seen, Stack<Match3Coord> stack)
@@ -1230,27 +1263,27 @@ namespace SmallGames
 
         private bool ShuffleInternal()
         {
-            var tiles = new List<Match3Tile>(Width * Height);
+            _shuffleTiles.Clear();
             for (var y = 0; y < Height; y++)
             {
                 for (var x = 0; x < Width; x++)
                 {
                     if (_tiles[x, y] != null && !IsLocked(x, y))
-                        tiles.Add(_tiles[x, y]);
+                        _shuffleTiles.Add(_tiles[x, y]);
                 }
             }
 
-            if (tiles.Count < 3)
+            if (_shuffleTiles.Count < 3)
                 return false;
 
             for (var tryIndex = 0; tryIndex < MaxShuffleTries; tryIndex++)
             {
-                for (var i = tiles.Count - 1; i > 0; i--)
+                for (var i = _shuffleTiles.Count - 1; i > 0; i--)
                 {
                     var j = _rng.Next(i + 1);
-                    var tmp = tiles[i];
-                    tiles[i] = tiles[j];
-                    tiles[j] = tmp;
+                    var tmp = _shuffleTiles[i];
+                    _shuffleTiles[i] = _shuffleTiles[j];
+                    _shuffleTiles[j] = tmp;
                 }
 
                 var n = 0;
@@ -1259,7 +1292,7 @@ namespace SmallGames
                     for (var x = 0; x < Width; x++)
                     {
                         if (_tiles[x, y] != null && !IsLocked(x, y))
-                            _tiles[x, y] = tiles[n++];
+                            _tiles[x, y] = _shuffleTiles[n++];
                     }
                 }
 

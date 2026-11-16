@@ -19,7 +19,7 @@ namespace SmallGames.Tests
             engine.Deal(7);
             var again = new JieqiPieceState[JieqiEngine.MaxPieces];
             engine.CopySave(again);
-            Assert.AreEqual(engine.Hash(), HashOf(first, count, JieqiCamp.Red));
+            Assert.AreEqual(engine.Hash(), JieqiEngine.HashPieces(first, count, JieqiCamp.Red));
 
             var printed = new int[3, 8];
             var controllers = new int[3];
@@ -831,28 +831,5 @@ namespace SmallGames.Tests
             return engine;
         }
 
-        static ulong HashOf(JieqiPieceState[] pieces, int count, JieqiCamp side)
-        {
-            ulong hash = side == JieqiCamp.Black ? 2UL : 1UL;
-            for (var i = 0; i < count; i++)
-            {
-                var piece = pieces[i];
-                hash = hash * 1315423911UL + (piece.Alive ? 1UL : 0UL);
-                hash = hash * 1315423911UL + (ulong)(piece.X + 3);
-                hash = hash * 1315423911UL + (ulong)(piece.Y + 3);
-                hash = hash * 1315423911UL + (piece.FaceDown ? 1UL : 0UL);
-                hash = hash * 1315423911UL + (ulong)piece.Role;
-                hash = hash * 1315423911UL + (ulong)piece.SlotRole;
-                hash = hash * 1315423911UL + (ulong)piece.Printed;
-                hash = hash * 1315423911UL + (ulong)piece.Controller;
-                hash = hash * 1315423911UL + (ulong)piece.CapturedBy;
-                hash = hash * 1315423911UL + (piece.HasSkill ? 1UL : 0UL);
-                hash = hash * 1315423911UL + (ulong)piece.SkillRole;
-                hash = hash * 1315423911UL + (ulong)piece.SkillPrinted;
-                hash = hash * 1315423911UL + (piece.SkillBoost ? 1UL : 0UL);
-            }
-
-            return hash;
-        }
     }
 }

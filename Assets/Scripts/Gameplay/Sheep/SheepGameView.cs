@@ -52,6 +52,10 @@ namespace SmallGames
         private readonly List<SheepTileView> _slots = new List<SheepTileView>(SlotCount);
         private readonly Stack<UndoRecord> _undos = new Stack<UndoRecord>(32);
         private readonly List<SheepTileView> _removed = new List<SheepTileView>(8);
+        private int[] _layerIcons;
+        private readonly Vector3[] _corners = new Vector3[4];
+        private readonly Transform[] _chainA = new Transform[32];
+        private readonly Transform[] _chainB = new Transform[32];
         private bool _bound;
         private bool _ended;
         private bool _matching;
@@ -1070,7 +1074,6 @@ namespace SmallGames
                 return;
             }
 
-            _engine.BreakCombo();
             var record = _undos.Pop();
             Restore(record);
             RefreshLocks();
@@ -1101,19 +1104,43 @@ namespace SmallGames
 
         private void ShuffleBoardIcons()
         {
-            var ids = new List<int>(_boardTiles.Count);
+            var maxLayer = 0;
             for (var i = 0; i < _boardTiles.Count; i++)
-                ids.Add(_boardTiles[i].IconId);
-            for (var i = ids.Count - 1; i > 0; i--)
             {
-                var j = UnityEngine.Random.Range(0, i + 1);
-                var tmp = ids[i];
-                ids[i] = ids[j];
-                ids[j] = tmp;
+                if (_boardTiles[i].Layer > maxLayer)
+                    maxLayer = _boardTiles[i].Layer;
             }
 
-            for (var i = 0; i < _boardTiles.Count; i++)
-                _boardTiles[i].SetIcon(ids[i], IconOf(ids[i]));
+            if (_layerIcons == null || _layerIcons.Length < _boardTiles.Count)
+                _layerIcons = new int[_boardTiles.Count];
+
+            for (var layer = 0; layer <= maxLayer; layer++)
+            {
+                var count = 0;
+                for (var i = 0; i < _boardTiles.Count; i++)
+                {
+                    if (_boardTiles[i].Layer != layer)
+                        continue;
+                    _layerIcons[count++] = _boardTiles[i].IconId;
+                }
+
+                for (var i = count - 1; i > 0; i--)
+                {
+                    var j = UnityEngine.Random.Range(0, i + 1);
+                    var tmp = _layerIcons[i];
+                    _layerIcons[i] = _layerIcons[j];
+                    _layerIcons[j] = tmp;
+                }
+
+                var cursor = 0;
+                for (var i = 0; i < _boardTiles.Count; i++)
+                {
+                    if (_boardTiles[i].Layer != layer)
+                        continue;
+                    var id = _layerIcons[cursor++];
+                    _boardTiles[i].SetIcon(id, IconOf(id));
+                }
+            }
         }
 
         /// <summary>
@@ -1168,11 +1195,15 @@ namespace SmallGames
 
         private void PushUndo()
         {
+            _engine.CaptureProgress(out var groups, out var combo, out var peak);
             var record = new UndoRecord
             {
                 Slots = new List<SlotSnap>(_slots.Count),
                 Board = new List<BoardSnap>(_boardTiles.Count),
-                SlotIcons = _engine.CaptureSlots()
+                SlotIcons = _engine.CaptureSlots(),
+                GroupsCleared = groups,
+                Combo = combo,
+                ComboPeak = peak
             };
 
             for (var i = 0; i < _slots.Count; i++)
@@ -1246,6 +1277,7 @@ namespace SmallGames
 
             LayoutSlots();
             _engine.RestoreSlots(record.SlotIcons);
+            _engine.RestoreProgress(record.GroupsCleared, record.Combo, record.ComboPeak);
         }
 
         private void RefreshLocks()
@@ -1319,9 +1351,14 @@ namespace SmallGames
                 var other = _boardTiles[i];
                 if (other == null || other == tile || other.InSlot || !other.gameObject.activeSelf)
                     continue;
+                // 同一层也会叠在一起，后画出来的那张才算压住。只比层数会把底下那张放开。
                 if (!IsDrawnAbove(other.transform, tile.transform))
                     continue;
                 var otherRect = CoverRect(other);
+                if (otherRect.xMax < self.xMin || otherRect.xMin > self.xMax)
+                    continue;
+                if (otherRect.yMax < self.yMin || otherRect.yMin > self.yMax)
+                    continue;
                 var inter = Intersect(self, otherRect);
                 if (inter.width > minW && inter.height > minH)
                     return true;
@@ -1330,7 +1367,41 @@ namespace SmallGames
             return false;
         }
 
-        private static Rect CoverRect(SheepTileView tile)
+        private bool IsDrawnAbove(Transform above, Transform below)
+        {
+            if (above == null || below == null || above == below)
+                return false;
+            if (above.parent == below.parent)
+                return above.GetSiblingIndex() > below.GetSiblingIndex();
+
+            var na = FillChain(above, _chainA);
+            var nb = FillChain(below, _chainB);
+            var ia = na - 1;
+            var ib = nb - 1;
+            while (ia >= 0 && ib >= 0 && _chainA[ia] == _chainB[ib])
+            {
+                ia--;
+                ib--;
+            }
+
+            if (ia < 0 || ib < 0)
+                return false;
+            return _chainA[ia].GetSiblingIndex() > _chainB[ib].GetSiblingIndex();
+        }
+
+        private static int FillChain(Transform node, Transform[] chain)
+        {
+            var count = 0;
+            while (node != null && count < chain.Length)
+            {
+                chain[count++] = node;
+                node = node.parent;
+            }
+
+            return count;
+        }
+
+        private Rect CoverRect(SheepTileView tile)
         {
             if (tile == null)
                 return new Rect();
@@ -1349,40 +1420,12 @@ namespace SmallGames
             return Rect.MinMaxRect(xMin, yMin, xMax, yMax);
         }
 
-        private static Rect WorldRect(RectTransform rect)
+        private Rect WorldRect(RectTransform rect)
         {
             if (rect == null)
                 return new Rect();
-            var corners = new Vector3[4];
-            rect.GetWorldCorners(corners);
-            return Rect.MinMaxRect(corners[0].x, corners[0].y, corners[2].x, corners[2].y);
-        }
-
-        private static bool IsDrawnAbove(Transform a, Transform b)
-        {
-            var pathA = HierarchyPath(a);
-            var pathB = HierarchyPath(b);
-            var n = Mathf.Min(pathA.Count, pathB.Count);
-            for (var i = 0; i < n; i++)
-            {
-                if (pathA[i] != pathB[i])
-                    return pathA[i] > pathB[i];
-            }
-
-            return pathA.Count > pathB.Count;
-        }
-
-        private static List<int> HierarchyPath(Transform t)
-        {
-            var path = new List<int>(8);
-            while (t != null)
-            {
-                path.Add(t.GetSiblingIndex());
-                t = t.parent;
-            }
-
-            path.Reverse();
-            return path;
+            rect.GetWorldCorners(_corners);
+            return Rect.MinMaxRect(_corners[0].x, _corners[0].y, _corners[2].x, _corners[2].y);
         }
 
         private void RefreshProgress()
@@ -1471,6 +1514,9 @@ namespace SmallGames
             public List<BoardSnap> Board;
             public List<HiddenSnap> Hidden;
             public int[] SlotIcons;
+            public int GroupsCleared;
+            public int Combo;
+            public int ComboPeak;
         }
 
         private struct SlotSnap

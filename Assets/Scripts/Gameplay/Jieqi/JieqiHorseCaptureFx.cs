@@ -16,7 +16,7 @@ namespace SmallGames
         public Sprite Kick;
         public JieqiCaptureBackdrop Backdrop;
 
-        const float Duration = 2f;
+        public const float Duration = 2f;
         const float StandEnd = 0.18f;
         const float GatherEnd = 0.36f;
         const float KickEnd = 0.52f;

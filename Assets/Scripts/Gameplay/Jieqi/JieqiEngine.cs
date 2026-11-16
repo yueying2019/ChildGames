@@ -278,14 +278,7 @@ namespace SmallGames
             for (var i = 0; i < moves.Count; i++)
             {
                 var move = moves[i];
-                var undo = Make(move);
-                // 暗子翻开后若改归对方，不拿这枚刚翻开的子来判自己送将，否则玩家看不到这一步。
-                var ignore = -1;
-                if (_pieces[undo.MoverId].Controller != undo.SideBefore)
-                    ignore = undo.MoverId;
-                var leavesKing = KingInCheck(undo.SideBefore, ignore);
-                Unmake(undo);
-                if (leavesKing)
+                if (OpponentCanTakeKing(move))
                     continue;
                 moves[write++] = move;
             }
@@ -414,29 +407,123 @@ namespace SmallGames
 
         public ulong Hash()
         {
-            ulong hash = _side == JieqiCamp.Black ? 2UL : 1UL;
+            var hash = Zobrist(31, 0, _side == JieqiCamp.Black ? 2 : 1);
             for (var i = 0; i < _pieceCount; i++)
             {
                 var piece = _pieces[i];
-                hash = hash * 1315423911UL + (piece.Alive ? 1UL : 0UL);
-                hash = hash * 1315423911UL + (ulong)(piece.X + 3);
-                hash = hash * 1315423911UL + (ulong)(piece.Y + 3);
-                hash = hash * 1315423911UL + (piece.FaceDown ? 1UL : 0UL);
-                hash = hash * 1315423911UL + (ulong)piece.Role;
-                hash = hash * 1315423911UL + (ulong)piece.SlotRole;
-                hash = hash * 1315423911UL + (ulong)piece.Printed;
-                hash = hash * 1315423911UL + (ulong)piece.Controller;
-                hash = hash * 1315423911UL + (ulong)piece.CapturedBy;
-                hash = hash * 1315423911UL + (piece.HasSkill ? 1UL : 0UL);
-                hash = hash * 1315423911UL + (ulong)piece.SkillRole;
-                hash = hash * 1315423911UL + (ulong)piece.SkillPrinted;
-                hash = hash * 1315423911UL + (piece.SkillBoost ? 1UL : 0UL);
+                hash ^= MixPiece(i, piece.Alive, piece.X, piece.Y, piece.FaceDown, (int)piece.Role,
+                    (int)piece.SlotRole, (int)piece.Printed, (int)piece.Controller, (int)piece.CapturedBy,
+                    piece.HasSkill, (int)piece.SkillRole, (int)piece.SkillPrinted, piece.SkillBoost);
             }
 
             return hash;
         }
 
+        /// <summary>
+        /// 局面哈希。按棋子编号、格子和明暗等字段各取一个固定随机数再异或，三次重复用它比对。
+        /// </summary>
+        public static ulong HashPieces(JieqiPieceState[] pieces, int count, JieqiCamp side)
+        {
+            var hash = Zobrist(31, 0, side == JieqiCamp.Black ? 2 : 1);
+            if (pieces == null || count < 0)
+                return hash;
+            if (count > pieces.Length)
+                count = pieces.Length;
+            for (var i = 0; i < count; i++)
+            {
+                var piece = pieces[i];
+                hash ^= MixPiece(i, piece.Alive, piece.X, piece.Y, piece.FaceDown, (int)piece.Role,
+                    (int)piece.SlotRole, (int)piece.Printed, (int)piece.Controller, (int)piece.CapturedBy,
+                    piece.HasSkill, (int)piece.SkillRole, (int)piece.SkillPrinted, piece.SkillBoost);
+            }
+
+            return hash;
+        }
+
+        static ulong MixPiece(
+            int index, bool alive, int x, int y, bool faceDown, int role, int slot, int printed,
+            int controller, int capturedBy, bool hasSkill, int skillRole, int skillPrinted, bool skillBoost)
+        {
+            var hash = Zobrist(index, 1, alive ? 1 : 0);
+            hash ^= Zobrist(index, 2, x + 3);
+            hash ^= Zobrist(index, 3, y + 3);
+            hash ^= Zobrist(index, 4, faceDown ? 1 : 0);
+            hash ^= Zobrist(index, 5, role);
+            hash ^= Zobrist(index, 6, slot);
+            hash ^= Zobrist(index, 7, printed);
+            hash ^= Zobrist(index, 8, controller);
+            hash ^= Zobrist(index, 9, capturedBy);
+            hash ^= Zobrist(index, 10, hasSkill ? 1 : 0);
+            hash ^= Zobrist(index, 11, skillRole);
+            hash ^= Zobrist(index, 12, skillPrinted);
+            hash ^= Zobrist(index, 13, skillBoost ? 1 : 0);
+            return hash;
+        }
+
+        static ulong Zobrist(int piece, int field, int value)
+        {
+            ulong x = (ulong)(piece + 1) * 0x9E3779B97F4A7C15UL;
+            x ^= (ulong)(field + 3) * 0xBF58476D1CE4E5B9UL;
+            x ^= (ulong)(value + 17) * 0x94D049BB133111EBUL;
+            x ^= x >> 30;
+            x *= 0xBF58476D1CE4E5B9UL;
+            x ^= x >> 27;
+            x *= 0x94D049BB133111EBUL;
+            x ^= x >> 31;
+            return x;
+        }
+
         internal JieqiPiece[] Pieces => _pieces;
+
+        /// <summary>
+        /// 只改走子和被吃子的位置，看对方下一步能不能吃到己方将帅。不结算胜负，也不发技能。
+        /// 暗子翻开后若改归对方，不拿这枚刚翻开的子来判自己送将。
+        /// </summary>
+        bool OpponentCanTakeKing(JieqiMove move)
+        {
+            var saved = _pieces[move.Mover];
+            var had = move.Captured >= 0;
+            JieqiPiece captured = default;
+            if (had)
+                captured = _pieces[move.Captured];
+
+            _board[Index(saved.X, saved.Y)] = -1;
+            if (had)
+            {
+                var victim = captured;
+                victim.Alive = false;
+                victim.X = -1;
+                victim.Y = -1;
+                _pieces[move.Captured] = victim;
+            }
+
+            var mover = saved;
+            mover.X = move.ToX;
+            mover.Y = move.ToY;
+            var flippedAway = false;
+            if (mover.FaceDown)
+            {
+                mover.FaceDown = false;
+                if (mover.Printed == JieqiCamp.Red || mover.Printed == JieqiCamp.Black)
+                {
+                    if (mover.Controller != mover.Printed)
+                        flippedAway = true;
+                    mover.Controller = mover.Printed;
+                }
+            }
+
+            _pieces[move.Mover] = mover;
+            _board[Index(move.ToX, move.ToY)] = move.Mover;
+            var ignore = flippedAway ? move.Mover : -1;
+            var leaves = KingInCheck(_side, ignore);
+
+            _pieces[move.Mover] = saved;
+            _board[Index(saved.X, saved.Y)] = move.Mover;
+            _board[Index(move.ToX, move.ToY)] = had ? move.Captured : -1;
+            if (had)
+                _pieces[move.Captured] = captured;
+            return leaves;
+        }
 
         internal Undo Make(JieqiMove move)
         {

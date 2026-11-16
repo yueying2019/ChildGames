@@ -105,5 +105,20 @@ namespace SmallGames.Tests
             engine.RestoreSlots(before);
             CollectionAssert.AreEqual(new[] { 3, 3, 5 }, engine.CaptureSlots());
         }
+
+        [Test]
+        public void RestoreProgress_RollsBackGroupsAndCombo()
+        {
+            var engine = new SheepEngine();
+            engine.Load(3, 7, 4);
+            engine.NoteMatch();
+            engine.CaptureProgress(out var groups, out var combo, out var peak);
+            engine.NoteMatch();
+            Assert.AreEqual(2, engine.GroupsCleared);
+            engine.RestoreProgress(groups, combo, peak);
+            Assert.AreEqual(1, engine.GroupsCleared);
+            Assert.AreEqual(1, engine.Combo);
+            Assert.AreEqual(2, engine.ComboPeak);
+        }
     }
 }

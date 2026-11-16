@@ -11,11 +11,24 @@ namespace SmallGames
         public bool MusicEnabled = true;
         public bool SfxEnabled = true;
         public bool RemoveXiangqiFx;
+        /// <summary>0 普通、1 快、2 慢。旧存档没有这个字段时是 0，仍按现在的两层搜索。</summary>
+        public int XiangqiAiPace;
+
+        public int XiangqiSearchDepth()
+        {
+            if (XiangqiAiPace == 1)
+                return 1;
+            if (XiangqiAiPace == 2)
+                return 3;
+            return 2;
+        }
 
         public void Sanitize()
         {
             MusicVolume = Mathf.Clamp01(MusicVolume);
             SfxVolume = Mathf.Clamp01(SfxVolume);
+            if (XiangqiAiPace < 0 || XiangqiAiPace > 2)
+                XiangqiAiPace = 0;
         }
 
         public void CopyFrom(GameSettingsData other)
@@ -28,6 +41,7 @@ namespace SmallGames
             MusicEnabled = other.MusicEnabled;
             SfxEnabled = other.SfxEnabled;
             RemoveXiangqiFx = other.RemoveXiangqiFx;
+            XiangqiAiPace = other.XiangqiAiPace;
             Sanitize();
         }
     }

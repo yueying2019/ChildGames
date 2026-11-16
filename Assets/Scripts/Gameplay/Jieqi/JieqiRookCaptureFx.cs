@@ -12,7 +12,7 @@ namespace SmallGames
         public Image[] Dust;
         public JieqiCaptureBackdrop Backdrop;
 
-        const float Duration = 2f;
+        public const float Duration = 2f;
         const float NearScale = 1.75f;
         const float FarScale = 0.16f;
 
