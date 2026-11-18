@@ -57,8 +57,10 @@ namespace SmallGames
         {
             if (mode == GameModeType.None || _entering)
                 return;
-            // 教学关不扣体力：新手第一步就被体力卡住最劝退。
-            if (!TutorialCatalog.IsIndex(levelIndex) && !TrySpendEnergy())
+            // 教学关不扣体力：新手第一步就被体力卡住最劝退。残局编辑也不扣。
+            if (!TutorialCatalog.IsIndex(levelIndex)
+                && !IsEndgameEditor(mode, levelIndex)
+                && !TrySpendEnergy())
                 return;
 
             _entering = true;
@@ -135,9 +137,13 @@ namespace SmallGames
                     : EndlessCatalog.IsIndex(mode, levelIndex)
                         ? EndlessCatalog.LevelId
                         : LevelBrowse.LevelId(mode, levelIndex);
+            if (mode == GameModeType.Match3 && Match3Session.IsCustomIndex(levelIndex))
+                levelId = Match3Session.CustomLevelIndex;
+            if (mode == GameModeType.Lianliankan && LianliankanSession.IsCustomIndex(levelIndex))
+                levelId = LianliankanSession.CustomLevelIndex;
             // 教学关不写「上次玩的关」，否则选关页会把第 0 关高亮成上次进度。
-            // 每日挑战记在每日格子上，不把抽中的正式关标成上次。
-            if (!isTutorial)
+            // 每日挑战记在每日格子上，不把抽中的正式关标成上次。残局编辑也不是一关。
+            if (!isTutorial && !IsEndgameEditor(mode, levelIndex))
                 ProgressRepository.SetLastPlayed(mode, session.IsDaily ? DailyCatalog.LevelId : levelId);
 
             if (mode != GameModeType.Lianliankan && mode != GameModeType.Sheep && mode != GameModeType.Match3)
@@ -371,6 +377,16 @@ namespace SmallGames
         {
             DeclineContinue();
             return true;
+        }
+
+        static bool IsEndgameEditor(GameModeType mode, int levelIndex)
+        {
+            if (mode == GameModeType.Match3 && Match3Session.IsCustomIndex(levelIndex))
+                return true;
+            if (mode == GameModeType.Lianliankan && LianliankanSession.IsCustomIndex(levelIndex))
+                return true;
+            return (mode == GameModeType.Jieqi || mode == GameModeType.SkillXiangqi)
+                && JieqiSession.IsEditorIndex(levelIndex);
         }
 
         private bool TrySpendEnergy()

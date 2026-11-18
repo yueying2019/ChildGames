@@ -4,20 +4,28 @@ namespace SmallGames
 {
     public class LianliankanSession : GameSessionBase
     {
+        public const int CustomLevelIndex = 3000;
+
+        public static bool IsCustomIndex(int index) => index == CustomLevelIndex;
+
         public override GameModeType Mode => GameModeType.Lianliankan;
-        public override bool HasNextLevel => !IsEndless && !IsDaily && LianliankanLevelCatalog.Override == null && LevelIndex + 1 < LianliankanLevelCatalog.Count;
+        public override bool HasNextLevel => !IsCustom && !IsEndless && !IsDaily && LianliankanLevelCatalog.Override == null && LevelIndex + 1 < LianliankanLevelCatalog.Count;
         protected override int CurrentLevelId => IsEndless ? EndlessCatalog.LevelId : (_level != null ? _level.LevelId : LevelIndex + 1);
+
+        private bool IsCustom => IsCustomIndex(LevelIndex);
 
         private LianliankanGameView _view;
         private LianliankanLevelData _level;
 
         protected override void OnStart()
         {
-            _level = IsTutorial
-                ? TutorialCatalog.LianliankanLevel()
-                : IsEndless
-                    ? LianliankanEndlessGenerator.Build(Wave)
-                    : LianliankanLevelCatalog.Get(LevelIndex);
+            _level = IsCustom
+                ? BuildCustomLevel()
+                : IsTutorial
+                    ? TutorialCatalog.LianliankanLevel()
+                    : IsEndless
+                        ? LianliankanEndlessGenerator.Build(Wave)
+                        : LianliankanLevelCatalog.Get(LevelIndex);
 
             _view = UiPrefabs.Instantiate<LianliankanGameView>(UiPrefabs.LianliankanView, Root);
             _view?.CollectTiles();
@@ -28,19 +36,47 @@ namespace SmallGames
             _view.Won += OnWon;
             _view.Lost += OnLost;
             _view.Tutorial = IsTutorial;
+            _view.Custom = IsCustom;
             _view.StartPlay(_level);
+            if (IsCustom)
+            {
+                RefreshHud();
+                BeginAfterIntro();
+                return;
+            }
+
             _view.InputLocked = true;
             RefreshHud();
             LevelIntroPanel.Present(IntroLevelNumber(_level != null ? _level.LevelId : 0), IntroTitle(), BeginAfterIntro);
+        }
+
+        private static LianliankanLevelData BuildCustomLevel()
+        {
+            var data = ScriptableObject.CreateInstance<LianliankanLevelData>();
+            data.LevelId = 1;
+            data.Title = "自定义";
+            data.TypeCount = LianliankanLevelData.MaxTypes;
+            data.ComboTimeBonus = 0f;
+            data.EnsureInitialized();
+            for (var r = 0; r < LianliankanLevelData.Rows; r++)
+            {
+                for (var c = 0; c < LianliankanLevelData.Cols; c++)
+                    data.SetCell(r, c, LianliankanCellKind.Tile);
+            }
+
+            return data;
         }
 
         private void BeginAfterIntro()
         {
             if (_view == null)
                 return;
-            _view.BeginTimer(IsEndless
-                ? EndlessCatalog.LianStartSeconds
-                : (_level != null ? _level.TimeLimit : 180f));
+            if (!IsCustom)
+            {
+                _view.BeginTimer(IsEndless
+                    ? EndlessCatalog.LianStartSeconds
+                    : (_level != null ? _level.TimeLimit : 180f));
+            }
             _view.InputLocked = IsPaused;
             if (IsTutorial)
                 _view.StartTutorialGuide();

@@ -90,13 +90,15 @@ namespace SmallGames
             }
 
             ApplyGridLayout();
-            // 教学关、每日挑战占列表前两格，正式关和无尽整体后移。
+            // 教学关、每日挑战、自定义占列表前排，正式关和无尽接在后面。
             var hasTutorial = TutorialCatalog.Supports(_mode);
             var hasDaily = DailyCatalog.Supports(_mode);
             var campaign = EndlessCatalog.SelectCount(_mode);
             var prefix = (hasTutorial ? 1 : 0) + (hasDaily ? 1 : 0);
-            var count = campaign + prefix;
+            var custom = _mode == GameModeType.Match3 || _mode == GameModeType.Lianliankan ? 1 : 0;
+            var count = campaign + prefix + custom;
             var dailySlot = hasTutorial ? 1 : 0;
+            var customSlot = prefix;
             EnsureCells(count);
             var lastId = ProgressRepository.LastPlayedId(_mode);
             for (var i = 0; i < _cells.Count; i++)
@@ -130,7 +132,17 @@ namespace SmallGames
                     continue;
                 }
 
-                var index = i - prefix;
+                if (custom > 0 && i == customSlot)
+                {
+                    var customIndex = _mode == GameModeType.Lianliankan
+                        ? LianliankanSession.CustomLevelIndex
+                        : Match3Session.CustomLevelIndex;
+                    cell.BindPlain("自定义", "自己摆", "定制关卡",
+                        () => GameManager.Instance.StartGame(_mode, customIndex));
+                    continue;
+                }
+
+                var index = i - prefix - custom;
                 if (EndlessCatalog.IsIndex(_mode, index))
                 {
                     var unlocked = EndlessCatalog.IsUnlocked(_mode);
@@ -168,6 +180,26 @@ namespace SmallGames
             }
 
             ApplyGridLayout();
+            EnsureCells(4);
+            for (var i = 4; i < _cells.Count; i++)
+                _cells[i].gameObject.SetActive(false);
+
+            _cells[0].gameObject.SetActive(true);
+            _cells[1].gameObject.SetActive(true);
+            _cells[2].gameObject.SetActive(true);
+            _cells[3].gameObject.SetActive(true);
+            _cells[0].BindPlain("双人", "面对面", "两人轮流走",
+                () => GameManager.Instance.StartGame(GameModeType.Jieqi, 0));
+            _cells[1].BindPlain("人机", "对电脑", "你执红先走",
+                () => GameManager.Instance.StartGame(GameModeType.Jieqi, 1));
+            _cells[2].BindPlain("残局", "固定局面", "红先走", ShowJieqiEndgames);
+            _cells[3].BindPlain("自定义", "自己摆", "定制棋局",
+                () => GameManager.Instance.StartGame(GameModeType.Jieqi, JieqiSession.EditorLevelIndex));
+        }
+
+        private void RebuildSkillXiangqi()
+        {
+            ApplyGridLayout();
             EnsureCells(3);
             for (var i = 3; i < _cells.Count; i++)
                 _cells[i].gameObject.SetActive(false);
@@ -176,25 +208,11 @@ namespace SmallGames
             _cells[1].gameObject.SetActive(true);
             _cells[2].gameObject.SetActive(true);
             _cells[0].BindPlain("双人", "面对面", "两人轮流走",
-                () => GameManager.Instance.StartGame(GameModeType.Jieqi, 0));
-            _cells[1].BindPlain("人机", "对电脑", "你执红先走",
-                () => GameManager.Instance.StartGame(GameModeType.Jieqi, 1));
-            _cells[2].BindPlain("残局", "固定局面", "红先走", ShowJieqiEndgames);
-        }
-
-        private void RebuildSkillXiangqi()
-        {
-            ApplyGridLayout();
-            EnsureCells(2);
-            for (var i = 2; i < _cells.Count; i++)
-                _cells[i].gameObject.SetActive(false);
-
-            _cells[0].gameObject.SetActive(true);
-            _cells[1].gameObject.SetActive(true);
-            _cells[0].BindPlain("双人", "面对面", "两人轮流走",
                 () => GameManager.Instance.StartGame(GameModeType.SkillXiangqi, 0));
             _cells[1].BindPlain("人机", "对电脑", "你执红先走",
                 () => GameManager.Instance.StartGame(GameModeType.SkillXiangqi, 1));
+            _cells[2].BindPlain("自定义", "自己摆", "定制棋局",
+                () => GameManager.Instance.StartGame(GameModeType.SkillXiangqi, JieqiSession.EditorLevelIndex));
         }
 
         private void ShowJieqiEndgames()

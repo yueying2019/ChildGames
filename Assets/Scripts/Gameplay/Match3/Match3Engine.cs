@@ -50,6 +50,9 @@ namespace SmallGames
         public int Score { get; private set; }
         public bool Endless { get; set; }
 
+        /// <summary>自定义沙盒：不判胜负。涂格子不会触发消除。</summary>
+        public bool Custom { get; set; }
+
         public void AddMoves(int amount)
         {
             if (amount <= 0)
@@ -234,6 +237,118 @@ namespace SmallGames
 
         public Match3Tile GetTile(int x, int y) => IsPlayable(x, y) ? _tiles[x, y] : null;
 
+        /// <summary>把格子换成指定颜色的普通棋子，清掉障碍。不消除。</summary>
+        public bool EditorPaintColor(int x, int y, int color)
+        {
+            if (!InBoard(x, y) || color < 1 || color > ColorCount)
+                return false;
+
+            _kind[x, y] = Match3CellKind.Playable;
+            _layers[x, y] = 0;
+            _playable[x, y] = true;
+            var tile = _tiles[x, y];
+            if (tile == null)
+                _tiles[x, y] = CreateTile(color, Match3Special.None);
+            else
+            {
+                tile.Color = color;
+                tile.Special = Match3Special.None;
+                tile.Drop = Match3Drop.None;
+            }
+
+            return true;
+        }
+
+        /// <summary>用当前颜色数量里的随机一种替换该格。</summary>
+        public bool EditorPaintRandom(int x, int y)
+        {
+            if (!InBoard(x, y) || ColorCount < 1)
+                return false;
+            return EditorPaintColor(x, y, _rng.Next(1, ColorCount + 1));
+        }
+
+        /// <summary>铺一层障碍。石头不带棋子，冰、冻、锁下面保留或补一颗棋子。</summary>
+        public bool EditorPaintObstacle(int x, int y, Match3CellKind kind)
+        {
+            if (!InBoard(x, y) || !Match3CellUtil.IsOverlay(kind))
+                return false;
+
+            if (kind == Match3CellKind.Stone)
+            {
+                _tiles[x, y] = null;
+                _kind[x, y] = Match3CellKind.Stone;
+                _layers[x, y] = 1;
+                _playable[x, y] = false;
+                return true;
+            }
+
+            if (_tiles[x, y] == null)
+                _tiles[x, y] = CreateTile(_rng.Next(1, ColorCount + 1), Match3Special.None);
+            _kind[x, y] = kind;
+            _layers[x, y] = 1;
+            _playable[x, y] = true;
+            return true;
+        }
+
+        /// <summary>把格子换成横消、竖消、炸弹或彩虹。空格会先补一颗棋子。不消除。</summary>
+        public bool EditorPaintSpecial(int x, int y, Match3Special special)
+        {
+            if (!InBoard(x, y))
+                return false;
+            if (special != Match3Special.LineH && special != Match3Special.LineV
+                && special != Match3Special.Bomb && special != Match3Special.ColorBomb)
+                return false;
+
+            _kind[x, y] = Match3CellKind.Playable;
+            _layers[x, y] = 0;
+            _playable[x, y] = true;
+            var tile = _tiles[x, y];
+            if (tile == null)
+            {
+                var color = special == Match3Special.ColorBomb ? 0 : _rng.Next(1, ColorCount + 1);
+                _tiles[x, y] = CreateTile(color, special);
+                return true;
+            }
+
+            if (special == Match3Special.ColorBomb)
+                tile.Color = 0;
+            else if (tile.Color < 1 || tile.Color > ColorCount)
+                tile.Color = _rng.Next(1, ColorCount + 1);
+            tile.Special = special;
+            tile.Drop = Match3Drop.None;
+            return true;
+        }
+
+        /// <summary>
+        /// 一笔涂改结束后结算。有三连就消除、下落、补子并连锁，不扣步，自定义也不会因此结束。
+        /// </summary>
+        public Match3ResolveResult EditorResolve()
+        {
+            var result = new Match3ResolveResult();
+            ResetBonuses();
+            var groups = FindMatchGroups();
+            if (groups.Count == 0)
+                return result;
+
+            result.Applied = true;
+            ResolveFromGroups(groups, result.Events, 1);
+            Finish(result);
+            return result;
+        }
+
+        /// <summary>擦成空格子。已经是空格则不动。</summary>
+        public bool EditorErase(int x, int y)
+        {
+            if (!InBoard(x, y) || _kind[x, y] == Match3CellKind.Hole)
+                return false;
+
+            _tiles[x, y] = null;
+            _kind[x, y] = Match3CellKind.Hole;
+            _layers[x, y] = 0;
+            _playable[x, y] = false;
+            return true;
+        }
+
         public bool CanSwapAt(int x, int y) => GetTile(x, y) != null && !IsLocked(x, y);
 
         public int CountRemainingOverlays()
@@ -385,7 +500,7 @@ namespace SmallGames
 
         public bool GoalMet()
         {
-            if (Level == null)
+            if (Custom || Level == null)
                 return false;
 
             if (Level.GoalType == Match3GoalType.Score)
@@ -407,6 +522,8 @@ namespace SmallGames
 
         public string GoalLabel()
         {
+            if (Custom)
+                return $"分数 {Score}";
             if (Level == null)
                 return string.Empty;
 
@@ -447,6 +564,8 @@ namespace SmallGames
         {
             result.BonusMoves = _bonusMoves;
             result.BonusCoins = _bonusCoins;
+            if (Custom)
+                return;
             if (GoalMet())
             {
                 if (Endless)

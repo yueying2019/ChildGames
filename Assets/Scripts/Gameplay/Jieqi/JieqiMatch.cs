@@ -121,6 +121,12 @@ namespace SmallGames
             return true;
         }
 
+        /// <summary>丢掉悔棋和重复局面记录。恢复初始棋盘后调用，避免悔回编辑前的步。</summary>
+        public void AbandonHistory()
+        {
+            ResetHashes();
+        }
+
         void ResetHashes()
         {
             _hashes.Clear();

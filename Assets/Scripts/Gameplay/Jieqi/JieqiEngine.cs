@@ -25,6 +25,9 @@ namespace SmallGames
         readonly int[] _bag = new int[MaxPieces];
         readonly int[] _hiddenIds = new int[MaxPieces];
         readonly List<JieqiMove> _moveBuf = new List<JieqiMove>(160);
+        readonly List<EditorMark> _editorMarks = new List<EditorMark>(16);
+        EditorMark _origin;
+        bool _hasOrigin;
 
         int _pieceCount;
         JieqiCamp _side;
@@ -114,6 +117,8 @@ namespace SmallGames
         public void BeginCustom(JieqiCamp sideToMove)
         {
             Clear();
+            _editorMarks.Clear();
+            _hasOrigin = false;
             _side = sideToMove == JieqiCamp.Black ? JieqiCamp.Black : JieqiCamp.Red;
             _outcome = JieqiOutcome.Playing;
             _standard = false;
@@ -372,6 +377,205 @@ namespace SmallGames
                     continue;
                 _board[Index(state.X, state.Y)] = i;
             }
+        }
+
+        /// <summary>记下当前局面，供编辑里的恢复使用。重新开局会丢掉这份记录。</summary>
+        public void EditorCaptureOrigin()
+        {
+            var pieces = new JieqiPieceState[MaxPieces];
+            _origin = new EditorMark
+            {
+                Pieces = pieces,
+                Count = CopySave(pieces),
+                Side = _side,
+                Standard = _standard,
+                Skill = _skillRules
+            };
+            _hasOrigin = true;
+        }
+
+        /// <summary>回到记下的初始局面，并清掉编辑撤销。不判胜负。</summary>
+        public bool EditorRestoreOrigin()
+        {
+            if (!_hasOrigin || _origin.Pieces == null)
+                return false;
+            var mark = _origin;
+            _editorMarks.Clear();
+            Restore(mark.Pieces, mark.Count, mark.Side, JieqiOutcome.Playing, mark.Standard, mark.Skill);
+            return true;
+        }
+
+        /// <summary>把还扣着的子全部翻开。没有暗子时不记撤销。</summary>
+        public bool EditorRevealAll()
+        {
+            var any = false;
+            for (var i = 0; i < _pieceCount; i++)
+            {
+                if (_pieces[i].Alive && _pieces[i].FaceDown)
+                {
+                    any = true;
+                    break;
+                }
+            }
+
+            if (!any)
+                return false;
+
+            PushEditor();
+            for (var i = 0; i < _pieceCount; i++)
+            {
+                if (!_pieces[i].Alive || !_pieces[i].FaceDown)
+                    continue;
+                var piece = _pieces[i];
+                piece.FaceDown = false;
+                if (piece.Printed == JieqiCamp.Red || piece.Printed == JieqiCamp.Black)
+                    piece.Controller = piece.Printed;
+                _pieces[i] = piece;
+            }
+
+            return true;
+        }
+
+        /// <summary>吃掉这一格的子，放到它自己颜色的身后。将、帅不能吃。</summary>
+        public bool EditorCapture(int x, int y, out string message)
+        {
+            message = null;
+            if (!OnBoard(x, y))
+                return false;
+            var id = _board[Index(x, y)];
+            if (id < 0)
+                return false;
+            var piece = _pieces[id];
+            if (!piece.Alive)
+                return false;
+            if (piece.Role == JieqiRole.King)
+            {
+                message = "将帅不能被吃";
+                return false;
+            }
+
+            PushEditor();
+            _board[Index(x, y)] = -1;
+            var side = piece.Printed == JieqiCamp.Red || piece.Printed == JieqiCamp.Black
+                ? piece.Printed
+                : piece.Controller;
+            piece.Alive = false;
+            piece.FaceDown = false;
+            piece.CapturedBy = side;
+            piece.X = -1;
+            piece.Y = -1;
+            _pieces[id] = piece;
+            return true;
+        }
+
+        /// <summary>
+        /// 选中的子吃掉对方这一格，并走到那里。将、帅不能被吃。
+        /// 将、帅也不能吃九宫以外的子。技能局吃子后获得被吃子原来的兵种，将、帅不获得。
+        /// </summary>
+        public bool EditorTake(int fromX, int fromY, int toX, int toY, out string message)
+        {
+            message = null;
+            if (!OnBoard(fromX, fromY) || !OnBoard(toX, toY))
+                return false;
+            if (fromX == toX && fromY == toY)
+                return false;
+            var fromId = _board[Index(fromX, fromY)];
+            var toId = _board[Index(toX, toY)];
+            if (fromId < 0 || toId < 0 || fromId == toId)
+                return false;
+
+            var mover = _pieces[fromId];
+            var victim = _pieces[toId];
+            if (!mover.Alive || !victim.Alive)
+                return false;
+            if (mover.Controller == victim.Controller)
+                return false;
+            if (victim.Role == JieqiRole.King)
+            {
+                message = "将帅不能被吃";
+                return false;
+            }
+
+            if (mover.Role == JieqiRole.King && !InPalace(mover.Controller, toX, toY))
+            {
+                message = "将帅不能吃城池外的棋子";
+                return false;
+            }
+
+            PushEditor();
+            _board[Index(fromX, fromY)] = -1;
+            victim.Alive = false;
+            victim.FaceDown = false;
+            victim.CapturedBy = mover.Controller;
+            victim.X = -1;
+            victim.Y = -1;
+            _pieces[toId] = victim;
+            mover.X = toX;
+            mover.Y = toY;
+            if (_skillRules && mover.Role != JieqiRole.King)
+                GrantSkill(ref mover, victim);
+            _pieces[fromId] = mover;
+            _board[Index(toX, toY)] = fromId;
+            return true;
+        }
+
+        /// <summary>把子挪到空位。不翻开，也不走正常走法。将、帅不能出九宫。</summary>
+        public bool EditorMove(int fromX, int fromY, int toX, int toY, out string message)
+        {
+            message = null;
+            if (!OnBoard(fromX, fromY) || !OnBoard(toX, toY))
+                return false;
+            if (fromX == toX && fromY == toY)
+                return false;
+            var id = _board[Index(fromX, fromY)];
+            if (id < 0)
+                return false;
+            if (_board[Index(toX, toY)] >= 0)
+                return false;
+
+            var piece = _pieces[id];
+            if (piece.Role == JieqiRole.King && !InPalace(piece.Controller, toX, toY))
+            {
+                message = "将帅不能出九宫";
+                return false;
+            }
+
+            PushEditor();
+            _board[Index(fromX, fromY)] = -1;
+            piece.X = toX;
+            piece.Y = toY;
+            _pieces[id] = piece;
+            _board[Index(toX, toY)] = id;
+            return true;
+        }
+
+        /// <summary>正常走了一步之后，编辑撤销不再跨过这步棋。</summary>
+        public void EditorClearUndo()
+        {
+            _editorMarks.Clear();
+        }
+
+        public bool EditorUndo()
+        {
+            if (_editorMarks.Count == 0)
+                return false;
+            var mark = _editorMarks[_editorMarks.Count - 1];
+            _editorMarks.RemoveAt(_editorMarks.Count - 1);
+            Restore(mark.Pieces, mark.Count, mark.Side, JieqiOutcome.Playing, mark.Standard, mark.Skill);
+            return true;
+        }
+
+        void PushEditor()
+        {
+            var pieces = new JieqiPieceState[MaxPieces];
+            _editorMarks.Add(new EditorMark
+            {
+                Pieces = pieces,
+                Count = CopySave(pieces),
+                Side = _side,
+                Standard = _standard,
+                Skill = _skillRules
+            });
         }
 
         public void RefreshTerminal()
@@ -1503,6 +1707,15 @@ namespace SmallGames
             public JieqiRole SkillRole;
             public JieqiCamp SkillPrinted;
             public bool SkillBoost;
+        }
+
+        struct EditorMark
+        {
+            public JieqiPieceState[] Pieces;
+            public int Count;
+            public JieqiCamp Side;
+            public bool Standard;
+            public bool Skill;
         }
 
         internal struct Undo

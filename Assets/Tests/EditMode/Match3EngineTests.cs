@@ -99,5 +99,71 @@ namespace SmallGames.Tests
             Assert.AreEqual(Match3LevelData.MaxColor, level.ColorCount);
             Assert.AreEqual(1, level.MoveLimit, "步数至少为 1");
         }
+
+        [Test]
+        public void Custom_满盘可涂可擦且不会结束()
+        {
+            var level = MakeLevel(8, 8, 6, 5);
+            level.FixedBoard = true;
+            level.TargetScore = 1;
+            var engine = new Match3Engine(7);
+            engine.Custom = true;
+            engine.Load(level);
+
+            for (var y = 0; y < engine.Height; y++)
+            {
+                for (var x = 0; x < engine.Width; x++)
+                {
+                    Assert.AreEqual(Match3CellKind.Playable, engine.GetKind(x, y));
+                    Assert.IsNotNull(engine.GetTile(x, y));
+                }
+            }
+
+            Assert.IsTrue(engine.EditorPaintColor(0, 0, 3));
+            Assert.AreEqual(3, engine.GetTile(0, 0).Color);
+            Assert.IsTrue(engine.EditorPaintObstacle(1, 0, Match3CellKind.Stone));
+            Assert.IsNull(engine.GetTile(1, 0));
+            Assert.AreEqual(Match3CellKind.Stone, engine.GetKind(1, 0));
+            Assert.IsTrue(engine.EditorPaintObstacle(2, 0, Match3CellKind.Ice));
+            Assert.IsNotNull(engine.GetTile(2, 0));
+            Assert.AreEqual(Match3CellKind.Ice, engine.GetKind(2, 0));
+            Assert.IsTrue(engine.EditorPaintSpecial(3, 0, Match3Special.LineH));
+            Assert.AreEqual(Match3Special.LineH, engine.GetTile(3, 0).Special);
+            Assert.IsTrue(engine.EditorPaintSpecial(4, 0, Match3Special.ColorBomb));
+            Assert.AreEqual(Match3Special.ColorBomb, engine.GetTile(4, 0).Special);
+            Assert.AreEqual(0, engine.GetTile(4, 0).Color);
+            Assert.IsTrue(engine.EditorErase(0, 0));
+            Assert.AreEqual(Match3CellKind.Hole, engine.GetKind(0, 0));
+            Assert.IsFalse(engine.EditorErase(0, 0));
+
+            engine.SetMovesLeft(0);
+            var painted = engine.TryPaintSpecial(3, 0, Match3Special.Bomb);
+            Assert.IsTrue(painted.Applied);
+            Assert.IsFalse(painted.Won);
+            Assert.IsFalse(painted.Lost);
+            Assert.IsFalse(engine.GoalMet());
+        }
+
+        [Test]
+        public void Custom_涂出三连后结算消除且不结束()
+        {
+            var level = MakeLevel(6, 6, 5, 12);
+            level.FixedBoard = true;
+            var engine = new Match3Engine(3);
+            engine.Custom = true;
+            engine.Load(level);
+            var moves = engine.MovesLeft;
+
+            Assert.IsTrue(engine.EditorPaintColor(0, 2, 2));
+            Assert.IsTrue(engine.EditorPaintColor(1, 2, 2));
+            Assert.IsTrue(engine.EditorPaintColor(2, 2, 2));
+            var result = engine.EditorResolve();
+            Assert.IsTrue(result.Applied);
+            Assert.IsFalse(result.Won);
+            Assert.IsFalse(result.Lost);
+            Assert.Greater(engine.Score, 0);
+            Assert.AreEqual(moves, engine.MovesLeft);
+            Assert.IsFalse(engine.GoalMet());
+        }
     }
 }

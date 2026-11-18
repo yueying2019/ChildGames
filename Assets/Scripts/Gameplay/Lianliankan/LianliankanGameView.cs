@@ -32,6 +32,10 @@ namespace SmallGames
         public Sprite TileBgB;
         public Sprite TileSelect;
         public LianliankanAudioProfile AudioProfile;
+        public LianliankanCustomBar CustomBar;
+
+        /// <summary>自定义沙盒：不限时、不过关，页签选中时涂格子而不是连线。</summary>
+        public bool Custom;
 
         public const int Columns = 10;
         public const int Rows = 10;
@@ -230,11 +234,118 @@ namespace SmallGames
             BindTiles();
             _engine = new LianliankanEngine();
             _engine.Load(_tiles);
-            EnsurePlayable(false);
+            if (!Custom)
+                EnsurePlayable(false);
             SetLevel(config.LevelId, config.Title);
             RefreshToolCounts();
             EnsureTimeHud();
             RefreshTimeHud();
+            if (Custom)
+            {
+                BeginCustomUi();
+                if (TimeText != null)
+                {
+                    TimeText.text = "不限时";
+                    TimeText.color = UIStyle.TextMain;
+                }
+
+                SetTimeNormalized(1f);
+            }
+        }
+
+        private void BeginCustomUi()
+        {
+            if (ShuffleButton != null && ShuffleButton.transform.parent != null)
+                ShuffleButton.transform.parent.gameObject.SetActive(false);
+            if (CustomBar == null)
+                return;
+            CustomBar.gameObject.SetActive(true);
+            CustomBar.Bind(this, IconSprites);
+        }
+
+        public bool TryCustomCell(Vector2 screen, Camera camera, out int row, out int col)
+        {
+            row = -1;
+            col = -1;
+            if (_tiles == null)
+                return false;
+            for (var i = 0; i < _tiles.Length; i++)
+            {
+                var tile = _tiles[i];
+                if (tile == null)
+                    continue;
+                var rect = tile.transform as RectTransform;
+                if (rect == null)
+                    continue;
+                if (!RectTransformUtility.RectangleContainsScreenPoint(rect, screen, camera))
+                    continue;
+                row = tile.Row;
+                col = tile.Col;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>涂一格。没选笔时左键不动，右键仍可擦成空格。返回是否真的改了。</summary>
+        public bool PaintCustom(int row, int col, bool erase)
+        {
+            if (!Custom || _linking || _ended)
+                return false;
+            var tile = GetTile(row, col);
+            if (tile == null)
+                return false;
+            if (erase)
+            {
+                if (!tile.Occupied && !tile.Blocked)
+                    return false;
+                tile.Clear();
+                return true;
+            }
+
+            if (CustomBar == null || !CustomBar.TryGetBrush(out var iconId, out var random, out var blocker))
+                return false;
+            var bg = (row + col) % 2 == 0 ? TileBgA : TileBgB;
+            if (blocker)
+            {
+                if (tile.Blocked)
+                    return false;
+                tile.SetupBlocker(row, col, bg, IconOf(LianliankanLevelData.BlockerIconIndex));
+                return true;
+            }
+
+            if (random)
+                iconId = RandomPlayableIcon();
+            if (iconId < 0)
+                return false;
+            if (tile.Occupied && !tile.Blocked && tile.IconId == iconId)
+                return false;
+            tile.ApplyState(true, iconId, bg, IconOf(iconId));
+            return true;
+        }
+
+        /// <summary>一笔涂完后把盘面交给连线规则，不自动消对，也不重排。</summary>
+        public void FinishCustomStroke()
+        {
+            if (!Custom || _engine == null || _tiles == null || _linking)
+                return;
+            Select(null);
+            _engine.Load(_tiles);
+        }
+
+        private int RandomPlayableIcon()
+        {
+            var count = IconSprites != null ? IconSprites.Length : 0;
+            var first = count > LianliankanLevelData.FirstPlayableIconIndex
+                ? LianliankanLevelData.FirstPlayableIconIndex
+                : 0;
+            var last = first + LianliankanLevelData.PlayableIconCap(count);
+            var cap = first + LianliankanLevelData.MaxTypes;
+            if (last > cap)
+                last = cap;
+            if (last <= first)
+                return first;
+            return UnityEngine.Random.Range(first, last);
         }
 
         /// <summary>教学关的强制引导，棋盘建好之后调用。</summary>
@@ -281,6 +392,8 @@ namespace SmallGames
 
         public void AddTimerSeconds(float extra, float cap = 0f)
         {
+            if (Custom)
+                return;
             _timeLeft = Mathf.Max(0f, _timeLeft + extra);
             if (cap > 0f)
                 _timeLeft = Mathf.Min(_timeLeft, cap);
@@ -293,6 +406,12 @@ namespace SmallGames
 
         public void SetTimerRunning(bool running)
         {
+            if (Custom)
+            {
+                _timerRunning = false;
+                return;
+            }
+
             _timerRunning = running && !_ended && !_frozen;
         }
 
@@ -323,6 +442,12 @@ namespace SmallGames
         {
             if (LevelText == null)
                 return;
+            if (Custom)
+            {
+                LevelText.text = "自定义";
+                return;
+            }
+
             if (!string.IsNullOrEmpty(title) && title.StartsWith("无尽"))
                 LevelText.text = title;
             else
@@ -506,7 +631,9 @@ namespace SmallGames
             var playable = LianliankanLevelData.PlayableIconCap(maxIcons);
             if (playable <= 0)
                 playable = Mathf.Max(1, maxIcons);
-            var types = Mathf.Max(1, Mathf.Min(config != null ? config.TypeCount : LianliankanBoardLayout.EasyTypeCount, playable));
+            var types = Custom
+                ? Mathf.Max(1, Mathf.Min(LianliankanLevelData.MaxTypes, playable))
+                : Mathf.Max(1, Mathf.Min(config != null ? config.TypeCount : LianliankanBoardLayout.EasyTypeCount, playable));
             var first = maxIcons > LianliankanLevelData.FirstPlayableIconIndex
                 ? LianliankanLevelData.FirstPlayableIconIndex
                 : 0;
@@ -579,6 +706,8 @@ namespace SmallGames
         private void OnTileClicked(LianliankanTileView tile)
         {
             if (InputLocked || _linking || _ended || _engine == null || tile == null || !tile.Occupied)
+                return;
+            if (CustomBar != null && CustomBar.Editing)
                 return;
 
             if (_selected == null)
@@ -700,7 +829,7 @@ namespace SmallGames
         private void TickIdle()
         {
             // 引导正在闪目标时闲置提示不插手：两套闪烁会打架，Stop 也会掐掉引导高亮
-            if (TutorialDirector.Active)
+            if (TutorialDirector.Active || (CustomBar != null && CustomBar.Editing))
             {
                 _idle.Reset();
                 return;
@@ -757,6 +886,12 @@ namespace SmallGames
 
         private void AddTime()
         {
+            if (Custom)
+            {
+                UIManager.Instance?.ShowToast("自定义不限时");
+                return;
+            }
+
             if (InputLocked || _linking || _ended)
                 return;
             if (!CoinWallet.TryUse(ShopItemId.LianTime))
@@ -772,6 +907,12 @@ namespace SmallGames
 
         private void FreezeTimer()
         {
+            if (Custom)
+            {
+                UIManager.Instance?.ShowToast("自定义不限时");
+                return;
+            }
+
             if (_ended || _linking)
                 return;
             if (!CoinWallet.TryUse(ShopItemId.LianFreeze))
@@ -880,7 +1021,7 @@ namespace SmallGames
             TutorialDirector.NotifyCurrent();
             _linking = false;
             _linkRoutine = null;
-            if (_engine.Cleared)
+            if (_engine.Cleared && !Custom)
             {
                 _ended = true;
                 _audio?.PlayWin();
@@ -981,7 +1122,7 @@ namespace SmallGames
 
         private void EnsurePlayable(bool toastIfShuffled)
         {
-            if (_engine == null || _tiles == null || _ended)
+            if (Custom || _engine == null || _tiles == null || _ended)
                 return;
             if (!_engine.RefreshIfStuck(_tiles))
             {

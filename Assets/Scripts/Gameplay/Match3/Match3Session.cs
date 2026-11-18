@@ -4,8 +4,14 @@ namespace SmallGames
 {
     public class Match3Session : GameSessionBase
     {
+        public const int CustomLevelIndex = 3000;
+
+        public static bool IsCustomIndex(int index) => index == CustomLevelIndex;
+
         public override GameModeType Mode => GameModeType.Match3;
-        public override bool HasNextLevel => !IsEndless && !IsDaily && Match3LevelCatalog.Override == null && LevelIndex + 1 < Match3LevelCatalog.Count;
+        public override bool HasNextLevel => !IsCustom && !IsEndless && !IsDaily && Match3LevelCatalog.Override == null && LevelIndex + 1 < Match3LevelCatalog.Count;
+
+        private bool IsCustom => IsCustomIndex(LevelIndex);
         protected override int CurrentLevelId => IsEndless ? EndlessCatalog.LevelId : (_level != null ? _level.LevelId : LevelIndex + 1);
 
         private Match3Engine _engine;
@@ -14,12 +20,15 @@ namespace SmallGames
 
         protected override void OnStart()
         {
-            _level = IsTutorial
+            _level = IsCustom
+                ? BuildCustomLevel()
+                : IsTutorial
                 ? TutorialCatalog.Match3Level()
                 : IsEndless
                     ? Match3EndlessGenerator.Build(Wave)
                     : Match3LevelCatalog.Get(LevelIndex);
             _engine = new Match3Engine();
+            _engine.Custom = IsCustom;
             _engine.Load(_level);
             PrepareEndless();
 
@@ -31,9 +40,32 @@ namespace SmallGames
             _view.WaveCleared += OnWaveCleared;
             _view.Tutorial = IsTutorial;
             _view.Daily = IsDaily;
+            _view.Custom = IsCustom;
             _view.Setup(_engine);
             _view.InputLocked = true;
+            if (IsCustom)
+            {
+                BeginAfterIntro();
+                return;
+            }
+
             LevelIntroPanel.Present(IntroLevelNumber(_level != null ? _level.LevelId : 0), IntroTitle(), BeginAfterIntro);
+        }
+
+        private static Match3LevelData BuildCustomLevel()
+        {
+            var data = ScriptableObject.CreateInstance<Match3LevelData>();
+            data.LevelId = 0;
+            data.DisplayName = "自定义";
+            data.Width = 8;
+            data.Height = 8;
+            data.ColorCount = Match3LevelData.MaxColor;
+            data.MoveLimit = 99;
+            data.GoalType = Match3GoalType.Score;
+            data.TargetScore = 0;
+            data.FixedBoard = true;
+            data.FillPlayable(0);
+            return data;
         }
 
         private void BeginAfterIntro()
@@ -44,7 +76,7 @@ namespace SmallGames
             _view.InputLocked = IsPaused;
             if (IsTutorial)
                 _view.StartTutorialGuide();
-            else
+            else if (!IsCustom)
                 _view.BeginOpeningGuides();
         }
 

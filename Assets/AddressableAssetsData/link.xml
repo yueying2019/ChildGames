@@ -18,14 +18,19 @@
     <type fullname="SmallGames.LevelSelectCellView" preserve="all" />
     <type fullname="SmallGames.LevelSelectPanel" preserve="all" />
     <type fullname="SmallGames.LianliankanAudioProfile" preserve="all" />
+    <type fullname="SmallGames.LianliankanBoardPaint" preserve="all" />
+    <type fullname="SmallGames.LianliankanCustomBar" preserve="all" />
     <type fullname="SmallGames.LianliankanGameView" preserve="all" />
     <type fullname="SmallGames.LianliankanLevelData" preserve="all" />
     <type fullname="SmallGames.LianliankanTileView" preserve="all" />
     <type fullname="SmallGames.LoadingPanel" preserve="all" />
     <type fullname="SmallGames.MainMenuPanel" preserve="all" />
     <type fullname="SmallGames.Match3AudioProfile" preserve="all" />
+    <type fullname="SmallGames.Match3BoardPaint" preserve="all" />
+    <type fullname="SmallGames.Match3CustomBar" preserve="all" />
     <type fullname="SmallGames.Match3GameView" preserve="all" />
     <type fullname="SmallGames.Match3LevelData" preserve="all" />
+    <type fullname="SmallGames.Match3PaletteCell" preserve="all" />
     <type fullname="SmallGames.Match3TileView" preserve="all" />
     <type fullname="SmallGames.ModeRulesPanel" preserve="all" />
     <type fullname="SmallGames.PausePanel" preserve="all" />

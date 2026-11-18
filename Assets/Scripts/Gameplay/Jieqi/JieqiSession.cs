@@ -4,9 +4,12 @@ namespace SmallGames
 {
     /// <summary>
     /// 新规揭棋对局。LevelIndex 0 是双人，1 是玩家执红对电脑，2 起是残局。
+    /// <see cref="EditorLevelIndex"/> 是残局编辑，不进残局目录。
     /// </summary>
     public class JieqiSession : GameSessionBase
     {
+        public const int EditorLevelIndex = 1000;
+
         public override GameModeType Mode => SkillMatch ? GameModeType.SkillXiangqi : GameModeType.Jieqi;
 
         protected virtual bool SkillMatch => false;
@@ -19,14 +22,30 @@ namespace SmallGames
         JieqiGameView _view;
         string _puzzleTitle;
         bool _finished;
+        bool _editor;
+
+        public static bool IsEditorIndex(int levelIndex)
+        {
+            return levelIndex == EditorLevelIndex;
+        }
 
         protected override void OnStart()
         {
             AudioManager.Instance?.HoldBgm();
             _finished = false;
+            _editor = false;
             _match = new JieqiMatch();
             _puzzleTitle = null;
-            if (SkillMatch)
+            if (SkillMatch && IsEditorIndex(LevelIndex))
+            {
+                _editor = true;
+                _match.Engine.DealSkill();
+                _match.StartOnCurrent(
+                    JieqiPlayMode.TwoPlayer,
+                    JieqiCamp.Red,
+                    Random.Range(1, int.MaxValue));
+            }
+            else if (SkillMatch)
             {
                 _match.Engine.DealSkill();
                 var versusAi = LevelIndex == 1;
@@ -41,6 +60,14 @@ namespace SmallGames
                 _puzzleTitle = JieqiEndgameCatalog.Title(index);
                 JieqiEndgameCatalog.Load(_match.Engine, index);
                 _match.StartOnCurrent(JieqiPlayMode.VersusAi, JieqiCamp.Red, Random.Range(1, int.MaxValue));
+            }
+            else if (IsEditorIndex(LevelIndex))
+            {
+                _editor = true;
+                _match.Start(
+                    JieqiPlayMode.TwoPlayer,
+                    Random.Range(1, int.MaxValue),
+                    JieqiCamp.Red);
             }
             else
             {
@@ -57,6 +84,8 @@ namespace SmallGames
 
             _view.Changed += OnChanged;
             _view.Play(_match);
+            if (_editor)
+                _view.BeginEditor(SkillMatch);
             _view.SetLocked(IsPaused);
             Sync();
         }
@@ -127,6 +156,8 @@ namespace SmallGames
         {
             Sync();
             if (_finished || _match == null)
+                return;
+            if (_editor && _view != null && _view.Editing)
                 return;
             var outcome = _match.Engine.Outcome;
             if (outcome == JieqiOutcome.Playing)

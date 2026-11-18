@@ -808,6 +808,154 @@ namespace SmallGames.Tests
             Assert.AreEqual(JieqiRole.Rook, rook.Role);
         }
 
+        [Test]
+        public void Editor_RevealCaptureMoveAndUndo()
+        {
+            var engine = new JieqiEngine();
+            engine.Deal(3);
+            Assert.AreEqual(JieqiOutcome.Playing, engine.Outcome);
+            Assert.IsTrue(engine.EditorRevealAll());
+            var save = new JieqiPieceState[JieqiEngine.MaxPieces];
+            var count = engine.CopySave(save);
+            for (var i = 0; i < count; i++)
+            {
+                if (save[i].Alive)
+                    Assert.IsFalse(save[i].FaceDown);
+            }
+
+            Assert.IsFalse(engine.EditorRevealAll());
+            Assert.IsTrue(engine.EditorUndo());
+            count = engine.CopySave(save);
+            var hidden = 0;
+            for (var i = 0; i < count; i++)
+            {
+                if (save[i].Alive && save[i].FaceDown)
+                    hidden++;
+            }
+
+            Assert.Greater(hidden, 0);
+            Assert.IsFalse(engine.EditorCapture(4, 9, out var kingMessage));
+            Assert.AreEqual("将帅不能被吃", kingMessage);
+            Assert.IsTrue(engine.TryView(4, 9, out var king));
+            Assert.IsTrue(king.Occupied);
+
+            var fromX = -1;
+            var fromY = -1;
+            var hiddenBefore = false;
+            for (var y = 0; y < JieqiEngine.Ranks && fromX < 0; y++)
+            {
+                for (var x = 0; x < JieqiEngine.Files; x++)
+                {
+                    if ((x == 4 && y == 0) || (x == 4 && y == 9))
+                        continue;
+                    if (!engine.TryView(x, y, out var view) || !view.Occupied)
+                        continue;
+                    fromX = x;
+                    fromY = y;
+                    hiddenBefore = view.FaceDown;
+                    break;
+                }
+            }
+
+            Assert.GreaterOrEqual(fromX, 0);
+            Assert.IsFalse(engine.EditorMove(fromX, fromY, 4, 9, out _));
+            Assert.IsTrue(engine.EditorCapture(fromX, fromY, out var captureMessage));
+            Assert.IsNull(captureMessage);
+            Assert.IsTrue(engine.TryView(fromX, fromY, out var emptied));
+            Assert.IsFalse(emptied.Occupied);
+            var held = new List<JieqiCapturedView>();
+            engine.CopyCaptured(held);
+            Assert.AreEqual(1, held.Count);
+            Assert.AreEqual(held[0].Printed, held[0].CapturedBy);
+            Assert.AreEqual(JieqiOutcome.Playing, engine.Outcome);
+            Assert.IsTrue(engine.EditorUndo());
+            Assert.IsTrue(engine.TryView(fromX, fromY, out var restored));
+            Assert.IsTrue(restored.Occupied);
+            Assert.AreEqual(hiddenBefore, restored.FaceDown);
+
+            Assert.IsTrue(engine.EditorMove(fromX, fromY, 4, 5, out _));
+            Assert.IsTrue(engine.TryView(4, 5, out var moved));
+            Assert.IsTrue(moved.Occupied);
+            Assert.AreEqual(hiddenBefore, moved.FaceDown);
+            Assert.IsFalse(engine.EditorMove(4, 9, 4, 6, out var palace));
+            Assert.AreEqual("将帅不能出九宫", palace);
+            Assert.IsTrue(engine.TryView(4, 9, out var shuai));
+            Assert.IsTrue(shuai.Occupied);
+            Assert.IsTrue(engine.EditorMove(4, 9, 4, 8, out _));
+            Assert.IsTrue(engine.TryView(4, 8, out var shifted));
+            Assert.AreEqual(JieqiRole.King, shifted.Role);
+            Assert.IsTrue(engine.EditorUndo());
+            Assert.IsTrue(engine.TryView(4, 9, out shuai));
+            Assert.IsTrue(shuai.Occupied);
+            Assert.IsTrue(engine.EditorUndo());
+            Assert.IsTrue(engine.TryView(fromX, fromY, out restored));
+            Assert.IsTrue(restored.Occupied);
+            Assert.IsFalse(engine.EditorUndo());
+            engine.EditorCaptureOrigin();
+            Assert.IsTrue(engine.EditorRevealAll());
+            Assert.IsTrue(engine.EditorRestoreOrigin());
+            count = engine.CopySave(save);
+            hidden = 0;
+            for (var i = 0; i < count; i++)
+            {
+                if (save[i].Alive && save[i].FaceDown)
+                    hidden++;
+            }
+
+            Assert.Greater(hidden, 0);
+            Assert.AreEqual(JieqiOutcome.Playing, engine.Outcome);
+            Assert.IsFalse(engine.EditorUndo());
+        }
+
+        [Test]
+        public void EditorTake_CapturesOpponentAndKeepsKingsInPalace()
+        {
+            var engine = new JieqiEngine();
+            engine.BeginSkill(JieqiCamp.Red);
+            engine.AddPiece(JieqiCamp.Red, JieqiCamp.Red, JieqiRole.Rook, JieqiRole.Rook, false, 0, 9);
+            engine.AddPiece(JieqiCamp.Red, JieqiCamp.Red, JieqiRole.King, JieqiRole.King, false, 4, 9);
+            engine.AddPiece(JieqiCamp.Black, JieqiCamp.Black, JieqiRole.Pawn, JieqiRole.Pawn, false, 4, 6);
+            engine.AddPiece(JieqiCamp.Black, JieqiCamp.Black, JieqiRole.Advisor, JieqiRole.Advisor, false, 4, 8);
+            engine.AddPiece(JieqiCamp.Black, JieqiCamp.Black, JieqiRole.King, JieqiRole.King, false, 4, 0);
+            engine.EditorCaptureOrigin();
+
+            Assert.IsFalse(engine.EditorTake(4, 9, 4, 0, out var kingMessage));
+            Assert.AreEqual("将帅不能被吃", kingMessage);
+            Assert.IsFalse(engine.EditorTake(4, 9, 4, 6, out var outside));
+            Assert.AreEqual("将帅不能吃城池外的棋子", outside);
+            Assert.IsTrue(engine.TryView(4, 9, out var king));
+            Assert.IsTrue(king.Occupied);
+
+            Assert.IsTrue(engine.EditorTake(4, 9, 4, 8, out _));
+            Assert.IsTrue(engine.TryView(4, 8, out var movedKing));
+            Assert.AreEqual(JieqiRole.King, movedKing.Role);
+            Assert.IsFalse(movedKing.HasSkill);
+            Assert.IsTrue(engine.TryView(4, 9, out var vacated));
+            Assert.IsFalse(vacated.Occupied);
+
+            Assert.IsTrue(engine.EditorTake(0, 9, 4, 6, out _));
+            Assert.IsTrue(engine.TryView(4, 6, out var rook));
+            Assert.AreEqual(JieqiRole.Rook, rook.Role);
+            Assert.IsTrue(rook.HasSkill);
+            Assert.AreEqual(JieqiRole.Pawn, rook.SkillRole);
+            Assert.AreEqual(JieqiCamp.Black, rook.SkillPrinted);
+            var held = new List<JieqiCapturedView>();
+            engine.CopyCaptured(held);
+            Assert.AreEqual(2, held.Count);
+            Assert.AreEqual(JieqiCamp.Red, held[0].CapturedBy);
+            Assert.AreEqual(JieqiCamp.Red, held[1].CapturedBy);
+
+            Assert.IsTrue(engine.EditorUndo());
+            Assert.IsTrue(engine.TryView(0, 9, out rook));
+            Assert.AreEqual(JieqiRole.Rook, rook.Role);
+            Assert.IsTrue(engine.EditorRestoreOrigin());
+            Assert.IsTrue(engine.TryView(4, 9, out king));
+            Assert.AreEqual(JieqiRole.King, king.Role);
+            Assert.IsTrue(engine.TryView(4, 6, out var pawn));
+            Assert.AreEqual(JieqiRole.Pawn, pawn.Role);
+            Assert.IsFalse(engine.EditorUndo());
+        }
+
         static bool HasMove(JieqiEngine engine, int fromX, int fromY, int toX, int toY)
         {
             var moves = new List<JieqiMove>();

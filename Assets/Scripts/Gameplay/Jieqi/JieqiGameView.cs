@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace SmallGames
@@ -45,6 +46,13 @@ namespace SmallGames
         public JieqiRookCaptureFx CaptureFx;
         public JieqiHorseCaptureFx HorseCaptureFx;
         public JieqiRoleCaptureFx RoleCaptureFx;
+        public Button EditStartButton;
+        public Button RevealAllButton;
+        public Button CaptureButton;
+        public Button MoveButton;
+        public Button RestoreButton;
+        public Button UndoEditButton;
+        public JieqiBoardClick BoardClick;
 
         readonly List<JieqiPieceView> _pool = new List<JieqiPieceView>(48);
         readonly List<JieqiPieceView> _heldPool = new List<JieqiPieceView>(16);
@@ -63,6 +71,14 @@ namespace SmallGames
         bool _popGlow;
         bool _locked;
         bool _thinking;
+        bool _editor;
+        bool _editing;
+        bool _skillCapture;
+        bool _editorBound;
+        EditorTool _tool;
+        Text _editLabel;
+
+        public bool Editing => _editing;
 
         Coroutine _ai;
         Coroutine _hold;
@@ -83,6 +99,39 @@ namespace SmallGames
             _thinking = false;
             CancelHold();
             StopCaptureFx();
+            Refresh();
+        }
+
+        /// <summary>残局编辑。必须在 <see cref="Play"/> 之后调用，棋盘先按正常开局摆好。技能象棋吃子是选中后再吃对方。</summary>
+        public void BeginEditor(bool skillCapture = false)
+        {
+            _editor = true;
+            _editing = false;
+            _skillCapture = skillCapture;
+            _tool = EditorTool.None;
+            if (RevealAllButton != null)
+                RevealAllButton.gameObject.SetActive(!skillCapture);
+            if (skillCapture)
+                LayoutSkillButtons();
+            if (EditStartButton != null)
+                EditStartButton.transform.parent.gameObject.SetActive(true);
+            if (!_editorBound)
+            {
+                _editorBound = true;
+                WireButton(EditStartButton, OnStartEdit);
+                WireButton(RevealAllButton, OnRevealAll);
+                WireButton(CaptureButton, OnCaptureTool);
+                WireButton(MoveButton, OnMoveTool);
+                WireButton(RestoreButton, OnRestore);
+                WireButton(UndoEditButton, OnUndoEdit);
+                if (BoardClick != null)
+                    BoardClick.Clicked += OnBoardClick;
+            }
+
+            if (_match != null)
+                _match.Engine.EditorCaptureOrigin();
+            ShowEditLabel(false);
+            SetTool(EditorTool.None);
             Refresh();
         }
 
@@ -150,8 +199,11 @@ namespace SmallGames
             }
 
             var engine = _match.Engine;
-            engine.CollectMoves(_moves);
-            MarkLastMove();
+            if (!_editing)
+            {
+                engine.CollectMoves(_moves);
+                MarkLastMove();
+            }
             for (var y = 0; y < JieqiEngine.Ranks; y++)
             {
                 for (var x = 0; x < JieqiEngine.Files; x++)
@@ -175,7 +227,7 @@ namespace SmallGames
                 }
             }
 
-            if (_fromX >= 0)
+            if (_fromX >= 0 && !_editing)
             {
                 for (var i = 0; i < _moves.Count; i++)
                 {
@@ -199,6 +251,12 @@ namespace SmallGames
 
         void OnSquare(int x, int y)
         {
+            if (_editor && _editing)
+            {
+                OnEditorSquare(x, y);
+                return;
+            }
+
             if (_locked || _thinking || _holding || _match == null || !_match.HumanToMove)
                 return;
 
@@ -302,6 +360,8 @@ namespace SmallGames
         /// <summary>吃子且动效开着时，锁到这段动画播完。对局分出胜负就等同一段时间后再打开结算。</summary>
         void FinishMove(JieqiStep step, bool fromAi)
         {
+            if (_editor && _match != null)
+                _match.Engine.EditorClearUndo();
             RememberMove(step);
             PlayMoveSounds(step);
             var seconds = step.Captured ? PlayCaptureFx(step) : 0f;
@@ -699,6 +759,298 @@ namespace SmallGames
                 return;
             view.Button.onClick.RemoveAllListeners();
             view.Button.onClick.AddListener(click);
+        }
+
+        enum EditorTool
+        {
+            None = 0,
+            Capture = 1,
+            Move = 2
+        }
+
+        void ShowEditLabel(bool editing)
+        {
+            if (_editLabel == null && EditStartButton != null)
+                _editLabel = EditStartButton.GetComponentInChildren<Text>(true);
+            if (_editLabel != null)
+                _editLabel.text = editing ? "退出编辑" : "开始编辑";
+        }
+
+        void ClearSelection()
+        {
+            _fromX = -1;
+            _fromY = -1;
+            _lastFromX = -1;
+            _lastFromY = -1;
+            _lastToX = -1;
+            _lastToY = -1;
+            _popGlow = false;
+        }
+
+        void OnStartEdit()
+        {
+            if (_locked)
+                return;
+            _editing = !_editing;
+            ShowEditLabel(_editing);
+            ClearSelection();
+            SetTool(EditorTool.None);
+            if (!_editing && _match != null)
+                _match.Engine.RefreshTerminal();
+            Changed?.Invoke();
+        }
+
+        void OnRestore()
+        {
+            if (!EnsureEditing() || _match == null)
+                return;
+            ClearSelection();
+            SetTool(EditorTool.None);
+            if (!_match.Engine.EditorRestoreOrigin())
+                return;
+            _match.AbandonHistory();
+            Refresh();
+            Changed?.Invoke();
+        }
+
+        void OnRevealAll()
+        {
+            if (!EnsureEditing() || _match == null)
+                return;
+            SetTool(EditorTool.None);
+            if (!_match.Engine.EditorRevealAll())
+            {
+                UIManager.Instance?.ShowToast("没有暗棋");
+                return;
+            }
+
+            Refresh();
+            Changed?.Invoke();
+        }
+
+        void OnCaptureTool()
+        {
+            if (!EnsureEditing())
+                return;
+            SetTool(_tool == EditorTool.Capture ? EditorTool.None : EditorTool.Capture);
+        }
+
+        void OnMoveTool()
+        {
+            if (!EnsureEditing())
+                return;
+            SetTool(_tool == EditorTool.Move ? EditorTool.None : EditorTool.Move);
+        }
+
+        void OnUndoEdit()
+        {
+            if (!EnsureEditing() || _match == null)
+                return;
+            SetTool(EditorTool.None);
+            if (!_match.Engine.EditorUndo())
+            {
+                UIManager.Instance?.ShowToast("没有可撤销的操作");
+                return;
+            }
+
+            Refresh();
+            Changed?.Invoke();
+        }
+
+        bool EnsureEditing()
+        {
+            if (_locked)
+                return false;
+            return _editing;
+        }
+
+        void SetTool(EditorTool tool)
+        {
+            _tool = tool;
+            _fromX = -1;
+            _fromY = -1;
+            Latch(CaptureButton, tool == EditorTool.Capture);
+            Latch(MoveButton, tool == EditorTool.Move);
+            if (BoardClick != null)
+                BoardClick.SetListening(tool == EditorTool.Move);
+            if (_editor)
+                Refresh();
+        }
+
+        void LayoutSkillButtons()
+        {
+            Place(EditStartButton, 168f);
+            Place(CaptureButton, 84f);
+            Place(MoveButton, 0f);
+            Place(RestoreButton, -84f);
+            Place(UndoEditButton, -168f);
+        }
+
+        static void Place(Button button, float y)
+        {
+            var rect = button != null ? button.transform as RectTransform : null;
+            if (rect != null)
+                rect.anchoredPosition = new Vector2(0f, y);
+        }
+
+        void OnSkillCaptureSquare(int x, int y)
+        {
+            var occupied = _match.Engine.TryView(x, y, out var view) && view.Occupied;
+            if (_fromX < 0)
+            {
+                if (!occupied)
+                    return;
+                _fromX = x;
+                _fromY = y;
+                Refresh();
+                return;
+            }
+
+            if (!occupied || (x == _fromX && y == _fromY))
+                return;
+            if (!_match.Engine.TryView(_fromX, _fromY, out var from) || !from.Occupied)
+            {
+                _fromX = x;
+                _fromY = y;
+                Refresh();
+                return;
+            }
+
+            if (view.Controller == from.Controller)
+            {
+                _fromX = x;
+                _fromY = y;
+                Refresh();
+                return;
+            }
+
+            if (!_match.Engine.EditorTake(_fromX, _fromY, x, y, out var message))
+            {
+                if (!string.IsNullOrEmpty(message))
+                    UIManager.Instance?.ShowToast(message);
+                return;
+            }
+
+            _fromX = -1;
+            _fromY = -1;
+            Refresh();
+            Changed?.Invoke();
+        }
+
+        void OnEditorSquare(int x, int y)
+        {
+            if (_locked || !_editing || _match == null)
+                return;
+            if (_tool == EditorTool.Capture)
+            {
+                if (_skillCapture)
+                {
+                    OnSkillCaptureSquare(x, y);
+                    return;
+                }
+
+                if (!_match.Engine.EditorCapture(x, y, out var message))
+                {
+                    if (!string.IsNullOrEmpty(message))
+                        UIManager.Instance?.ShowToast(message);
+                    return;
+                }
+
+                Refresh();
+                Changed?.Invoke();
+                return;
+            }
+
+            if (_tool != EditorTool.Move)
+                return;
+
+            var occupied = _match.Engine.TryView(x, y, out var view) && view.Occupied;
+            if (_fromX < 0 || occupied)
+            {
+                if (!occupied)
+                    return;
+                _fromX = x;
+                _fromY = y;
+                Refresh();
+                return;
+            }
+
+            if (!_match.Engine.EditorMove(_fromX, _fromY, x, y, out var moveMessage))
+            {
+                if (!string.IsNullOrEmpty(moveMessage))
+                    UIManager.Instance?.ShowToast(moveMessage);
+                return;
+            }
+
+            _fromX = -1;
+            _fromY = -1;
+            Refresh();
+            Changed?.Invoke();
+        }
+
+        void OnBoardClick(PointerEventData eventData)
+        {
+            if (!_editor || !_editing || _tool != EditorTool.Move || PieceLayer == null || eventData == null)
+                return;
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    PieceLayer, eventData.position, eventData.pressEventCamera, out var local))
+                return;
+
+            var rect = PieceLayer.rect;
+            if (rect.width < 1f || rect.height < 1f)
+                return;
+            var nx = (local.x - rect.xMin) / rect.width;
+            var ny = (local.y - rect.yMin) / rect.height;
+            var designX = nx * BoardWidth;
+            var designY = (1f - ny) * BoardHeight;
+            var best = 70f * 70f;
+            var bx = -1;
+            var by = -1;
+            for (var y = 0; y < JieqiEngine.Ranks; y++)
+            {
+                var dy = designY - RankY[y];
+                for (var x = 0; x < JieqiEngine.Files; x++)
+                {
+                    var dx = designX - FileX[x];
+                    var dist = dx * dx + dy * dy;
+                    if (dist >= best)
+                        continue;
+                    best = dist;
+                    bx = x;
+                    by = y;
+                }
+            }
+
+            if (bx < 0)
+                return;
+            OnEditorSquare(bx, by);
+        }
+
+        static void WireButton(Button button, UnityEngine.Events.UnityAction click)
+        {
+            if (button == null || click == null)
+                return;
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(click);
+        }
+
+        static void Latch(Button button, bool down)
+        {
+            if (button == null)
+                return;
+            button.transform.localScale = down ? new Vector3(0.94f, 0.94f, 1f) : Vector3.one;
+            if (button.targetGraphic == null)
+                return;
+            if (down)
+            {
+                button.transition = Selectable.Transition.None;
+                button.targetGraphic.color = button.colors.pressedColor;
+            }
+            else
+            {
+                button.targetGraphic.color = Color.white;
+                button.transition = Selectable.Transition.ColorTint;
+            }
         }
     }
 }

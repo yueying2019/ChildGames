@@ -43,6 +43,11 @@ namespace SmallGames
         /// <summary>本局是每日挑战：标题加上「每日」，棋盘仍是抽中的那一关。</summary>
         public bool Daily;
 
+        /// <summary>自定义沙盒。页签和涂色层在 <see cref="CustomBar"/>。</summary>
+        public bool Custom;
+
+        public Match3CustomBar CustomBar;
+
         internal Match3Engine _engine;
         internal readonly Dictionary<int, Match3TileView> _views = new Dictionary<int, Match3TileView>();
         private readonly List<Image> _slots = new List<Image>();
@@ -223,6 +228,7 @@ namespace SmallGames
             _timerRunning = false;
             _lastShownSeconds = -1;
             BindButtons();
+            BeginCustomUi();
             _combo = ComboPopupView.Attach(transform);
             _audio = AudioProfile != null ? AudioProfile : Match3AudioProfile.Load();
             _audio?.PlayBgm();
@@ -344,6 +350,8 @@ namespace SmallGames
                     LevelText.text = level != null ? level.DisplayName : EndlessCatalog.Title(1);
                 else if (Daily)
                     LevelText.text = level != null ? $"每日 · 第{level.LevelId}关  {level.DisplayName}" : "每日挑战";
+                else if (Custom)
+                    LevelText.text = "自定义";
                 else
                     LevelText.text = level != null ? $"第{level.LevelId}关  {level.DisplayName}" : "三消";
             }
@@ -406,7 +414,7 @@ namespace SmallGames
                 return;
             }
 
-            if (_busy || _ended || InputLocked || _engine == null)
+            if (_busy || _ended || InputLocked || _engine == null || (CustomBar != null && CustomBar.Editing))
             {
                 _idle.Reset();
                 HintFlash.Stop();
@@ -553,6 +561,88 @@ namespace SmallGames
             EnsureFxLayer();
             if (FxLayer != null)
                 FxLayer.SetAsLastSibling();
+            if (CustomBar != null && CustomBar.Paint != null)
+                CustomBar.Paint.transform.SetAsLastSibling();
+        }
+
+        private void BeginCustomUi()
+        {
+            if (!Custom || CustomBar == null)
+                return;
+            CustomBar.gameObject.SetActive(true);
+            CustomBar.Bind(this, IconSprites);
+        }
+
+        /// <summary>把屏幕坐标换成棋盘格。涂色层按住拖的时候用。</summary>
+        public bool TryCustomCell(Vector2 screen, Camera camera, out int x, out int y)
+        {
+            x = -1;
+            y = -1;
+            if (_busy || _ended || _engine == null || BoardRoot == null || _cellSize < 1f)
+                return false;
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(BoardRoot, screen, camera, out var local))
+                return false;
+            x = Mathf.RoundToInt((local.x - _origin.x) / _cellSize);
+            y = Mathf.RoundToInt((_origin.y - local.y) / _cellSize);
+            return x >= 0 && y >= 0 && x < _engine.Width && y < _engine.Height;
+        }
+
+        /// <summary>左键按当前笔刷替换，右键擦成空格。没选笔刷时左键不动。返回是否改动了格子。</summary>
+        public bool PaintCustom(int x, int y, bool erase)
+        {
+            if (_engine == null || CustomBar == null || !CustomBar.Editing)
+                return false;
+
+            var before = _engine.GetTile(x, y);
+            var beforeId = before != null ? before.Id : 0;
+            var applied = erase ? _engine.EditorErase(x, y) : PaintBrush(x, y);
+            if (!applied)
+                return false;
+
+            var after = _engine.GetTile(x, y);
+            if (beforeId != 0 && (after == null || after.Id != beforeId) && _views.TryGetValue(beforeId, out var old))
+            {
+                RecycleTile(old);
+                _views.Remove(beforeId);
+            }
+
+            if (after != null)
+            {
+                if (_views.TryGetValue(after.Id, out var view) && view != null)
+                {
+                    view.Bind(x, y, after, IconOf(after));
+                    view.SetLocked(!_engine.CanSwapAt(x, y));
+                }
+                else
+                    CreateView(after, x, y, CellPos(x, y));
+            }
+
+            ApplyOverlay(x, y);
+            return true;
+        }
+
+        /// <summary>这一笔涂改松开后，按三消规则把已经形成的消除播完。</summary>
+        public void FinishCustomStroke()
+        {
+            if (_busy || _ended || _engine == null || !Custom)
+                return;
+            var result = _engine.EditorResolve();
+            if (!result.Applied)
+                return;
+            StartPlay(result);
+        }
+
+        private bool PaintBrush(int x, int y)
+        {
+            if (!CustomBar.TryGetBrush(out var color, out var random, out var obstacle, out var special))
+                return false;
+            if (random)
+                return _engine.EditorPaintRandom(x, y);
+            if (color > 0)
+                return _engine.EditorPaintColor(x, y, color);
+            if (special != Match3Special.None)
+                return _engine.EditorPaintSpecial(x, y, special);
+            return _engine.EditorPaintObstacle(x, y, obstacle);
         }
 
         internal void RebuildTiles()
@@ -656,6 +746,8 @@ namespace SmallGames
         {
             if (_busy || _ended || InputLocked || view == null)
                 return;
+            if (CustomBar != null && CustomBar.Editing)
+                return;
             EnsureParts();
             if (_tools.Armed != Match3Tool.None)
                 return;
@@ -669,6 +761,8 @@ namespace SmallGames
         private void OnTileTapped(Match3TileView view)
         {
             if (_busy || _ended || InputLocked || view == null || _engine == null)
+                return;
+            if (CustomBar != null && CustomBar.Editing)
                 return;
             EnsureParts();
             if (_tools.Armed == Match3Tool.None)
