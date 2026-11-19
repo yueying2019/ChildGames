@@ -34,12 +34,13 @@ namespace SmallGames
 
         public bool Editing => _tab != Tab.None;
 
-        public bool TryGetBrush(out int color, out bool random, out Match3CellKind obstacle, out Match3Special special)
+        public bool TryGetBrush(out int color, out bool random, out Match3CellKind obstacle, out Match3Special special, out bool scrub)
         {
             color = 0;
             random = false;
             obstacle = Match3CellKind.Hole;
             special = Match3Special.None;
+            scrub = false;
             if (_tab == Tab.None || _brush < 0)
                 return false;
             if (_tab == Tab.Block)
@@ -55,6 +56,12 @@ namespace SmallGames
             {
                 special = SpecialAt(_brush);
                 return special != Match3Special.None;
+            }
+
+            if (_brush >= 4)
+            {
+                scrub = true;
+                return true;
             }
 
             obstacle = ObstacleAt(_brush);
@@ -191,6 +198,15 @@ namespace SmallGames
 
                 if (cell.Label != null)
                     cell.Label.gameObject.SetActive(false);
+            }
+
+            var scrub = Spawn(kinds.Length, true);
+            if (scrub.Icon != null)
+                scrub.Icon.enabled = false;
+            if (scrub.Label != null)
+            {
+                scrub.Label.gameObject.SetActive(true);
+                scrub.Label.text = "刷子";
             }
         }
 

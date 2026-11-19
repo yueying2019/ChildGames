@@ -634,8 +634,10 @@ namespace SmallGames
 
         private bool PaintBrush(int x, int y)
         {
-            if (!CustomBar.TryGetBrush(out var color, out var random, out var obstacle, out var special))
+            if (!CustomBar.TryGetBrush(out var color, out var random, out var obstacle, out var special, out var scrub))
                 return false;
+            if (scrub)
+                return _engine.EditorScrub(x, y);
             if (random)
                 return _engine.EditorPaintRandom(x, y);
             if (color > 0)

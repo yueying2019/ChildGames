@@ -303,8 +303,16 @@ namespace SmallGames
                 return true;
             }
 
-            if (CustomBar == null || !CustomBar.TryGetBrush(out var iconId, out var random, out var blocker))
+            if (CustomBar == null || !CustomBar.TryGetBrush(out var iconId, out var random, out var blocker, out var scrub))
                 return false;
+            if (scrub)
+            {
+                if (!tile.Occupied && !tile.Blocked)
+                    return false;
+                tile.Clear();
+                return true;
+            }
+
             var bg = (row + col) % 2 == 0 ? TileBgA : TileBgB;
             if (blocker)
             {

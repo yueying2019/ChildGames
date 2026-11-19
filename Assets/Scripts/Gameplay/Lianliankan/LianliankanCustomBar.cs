@@ -32,15 +32,22 @@ namespace SmallGames
 
         public bool Editing => _tab != Tab.None;
 
-        public bool TryGetBrush(out int iconId, out bool random, out bool blocker)
+        public bool TryGetBrush(out int iconId, out bool random, out bool blocker, out bool scrub)
         {
             iconId = -1;
             random = false;
             blocker = false;
+            scrub = false;
             if (_tab == Tab.None || _brush < 0)
                 return false;
             if (_tab == Tab.Obstacle)
             {
+                if (_brush > 0)
+                {
+                    scrub = true;
+                    return true;
+                }
+
                 blocker = true;
                 return true;
             }
@@ -156,6 +163,15 @@ namespace SmallGames
 
             if (cell.Label != null)
                 cell.Label.gameObject.SetActive(false);
+
+            var scrub = Spawn(1, true);
+            if (scrub.Icon != null)
+                scrub.Icon.enabled = false;
+            if (scrub.Label != null)
+            {
+                scrub.Label.gameObject.SetActive(true);
+                scrub.Label.text = "刷子";
+            }
         }
 
         private Match3PaletteCell Spawn(int index, bool wide)

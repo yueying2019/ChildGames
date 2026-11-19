@@ -145,6 +145,48 @@ namespace SmallGames.Tests
         }
 
         [Test]
+        public void Custom_刷子先揭障碍再擦空格()
+        {
+            var level = MakeLevel(4, 4, 4, 8);
+            level.FixedBoard = true;
+            var engine = new Match3Engine(5);
+            engine.Custom = true;
+            engine.Load(level);
+
+            Assert.IsTrue(engine.EditorPaintColor(0, 0, 3));
+            Assert.IsTrue(engine.EditorPaintObstacle(0, 0, Match3CellKind.Ice));
+            Assert.AreEqual(1, engine.GetLayers(0, 0));
+            Assert.IsTrue(engine.EditorPaintObstacle(0, 0, Match3CellKind.Ice));
+            Assert.IsTrue(engine.EditorPaintObstacle(0, 0, Match3CellKind.Ice));
+            Assert.AreEqual(3, engine.GetLayers(0, 0));
+            Assert.AreEqual(Match3CellKind.Ice, engine.GetKind(0, 0));
+            Assert.IsFalse(engine.EditorPaintObstacle(0, 0, Match3CellKind.Ice));
+            Assert.IsTrue(engine.EditorScrub(0, 0));
+            Assert.AreEqual(2, engine.GetLayers(0, 0));
+            Assert.AreEqual(Match3CellKind.Ice, engine.GetKind(0, 0));
+            Assert.IsTrue(engine.EditorScrub(0, 0));
+            Assert.IsTrue(engine.EditorScrub(0, 0));
+            Assert.AreEqual(Match3CellKind.Playable, engine.GetKind(0, 0));
+            Assert.AreEqual(0, engine.GetLayers(0, 0));
+            Assert.AreEqual(3, engine.GetTile(0, 0).Color);
+            Assert.IsTrue(engine.EditorScrub(0, 0));
+            Assert.AreEqual(Match3CellKind.Hole, engine.GetKind(0, 0));
+            Assert.IsFalse(engine.EditorScrub(0, 0));
+
+            Assert.IsTrue(engine.EditorPaintColor(1, 0, 2));
+            Assert.IsTrue(engine.EditorPaintObstacle(1, 0, Match3CellKind.Stone));
+            Assert.AreEqual(1, engine.GetLayers(1, 0));
+            Assert.IsNull(engine.GetTile(1, 0));
+            Assert.IsTrue(engine.EditorPaintObstacle(1, 0, Match3CellKind.Stone));
+            Assert.AreEqual(2, engine.GetLayers(1, 0));
+            Assert.IsTrue(engine.EditorScrub(1, 0));
+            Assert.AreEqual(Match3CellKind.Stone, engine.GetKind(1, 0));
+            Assert.IsTrue(engine.EditorScrub(1, 0));
+            Assert.AreEqual(Match3CellKind.Playable, engine.GetKind(1, 0));
+            Assert.AreEqual(2, engine.GetTile(1, 0).Color);
+        }
+
+        [Test]
         public void Custom_涂出三连后结算消除且不结束()
         {
             var level = MakeLevel(6, 6, 5, 12);

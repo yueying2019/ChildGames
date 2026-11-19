@@ -18,6 +18,7 @@ MonoBehaviour:
   Height: 8
   ColorCount: 5
   MoveLimit: 24
+  TimeLimit: 0
   GoalType: 2
   TargetScore: 0
   CollectCounts: 00000000000000000000000000000000000000000000000000000000
@@ -214,3 +215,4 @@ MonoBehaviour:
   - Kind: 1
     Color: 0
     Layers: 0
+  FixedBoard: 0

@@ -267,26 +267,28 @@ namespace SmallGames
             return EditorPaintColor(x, y, _rng.Next(1, ColorCount + 1));
         }
 
-        /// <summary>铺一层障碍。石头不带棋子，冰、冻、锁下面保留或补一颗棋子。</summary>
+        /// <summary>
+        /// 加一层障碍，同一种最多 3 层。换成另一种从 1 层重新计。
+        /// 棋子留在下面，石头盖住时先不显示。
+        /// </summary>
         public bool EditorPaintObstacle(int x, int y, Match3CellKind kind)
         {
             if (!InBoard(x, y) || !Match3CellUtil.IsOverlay(kind))
                 return false;
-
-            if (kind == Match3CellKind.Stone)
-            {
-                _tiles[x, y] = null;
-                _kind[x, y] = Match3CellKind.Stone;
-                _layers[x, y] = 1;
-                _playable[x, y] = false;
-                return true;
-            }
+            if (_kind[x, y] == kind && _layers[x, y] >= 3)
+                return false;
 
             if (_tiles[x, y] == null)
                 _tiles[x, y] = CreateTile(_rng.Next(1, ColorCount + 1), Match3Special.None);
-            _kind[x, y] = kind;
-            _layers[x, y] = 1;
-            _playable[x, y] = true;
+            if (_kind[x, y] == kind && _layers[x, y] > 0)
+                _layers[x, y]++;
+            else
+            {
+                _kind[x, y] = kind;
+                _layers[x, y] = 1;
+            }
+
+            _playable[x, y] = kind != Match3CellKind.Stone;
             return true;
         }
 
@@ -334,6 +336,29 @@ namespace SmallGames
             ResolveFromGroups(groups, result.Events, 1);
             Finish(result);
             return result;
+        }
+
+        /// <summary>
+        /// 障碍刷。有障碍时减一层，减到 0 恢复成方块格子。
+        /// 没有障碍才擦成空格。
+        /// </summary>
+        public bool EditorScrub(int x, int y)
+        {
+            if (!InBoard(x, y) || _kind[x, y] == Match3CellKind.Hole)
+                return false;
+            if (!Match3CellUtil.IsOverlay(_kind[x, y]) || _layers[x, y] <= 0)
+                return EditorErase(x, y);
+
+            _layers[x, y]--;
+            if (_layers[x, y] > 0)
+                return true;
+
+            _layers[x, y] = 0;
+            _kind[x, y] = Match3CellKind.Playable;
+            _playable[x, y] = true;
+            if (_tiles[x, y] == null)
+                _tiles[x, y] = CreateTile(_rng.Next(1, ColorCount + 1), Match3Special.None);
+            return true;
         }
 
         /// <summary>擦成空格子。已经是空格则不动。</summary>
@@ -1387,7 +1412,7 @@ namespace SmallGames
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    if (_tiles[x, y] != null && !IsLocked(x, y))
+                    if (IsPlayable(x, y) && _tiles[x, y] != null && !IsLocked(x, y))
                         _shuffleTiles.Add(_tiles[x, y]);
                 }
             }
@@ -1410,7 +1435,7 @@ namespace SmallGames
                 {
                     for (var x = 0; x < Width; x++)
                     {
-                        if (_tiles[x, y] != null && !IsLocked(x, y))
+                        if (IsPlayable(x, y) && _tiles[x, y] != null && !IsLocked(x, y))
                             _tiles[x, y] = _shuffleTiles[n++];
                     }
                 }
