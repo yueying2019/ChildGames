@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace SmallGames
 {
     /// <summary>
-    /// 揭棋棋盘。红方在下。暗子只显示背面，翻开后才换成真子图。
+    /// 揭棋棋盘。红方在下。暗子只显示背面，翻开后才换成真子图。终局先揭开未翻的子，颜色比正常揭开灰度 50%。
     /// </summary>
     public class JieqiGameView : MonoBehaviour
     {
@@ -53,6 +53,9 @@ namespace SmallGames
         public Button RestoreButton;
         public Button UndoEditButton;
         public JieqiBoardClick BoardClick;
+        public Material HalfGray;
+        public Sprite HintRing;
+        public JieqiHintArrow HintArrow;
 
         readonly List<JieqiPieceView> _pool = new List<JieqiPieceView>(48);
         readonly List<JieqiPieceView> _heldPool = new List<JieqiPieceView>(16);
@@ -83,6 +86,12 @@ namespace SmallGames
         Coroutine _ai;
         Coroutine _hold;
         bool _holding;
+        bool _endReveal;
+        int _hintFromX = -1;
+        int _hintFromY = -1;
+        int _hintToX = -1;
+        int _hintToY = -1;
+        float _hintBend;
 
         public event Action Changed;
 
@@ -97,9 +106,67 @@ namespace SmallGames
             _lastToY = -1;
             _popGlow = false;
             _thinking = false;
+            _endReveal = false;
+            ClearHint();
             CancelHold();
             StopCaptureFx();
             Refresh();
+        }
+
+        /// <summary>对局结束后立刻停手，并把还没揭开的子按真身显示成半灰。结算由对局晚一点再开。</summary>
+        public void ShowEndReveal()
+        {
+            _endReveal = true;
+            ClearHint();
+            _fromX = -1;
+            _fromY = -1;
+            Refresh();
+        }
+
+        /// <summary>
+        /// 标出当前行棋方一步较有利的走法。必须在对局进行中、且不在编辑或动画里调用。
+        /// 弯的方向每次点击重新随机，走法由局面决定。
+        /// </summary>
+        public bool TryShowHint(out string message)
+        {
+            message = null;
+            if (_match == null || _locked || _endReveal || _thinking || _holding)
+            {
+                message = "现在不能提示";
+                return false;
+            }
+
+            if (_editing)
+            {
+                message = "编辑时不能提示";
+                return false;
+            }
+
+            if (_match.Engine.Outcome != JieqiOutcome.Playing)
+            {
+                message = "对局已经结束";
+                return false;
+            }
+
+            if (!_match.TryHint(out var move))
+            {
+                ClearHint();
+                Refresh();
+                message = "没有可走的棋";
+                return false;
+            }
+
+            _hintFromX = move.FromX;
+            _hintFromY = move.FromY;
+            _hintToX = move.ToX;
+            _hintToY = move.ToY;
+            _hintBend = UnityEngine.Random.Range(0.3f, 0.55f);
+            if (UnityEngine.Random.value < 0.5f)
+                _hintBend = -_hintBend;
+            _fromX = -1;
+            _fromY = -1;
+            Refresh();
+            return true;
         }
 
         /// <summary>残局编辑。必须在 <see cref="Play"/> 之后调用，棋盘先按正常开局摆好。技能象棋吃子是选中后再吃对方。</summary>
@@ -160,6 +227,8 @@ namespace SmallGames
 
             CancelHold();
 
+            _endReveal = false;
+            ClearHint();
             _locked = false;
             _fromX = -1;
             _fromY = -1;
@@ -195,6 +264,7 @@ namespace SmallGames
             {
                 HideUnused();
                 HideHeld();
+                HideHintArrow();
                 return;
             }
 
@@ -203,27 +273,33 @@ namespace SmallGames
             {
                 engine.CollectMoves(_moves);
                 MarkLastMove();
+                MarkHint();
             }
             for (var y = 0; y < JieqiEngine.Ranks; y++)
             {
                 for (var x = 0; x < JieqiEngine.Files; x++)
                 {
-                    if (!engine.TryView(x, y, out var view) || !view.Occupied)
+                    if (!engine.TryView(x, y, out var view, _endReveal) || !view.Occupied)
                         continue;
                     var piece = Rent(x, y, 72f);
+                    var hidden = _endReveal && view.FaceDown;
+                    var tint = hidden && HalfGray == null ? new Color(0.5f, 0.5f, 0.5f, 1f) : Color.white;
                     if (view.HasSkill)
                         piece.ShowPair(
                             SpriteOf(view.Printed, view.Role),
-                            Color.white,
+                            tint,
                             SpriteOf(view.SkillPrinted, view.SkillRole),
-                            Color.white);
+                            tint);
                     else
-                        piece.Show(SpriteOf(view), Color.white);
+                        piece.Show(hidden ? SpriteOf(view.Printed, view.Role) : SpriteOf(view), tint);
+                    piece.SetSpriteMaterial(hidden ? HalfGray : null);
                     var capturedX = x;
                     var capturedY = y;
                     Wire(piece, () => OnSquare(capturedX, capturedY));
                     if (_fromX == x && _fromY == y)
                         piece.transform.localScale = new Vector3(1.12f, 1.12f, 1f);
+                    else if (_hintFromX == x && _hintFromY == y)
+                        piece.transform.localScale = new Vector3(1.08f, 1.08f, 1f);
                 }
             }
 
@@ -244,6 +320,7 @@ namespace SmallGames
             }
 
             HideUnused();
+            DrawHintArrow();
             WriteHeld(RedHeldIcons, JieqiCamp.Red);
             WriteHeld(BlackHeldIcons, JieqiCamp.Black);
             HideHeld();
@@ -257,7 +334,7 @@ namespace SmallGames
                 return;
             }
 
-            if (_locked || _thinking || _holding || _match == null || !_match.HumanToMove)
+            if (_locked || _endReveal || _thinking || _holding || _match == null || !_match.HumanToMove)
                 return;
 
             if (_fromX >= 0 && IsLegal(_fromX, _fromY, x, y))
@@ -357,21 +434,20 @@ namespace SmallGames
             Changed?.Invoke();
         }
 
-        /// <summary>吃子且动效开着时，锁到这段动画播完。对局分出胜负就等同一段时间后再打开结算。</summary>
+        /// <summary>吃子且动效开着时，先锁住操作。终局由对局去揭暗子并晚点开结算，这里只等动画收沙盘。</summary>
         void FinishMove(JieqiStep step, bool fromAi)
         {
+            ClearHint();
             if (_editor && _match != null)
                 _match.Engine.EditorClearUndo();
             RememberMove(step);
             PlayMoveSounds(step);
             var seconds = step.Captured ? PlayCaptureFx(step) : 0f;
             Refresh();
-            var over = _match != null && _match.Engine.Outcome != JieqiOutcome.Playing;
             if (seconds > 0f)
             {
-                BeginHold(over, seconds);
-                if (!over)
-                    Changed?.Invoke();
+                BeginHold(seconds);
+                Changed?.Invoke();
                 return;
             }
 
@@ -380,24 +456,21 @@ namespace SmallGames
                 ScheduleAi();
         }
 
-        void BeginHold(bool openResult, float seconds)
+        void BeginHold(float seconds)
         {
             if (_hold != null)
                 StopCoroutine(_hold);
-            _hold = StartCoroutine(HoldCapture(openResult, seconds));
+            _hold = StartCoroutine(HoldCapture(seconds));
         }
 
-        IEnumerator HoldCapture(bool openResult, float seconds)
+        IEnumerator HoldCapture(float seconds)
         {
             _holding = true;
             yield return new WaitForSeconds(seconds);
             _holding = false;
             _hold = null;
             HideSand();
-            if (openResult)
-                Changed?.Invoke();
-            else
-                ScheduleAi();
+            ScheduleAi();
         }
 
         void CancelHold()
@@ -427,10 +500,76 @@ namespace SmallGames
             _popGlow = false;
         }
 
+        void MarkHint()
+        {
+            if (_hintFromX < 0)
+                return;
+            var ring = HintRing != null ? HintRing : MoveGlow;
+            ShowMark(ring, _hintFromX, _hintFromY, 116f, new Color(0.92f, 0.1f, 0.08f, 1f), false);
+            ShowMark(ring, _hintToX, _hintToY, 116f, new Color(0.12f, 0.78f, 0.28f, 1f), false);
+        }
+
+        void DrawHintArrow()
+        {
+            if (HintArrow == null)
+                return;
+            if (_hintFromX < 0 || _editing)
+            {
+                HintArrow.Hide();
+                return;
+            }
+
+            var from = BoardLocal(_hintFromX, _hintFromY);
+            var to = BoardLocal(_hintToX, _hintToY);
+            var delta = to - from;
+            var len = delta.magnitude;
+            var perp = len > 1f ? new Vector2(-delta.y / len, delta.x / len) : Vector2.up;
+            var bend = _hintBend * Mathf.Max(len, 90f);
+            if (bend < 0f)
+                bend = Mathf.Min(bend, -42f);
+            else
+                bend = Mathf.Max(bend, 42f);
+            if (bend > 150f)
+                bend = 150f;
+            if (bend < -150f)
+                bend = -150f;
+            HintArrow.Show(from, (from + to) * 0.5f + perp * bend, to);
+        }
+
+        void ClearHint()
+        {
+            _hintFromX = -1;
+            _hintFromY = -1;
+            _hintToX = -1;
+            _hintToY = -1;
+        }
+
+        void HideHintArrow()
+        {
+            if (HintArrow != null)
+                HintArrow.Hide();
+        }
+
+        Vector2 BoardLocal(int x, int y)
+        {
+            var board = HintArrow != null ? HintArrow.transform.parent as RectTransform : PieceLayer;
+            var width = board != null && board.rect.width > 1f ? board.rect.width : BoardWidth;
+            var height = board != null && board.rect.height > 1f ? board.rect.height : BoardHeight;
+            var nx = FileX[x] / (float)BoardWidth;
+            var ny = 1f - RankY[y] / (float)BoardHeight;
+            return new Vector2((nx - 0.5f) * width, (ny - 0.5f) * height);
+        }
+
         void ShowGlow(int x, int y, float size, Color color, bool pop)
         {
+            ShowMark(MoveGlow, x, y, size, color, pop);
+        }
+
+        void ShowMark(Sprite sprite, int x, int y, float size, Color color, bool pop)
+        {
             var mark = Rent(x, y, size);
-            mark.Show(MoveGlow, color);
+            mark.Show(sprite, color);
+            mark.SetHitEnabled(false);
             if (mark.Icon != null)
                 mark.Icon.raycastTarget = false;
             if (mark.Button != null)
@@ -689,6 +828,7 @@ namespace SmallGames
 
             view.SetHitPadding(Vector4.zero);
             view.SetHitEnabled(true);
+            view.SetSpriteMaterial(null);
             if (view.Button != null)
                 view.Button.interactable = true;
             view.transform.SetAsLastSibling();
@@ -794,6 +934,7 @@ namespace SmallGames
             _editing = !_editing;
             ShowEditLabel(_editing);
             ClearSelection();
+            ClearHint();
             SetTool(EditorTool.None);
             if (!_editing && _match != null)
                 _match.Engine.RefreshTerminal();

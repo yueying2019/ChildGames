@@ -10,6 +10,7 @@ namespace SmallGames
         public Button PauseButton;
         public Button RulesButton;
         public Button UndoButton;
+        public Button HintButton;
 
         public override void BindListeners()
         {
@@ -17,6 +18,7 @@ namespace SmallGames
             Wire(PauseButton, () => GameManager.Instance.PauseGame());
             Wire(RulesButton, ShowRules);
             Wire(UndoButton, UndoMove);
+            Wire(HintButton, ShowHint);
         }
 
         /// <summary>进玩法就收掉 Banner：它是原生层，会盖住游戏画面，且遮挡底部按钮属违规。</summary>
@@ -30,6 +32,17 @@ namespace SmallGames
                 RulesButton.gameObject.SetActive(jieqi);
             if (UndoButton != null)
                 UndoButton.gameObject.SetActive(jieqi);
+            if (HintButton != null)
+                HintButton.gameObject.SetActive(jieqi);
+        }
+
+        void ShowHint()
+        {
+            var session = GameManager.Instance != null
+                ? GameManager.Instance.CurrentSession as JieqiSession
+                : null;
+            if (session != null)
+                session.ShowHint();
         }
 
         void UndoMove()

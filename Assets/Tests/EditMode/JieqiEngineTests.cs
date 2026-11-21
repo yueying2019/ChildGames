@@ -140,13 +140,24 @@ namespace SmallGames.Tests
         }
 
         [Test]
-        public void Pawn_CanStepSidewaysBeforeTheRiver()
+        public void Pawn_CannotStepSidewaysBeforeTheRiver()
         {
             var engine = new JieqiEngine();
             engine.BeginCustom(JieqiCamp.Red);
             AddKings(engine, 4, 0, 5, 9);
             engine.AddPiece(JieqiCamp.Red, JieqiCamp.Red, JieqiRole.Pawn, JieqiRole.Pawn, false, 4, 6);
-            Assert.IsTrue(engine.TryMove(4, 6, 3, 6, out _));
+            Assert.IsFalse(engine.TryMove(4, 6, 3, 6, out _));
+            Assert.IsTrue(engine.TryMove(4, 6, 4, 5, out _));
+        }
+
+        [Test]
+        public void Pawn_CanStepSidewaysAfterTheRiver()
+        {
+            var engine = new JieqiEngine();
+            engine.BeginCustom(JieqiCamp.Red);
+            AddKings(engine, 4, 0, 5, 9);
+            engine.AddPiece(JieqiCamp.Red, JieqiCamp.Red, JieqiRole.Pawn, JieqiRole.Pawn, false, 4, 4);
+            Assert.IsTrue(engine.TryMove(4, 4, 3, 4, out _));
         }
 
         [Test]

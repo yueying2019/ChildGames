@@ -97,6 +97,22 @@ namespace SmallGames
             return Commit(move.FromX, move.FromY, move.ToX, move.ToY, out step);
         }
 
+        /// <summary>当前行棋方评分最高的一步。暗子只盲抽一次，不看真实底牌。同一局面重复点提示，走法不变。</summary>
+        public bool TryHint(out JieqiMove move)
+        {
+            move = default;
+            if (_engine.Outcome != JieqiOutcome.Playing)
+                return false;
+            var depth = JieqiAi.Depth;
+            if (SettingsRepository.Current != null)
+                depth = SettingsRepository.Current.XiangqiSearchDepth();
+            var hash = _engine.Hash();
+            var seed = unchecked((int)(hash ^ (hash >> 32)));
+            if (seed == 0)
+                seed = 1;
+            return _ai.TryChoose(_engine, new Random(seed), depth, out move);
+        }
+
         /// <summary>
         /// 退回上一步。人机对局如果刚被电脑应过，连你自己的那步一起退，否则电脑会立刻再走。
         /// </summary>

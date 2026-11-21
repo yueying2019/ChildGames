@@ -9,7 +9,7 @@ namespace SmallGames
     /// 暗子由扣下去时所在的阵营走，走完翻开。翻开后改按棋子颜色归属，对方的子只能由对方走。
     /// 暗子按所在格的兵种走一步就翻开，之后按真实兵种走。
     /// 暗象不过河，暗士不出九宫；翻开后象仍走田、塞象眼，但可以过河；士仍斜走一格，但可以出宫。
-    /// 将、帅不出九宫，不能照面。兵、卒按当前控制方前进：红向上、黑向下，左右各一格，不能后退。
+    /// 将、帅不出九宫，不能照面。兵、卒按当前控制方前进：红向上、黑向下，过河前不能横走，过河后可左右各一格，不能后退。
     /// 没翻开的子，对方能吃，己方也能吃。翻开后的己方子不能吃。
     /// 被吃的子无论明暗都翻给双方看，记在吃方身后，不再回到棋盘。
     /// 被将军必须应将。无子可走判负。同一局面第三次出现判和。不判长将、长捉。
@@ -292,7 +292,7 @@ namespace SmallGames
                 moves.RemoveRange(write, moves.Count - write);
         }
 
-        public bool TryView(int x, int y, out JieqiViewSquare view)
+        public bool TryView(int x, int y, out JieqiViewSquare view, bool revealHidden = false)
         {
             view = default;
             if (!OnBoard(x, y))
@@ -306,10 +306,19 @@ namespace SmallGames
             view.PieceId = id;
             view.FaceDown = piece.FaceDown;
             view.Controller = piece.Controller;
+            // 对局中暗子不带底牌。终局演出才把真身交给界面，FaceDown 仍为真，方便涂灰。
             if (piece.FaceDown)
             {
-                view.Printed = JieqiCamp.None;
-                view.Role = piece.SlotRole;
+                if (revealHidden && _outcome != JieqiOutcome.Playing)
+                {
+                    view.Printed = piece.Printed;
+                    view.Role = piece.Role;
+                }
+                else
+                {
+                    view.Printed = JieqiCamp.None;
+                    view.Role = piece.SlotRole;
+                }
             }
             else
             {
@@ -1294,7 +1303,7 @@ namespace SmallGames
         {
             var forward = piece.Controller == JieqiCamp.Red ? -1 : 1;
             TryAdd(piece, id, piece.X, piece.Y + forward, moves, false);
-            if (!_skillRules || CrossedRiver(piece))
+            if (CrossedRiver(piece))
             {
                 TryAdd(piece, id, piece.X - 1, piece.Y, moves, false);
                 TryAdd(piece, id, piece.X + 1, piece.Y, moves, false);
@@ -1399,7 +1408,7 @@ namespace SmallGames
                 case JieqiRole.Cannon:
                     return SlideAttacks(piece.X, piece.Y, tx, ty, true);
                 case JieqiRole.Pawn:
-                    return PawnStep(piece.Controller, dx, dy, !_skillRules || CrossedRiver(piece));
+                    return PawnStep(piece.Controller, dx, dy, CrossedRiver(piece));
                 default:
                     return false;
             }

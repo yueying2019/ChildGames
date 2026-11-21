@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace SmallGames
@@ -21,8 +22,11 @@ namespace SmallGames
         JieqiMatch _match;
         JieqiGameView _view;
         string _puzzleTitle;
+        const float EndRevealSeconds = 2f;
+
         bool _finished;
         bool _editor;
+        Coroutine _endReveal;
 
         public static bool IsEditorIndex(int levelIndex)
         {
@@ -105,7 +109,20 @@ namespace SmallGames
         protected override void OnPauseChanged(bool paused)
         {
             if (_view != null)
-                _view.SetLocked(paused);
+                _view.SetLocked(paused || _finished);
+        }
+
+        /// <summary>提示当前行棋方一步较有利的走法。结算等待和暂停时不标。</summary>
+        public void ShowHint()
+        {
+            if (IsPaused || _view == null || _finished)
+            {
+                UIManager.Instance?.ShowToast("现在不能提示");
+                return;
+            }
+
+            if (!_view.TryShowHint(out var message))
+                UIManager.Instance?.ShowToast(string.IsNullOrEmpty(message) ? "现在不能提示" : message);
         }
 
         /// <summary>悔棋。对局已经结束时先收起结算，再把局面退回去。</summary>
@@ -114,17 +131,19 @@ namespace SmallGames
             if (IsPaused || _view == null)
                 return;
             var finished = _finished;
+            CancelEndReveal();
+            _finished = false;
             if (!_view.TryUndo())
             {
+                _finished = finished;
+                if (finished)
+                    BeginEndReveal();
                 UIManager.Instance?.ShowToast("还没有可悔的棋");
                 return;
             }
 
             if (finished)
-            {
-                _finished = false;
                 UIManager.Instance?.Close(UIPanelId.Result);
-            }
         }
 
         public override void StartNextLevel()
@@ -165,8 +184,29 @@ namespace SmallGames
 
             _finished = true;
             if (_view != null)
+            {
                 _view.SetLocked(true);
+                _view.ShowEndReveal();
+            }
 
+            BeginEndReveal();
+        }
+
+        /// <summary>终局先揭暗子。必须等 <see cref="EndRevealSeconds"/> 秒，结算才打开。</summary>
+        void BeginEndReveal()
+        {
+            CancelEndReveal();
+            _endReveal = StartCoroutine(OpenResultAfterReveal());
+        }
+
+        IEnumerator OpenResultAfterReveal()
+        {
+            yield return new WaitForSeconds(EndRevealSeconds);
+            _endReveal = null;
+            if (!_finished || _match == null)
+                yield break;
+
+            var outcome = _match.Engine.Outcome;
             var humanWon = _match.Mode == JieqiPlayMode.TwoPlayer
                 ? outcome == JieqiOutcome.RedWin || outcome == JieqiOutcome.BlackWin
                 : _match.HumanCamp == JieqiCamp.Red
@@ -215,8 +255,17 @@ namespace SmallGames
             return string.IsNullOrEmpty(head) ? body : head + "  " + body;
         }
 
+        void CancelEndReveal()
+        {
+            if (_endReveal == null)
+                return;
+            StopCoroutine(_endReveal);
+            _endReveal = null;
+        }
+
         void Unbind()
         {
+            CancelEndReveal();
             if (_view == null)
                 return;
             _view.Changed -= OnChanged;

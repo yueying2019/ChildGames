@@ -42,6 +42,14 @@ namespace SmallGames
                 graphic.raycastPadding = padding;
         }
 
+        public void SetSpriteMaterial(Material material)
+        {
+            if (Icon != null)
+                Icon.material = material;
+            if (SkillIcon != null)
+                SkillIcon.material = material;
+        }
+
         public void SetHitEnabled(bool on)
         {
             var graphic = HitGraphic();
